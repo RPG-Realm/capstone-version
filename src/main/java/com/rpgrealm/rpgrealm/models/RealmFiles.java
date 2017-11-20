@@ -1,13 +1,15 @@
 package com.rpgrealm.rpgrealm.models;
 
+import org.springframework.data.annotation.Id;
+
 import javax.persistence.*;
 
 @Entity
 // Using camel case transforms the name into name_table
-@Table(name = "adImages")
-public class AdImage {
+@Table(name = "files")
+public class RealmFiles {
 
-    @Id
+/*    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -47,5 +49,5 @@ public class AdImage {
 
     public void setAd(Ad ad) {
         this.ad = ad;
-    }
+    }*/
 }
