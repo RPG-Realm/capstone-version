@@ -22,10 +22,10 @@ public class SendSms {
     System.out.println(message.getSid());
   }
 
-  public static void main(String[] args) {
+  /*public static void main(String[] args) {
 
     sendTxt("5125010416", "Test message from Chase's Java App");
 
-  }
+  }*/
 
 }
