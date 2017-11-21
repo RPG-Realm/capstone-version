@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "characters")
-public class Characters {
+public class Character {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Characters {
   @Column
   private Long character_file_id;
 
-  public Characters() {
+  public Character() {
   }
 
   public Long getId() {

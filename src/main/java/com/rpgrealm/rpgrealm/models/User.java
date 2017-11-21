@@ -1,14 +1,12 @@
 package com.rpgrealm.rpgrealm.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,17 +48,17 @@ public class Users {
     private String user_created_time;
 
 
-    public Users() {
+    public User() {
     }
 
-    public Users(Users copy) {
+    public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         email = copy.email;
         username = copy.username;
         password = copy.password;
     }
 
-    public Users(String username, String email, String password) {
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
