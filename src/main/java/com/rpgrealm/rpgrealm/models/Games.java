@@ -19,7 +19,8 @@ public class Games {
   @Column
   private String game_type;
 
-  @Column(nullable = false)
+  @ManyToOne
+  @JoinColumn(name = "user_id")
   private Long game_master;
 
   @Column
