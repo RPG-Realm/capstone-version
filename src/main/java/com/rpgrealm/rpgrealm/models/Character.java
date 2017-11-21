@@ -16,11 +16,11 @@ public class Character {
   @Column
   private String character_type;
 
-  @Column
-  private Long character_image_id;
+  @OneToOne
+  private File character_image_id;
 
-  @Column
-  private Long character_file_id;
+  @OneToOne
+  private File character_file_id;
 
   public Character() {
   }
@@ -49,19 +49,19 @@ public class Character {
     this.character_type = character_type;
   }
 
-  public Long getCharacter_image_id() {
+  public File getCharacter_image_id() {
     return character_image_id;
   }
 
-  public void setCharacter_image_id(Long character_image_id) {
+  public void setCharacter_image_id(File character_image_id) {
     this.character_image_id = character_image_id;
   }
 
-  public Long getCharacter_file_id() {
+  public File getCharacter_file_id() {
     return character_file_id;
   }
 
-  public void setCharacter_file_id(Long character_file_id) {
+  public void setCharacter_file_id(File character_file_id) {
     this.character_file_id = character_file_id;
   }
 }

@@ -26,8 +26,8 @@ public class Game {
   @Column
   private String game_voice_server;
 
-  @Column
-  private Long game_image_id;
+  @OneToOne
+  private File game_image_id;
 
   @Column
   private String game_play_time;
@@ -107,11 +107,11 @@ public class Game {
     this.game_voice_server = game_voice_server;
   }
 
-  public Long getGame_image_id() {
+  public File getGame_image_id() {
     return game_image_id;
   }
 
-  public void setGame_image_id(Long game_image_id) {
+  public void setGame_image_id(File game_image_id) {
     this.game_image_id = game_image_id;
   }
 

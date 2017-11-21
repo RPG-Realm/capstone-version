@@ -47,29 +47,29 @@ public class User {
     @Column
     private String web_site;
     @Column
-    private int profile_photo;
+
+    @OneToOne
+    private File profile_photo;
+
     @Column(nullable = false)
     private String user_created_time;
 
 //    mapped properties
     @OneToMany(mappedBy = "user")
-    private List<File> files;
+    private List<File> user_files;
+
+    @OneToMany(mappedBy = "game")
+    private List<File> game_files;
+
+    @OneToMany(mappedBy = "character")
+    private List<File> character_files;
+
+    @OneToMany(mappedBy = "game_master")
+    private List<Game> games;
+
 
 
     public User() {
-    }
-
-    public User(User copy) {
-        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
-        email = copy.email;
-        username = copy.username;
-        password = copy.password;
-    }
-
-    public User(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
     }
 
     public Long getId() {
@@ -192,11 +192,11 @@ public class User {
         this.web_site = web_site;
     }
 
-    public int getProfile_photo() {
+    public File getProfile_photo() {
         return profile_photo;
     }
 
-    public void setProfile_photo(int profile_photo) {
+    public void setProfile_photo(File profile_photo) {
         this.profile_photo = profile_photo;
     }
 
@@ -206,5 +206,37 @@ public class User {
 
     public void setUser_created_time(String user_created_time) {
         this.user_created_time = user_created_time;
+    }
+
+    public List<File> getUser_files() {
+        return user_files;
+    }
+
+    public void setUser_files(List<File> user_files) {
+        this.user_files = user_files;
+    }
+
+    public List<File> getGame_files() {
+        return game_files;
+    }
+
+    public void setGame_files(List<File> game_files) {
+        this.game_files = game_files;
+    }
+
+    public List<File> getCharacter_files() {
+        return character_files;
+    }
+
+    public void setCharacter_files(List<File> character_files) {
+        this.character_files = character_files;
+    }
+
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Game> games) {
+        this.games = games;
     }
 }
