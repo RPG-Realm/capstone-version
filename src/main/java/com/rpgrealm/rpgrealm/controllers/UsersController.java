@@ -13,15 +13,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 @Controller
 public class UsersController {
-    private PasswordEncoder encoder;
-    private UsersRepository repository;
 
-    public UsersController(PasswordEncoder encoder, UsersRepository repository) {
-        this.encoder = encoder;
-        this.repository = repository;
-    }
+
+//    private PasswordEncoder encoder;
+//    private UsersRepository repository;
+//
+//    public UsersController(PasswordEncoder encoder, UsersRepository repository) {
+//        this.encoder = encoder;
+//        this.repository = repository;
+//    }
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -34,9 +37,9 @@ public class UsersController {
         // TODO: Validate the input
         // TODO: double check that the username is not already in use
 
-        String hash = encoder.encode(user.getPassword());
-        user.setPassword(hash);
-        repository.save(user);
+//        String hash = encoder.encode(user.getPassword());
+//        user.setPassword(hash);
+//        repository.save(user);
 
         return "redirect:/login";
     }
