@@ -1,6 +1,5 @@
 package com.rpgrealm.rpgrealm.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -46,28 +45,20 @@ public class User {
     private String time_zone;
     @Column
     private String web_site;
-    @Column
 
     @OneToOne
-    private File profile_photo;
+    private AppFile profile_photo;
 
     @Column(nullable = false)
+    // Maybe consider the Date type
     private String user_created_time;
 
 //    mapped properties
     @OneToMany(mappedBy = "user")
-    private List<File> user_files;
-
-    @OneToMany(mappedBy = "game")
-    private List<File> game_files;
-
-    @OneToMany(mappedBy = "character")
-    private List<File> character_files;
+    private List<AppFile> user_User_files;
 
     @OneToMany(mappedBy = "game_master")
     private List<Game> games;
-
-
 
     public User() {
     }
@@ -192,11 +183,11 @@ public class User {
         this.web_site = web_site;
     }
 
-    public File getProfile_photo() {
+    public AppFile getProfile_photo() {
         return profile_photo;
     }
 
-    public void setProfile_photo(File profile_photo) {
+    public void setProfile_photo(AppFile profile_photo) {
         this.profile_photo = profile_photo;
     }
 
@@ -208,28 +199,12 @@ public class User {
         this.user_created_time = user_created_time;
     }
 
-    public List<File> getUser_files() {
-        return user_files;
+    public List<AppFile> getUser_User_files() {
+        return user_User_files;
     }
 
-    public void setUser_files(List<File> user_files) {
-        this.user_files = user_files;
-    }
-
-    public List<File> getGame_files() {
-        return game_files;
-    }
-
-    public void setGame_files(List<File> game_files) {
-        this.game_files = game_files;
-    }
-
-    public List<File> getCharacter_files() {
-        return character_files;
-    }
-
-    public void setCharacter_files(List<File> character_files) {
-        this.character_files = character_files;
+    public void setUser_User_files(List<AppFile> user_User_files) {
+        this.user_User_files = user_User_files;
     }
 
     public List<Game> getGames() {
