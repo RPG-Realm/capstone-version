@@ -21,7 +21,7 @@ public class Game {
 
   @ManyToOne
   @JoinColumn(name = "user_id")
-  private Long game_master;
+  private User game_master;
 
   @Column
   private String game_voice_server;
@@ -91,11 +91,11 @@ public class Game {
     this.game_type = game_type;
   }
 
-  public Long getGame_master() {
+  public User getGame_master() {
     return game_master;
   }
 
-  public void setGame_master(Long game_master) {
+  public void setGame_master(User game_master) {
     this.game_master = game_master;
   }
 

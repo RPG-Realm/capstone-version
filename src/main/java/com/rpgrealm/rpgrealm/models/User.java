@@ -53,7 +53,7 @@ public class User {
 
 //    mapped properties
     @OneToMany(mappedBy = "user")
-    private List<Files> files;
+    private List<File> files;
 
 
     public User() {
