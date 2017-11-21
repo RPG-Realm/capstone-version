@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="files")
-public class Files {
+public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
@@ -15,6 +15,6 @@ public class Files {
 //    foreign keys
     @ManyToOne
     @JoinColumn(name= "user_id")
-    private Users user;
+    private User user;
 
 }
