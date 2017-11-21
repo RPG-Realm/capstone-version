@@ -1,6 +1,7 @@
 package com.rpgrealm.rpgrealm.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "characters")
@@ -11,16 +12,21 @@ public class Character {
   private Long id;
 
   @Column
-  private String character_name;
+  private String name;
 
   @Column
-  private String character_type;
+  private String type;
 
-  @Column
-  private Long character_image_id;
+  @OneToOne
+  private AppFile image_id;
 
-  @Column
-  private Long character_file_id;
+  @OneToOne
+  private AppFile file_id;
+
+  // mapped properties
+
+  @OneToMany(mappedBy = "character")
+  private List<AppFile> character_files;
 
   public Character() {
   }
@@ -33,35 +39,43 @@ public class Character {
     this.id = id;
   }
 
-  public String getCharacter_name() {
-    return character_name;
+  public String getName() {
+    return name;
   }
 
-  public void setCharacter_name(String character_name) {
-    this.character_name = character_name;
+  public void setName(String name) {
+    this.name = name;
   }
 
-  public String getCharacter_type() {
-    return character_type;
+  public String getType() {
+    return type;
   }
 
-  public void setCharacter_type(String character_type) {
-    this.character_type = character_type;
+  public void setType(String type) {
+    this.type = type;
   }
 
-  public Long getCharacter_image_id() {
-    return character_image_id;
+  public AppFile getImage_id() {
+    return image_id;
   }
 
-  public void setCharacter_image_id(Long character_image_id) {
-    this.character_image_id = character_image_id;
+  public void setImage_id(AppFile image_id) {
+    this.image_id = image_id;
   }
 
-  public Long getCharacter_file_id() {
-    return character_file_id;
+  public AppFile getFile_id() {
+    return file_id;
   }
 
-  public void setCharacter_file_id(Long character_file_id) {
-    this.character_file_id = character_file_id;
+  public void setFile_id(AppFile file_id) {
+    this.file_id = file_id;
+  }
+
+  public List<AppFile> getCharacter() {
+    return character_files;
+  }
+
+  public void setCharacter(List<AppFile> character) {
+    this.character_files = character_files;
   }
 }

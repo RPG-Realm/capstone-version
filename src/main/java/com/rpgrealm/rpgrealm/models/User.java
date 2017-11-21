@@ -1,6 +1,5 @@
 package com.rpgrealm.rpgrealm.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -46,30 +45,22 @@ public class User {
     private String time_zone;
     @Column
     private String web_site;
-    @Column
-    private int profile_photo;
+
+    @OneToOne
+    private AppFile profile_photo;
+
     @Column(nullable = false)
+    // Maybe consider the Date type
     private String user_created_time;
 
 //    mapped properties
     @OneToMany(mappedBy = "user")
-    private List<File> files;
+    private List<AppFile> user_User_files;
 
+    @OneToMany(mappedBy = "game_master")
+    private List<Game> games;
 
     public User() {
-    }
-
-    public User(User copy) {
-        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
-        email = copy.email;
-        username = copy.username;
-        password = copy.password;
-    }
-
-    public User(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
     }
 
     public Long getId() {
@@ -192,11 +183,11 @@ public class User {
         this.web_site = web_site;
     }
 
-    public int getProfile_photo() {
+    public AppFile getProfile_photo() {
         return profile_photo;
     }
 
-    public void setProfile_photo(int profile_photo) {
+    public void setProfile_photo(AppFile profile_photo) {
         this.profile_photo = profile_photo;
     }
 
@@ -206,5 +197,21 @@ public class User {
 
     public void setUser_created_time(String user_created_time) {
         this.user_created_time = user_created_time;
+    }
+
+    public List<AppFile> getUser_User_files() {
+        return user_User_files;
+    }
+
+    public void setUser_User_files(List<AppFile> user_User_files) {
+        this.user_User_files = user_User_files;
+    }
+
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Game> games) {
+        this.games = games;
     }
 }

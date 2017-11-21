@@ -12,9 +12,9 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class UserWithRoles extends User implements UserDetails {
-    public UserWithRoles(User user) {
+    /*public UserWithRoles(User user) {
         super(user);  // Call the copy constructor defined in User
-    }
+    }*/
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,6 +1,7 @@
 package com.rpgrealm.rpgrealm.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "games")
@@ -11,50 +12,55 @@ public class Game {
   private Long id;
 
   @Column
-  private String game_name;
+  private String name;
 
   @Column
-  private String game_description;
+  private String description;
 
   @Column
-  private String game_type;
+  private String type;
 
   @ManyToOne
   @JoinColumn(name = "user_id")
-  private User game_master;
+  private User master;
 
   @Column
-  private String game_voice_server;
+  private String voice_server;
+
+  @OneToOne
+  private AppFile image_id;
 
   @Column
-  private Long game_image_id;
+  private String play_time;
 
   @Column
-  private String game_play_time;
+  private String created_time;
 
   @Column
-  private String game_created_time;
+  private String location_name;
 
   @Column
-  private String game_location_name;
+  private String address;
 
   @Column
-  private String game_address;
+  private String city;
 
   @Column
-  private String game_city;
+  private String state;
 
   @Column
-  private String game_state;
+  private Long zip_code;
 
   @Column
-  private Long game_created_zip_code;
+  private Long rating;
 
   @Column
-  private Long game_rating;
+  private Long isactive;
 
-  @Column
-  private Long game_isactive;
+  // mapped properties
+
+  @OneToMany(mappedBy = "game")
+  private List<AppFile> game_files;
 
   public Game() {
   }
@@ -67,123 +73,131 @@ public class Game {
     this.id = id;
   }
 
-  public String getGame_name() {
-    return game_name;
+  public String getName() {
+    return name;
   }
 
-  public void setGame_name(String game_name) {
-    this.game_name = game_name;
+  public void setName(String name) {
+    this.name = name;
   }
 
-  public String getGame_description() {
-    return game_description;
+  public String getDescription() {
+    return description;
   }
 
-  public void setGame_description(String game_description) {
-    this.game_description = game_description;
+  public void setDescription(String description) {
+    this.description = description;
   }
 
-  public String getGame_type() {
-    return game_type;
+  public String getType() {
+    return type;
   }
 
-  public void setGame_type(String game_type) {
-    this.game_type = game_type;
+  public void setType(String type) {
+    this.type = type;
   }
 
-  public User getGame_master() {
-    return game_master;
+  public User getMaster() {
+    return master;
   }
 
-  public void setGame_master(User game_master) {
-    this.game_master = game_master;
+  public void setMaster(User master) {
+    this.master = master;
   }
 
-  public String getGame_voice_server() {
-    return game_voice_server;
+  public String getVoice_server() {
+    return voice_server;
   }
 
-  public void setGame_voice_server(String game_voice_server) {
-    this.game_voice_server = game_voice_server;
+  public void setVoice_server(String voice_server) {
+    this.voice_server = voice_server;
   }
 
-  public Long getGame_image_id() {
-    return game_image_id;
+  public AppFile getImage_id() {
+    return image_id;
   }
 
-  public void setGame_image_id(Long game_image_id) {
-    this.game_image_id = game_image_id;
+  public void setImage_id(AppFile image_id) {
+    this.image_id = image_id;
   }
 
-  public String getGame_play_time() {
-    return game_play_time;
+  public String getPlay_time() {
+    return play_time;
   }
 
-  public void setGame_play_time(String game_play_time) {
-    this.game_play_time = game_play_time;
+  public void setPlay_time(String play_time) {
+    this.play_time = play_time;
   }
 
-  public String getGame_created_time() {
-    return game_created_time;
+  public String getCreated_time() {
+    return created_time;
   }
 
-  public void setGame_created_time(String game_created_time) {
-    this.game_created_time = game_created_time;
+  public void setCreated_time(String created_time) {
+    this.created_time = created_time;
   }
 
-  public String getGame_location_name() {
-    return game_location_name;
+  public String getLocation_name() {
+    return location_name;
   }
 
-  public void setGame_location_name(String game_location_name) {
-    this.game_location_name = game_location_name;
+  public void setLocation_name(String location_name) {
+    this.location_name = location_name;
   }
 
-  public String getGame_address() {
-    return game_address;
+  public String getAddress() {
+    return address;
   }
 
-  public void setGame_address(String game_address) {
-    this.game_address = game_address;
+  public void setAddress(String address) {
+    this.address = address;
   }
 
-  public String getGame_city() {
-    return game_city;
+  public String getCity() {
+    return city;
   }
 
-  public void setGame_city(String game_city) {
-    this.game_city = game_city;
+  public void setCity(String city) {
+    this.city = city;
   }
 
-  public String getGame_state() {
-    return game_state;
+  public String getState() {
+    return state;
   }
 
-  public void setGame_state(String game_state) {
-    this.game_state = game_state;
+  public void setState(String state) {
+    this.state = state;
   }
 
-  public Long getGame_created_zip_code() {
-    return game_created_zip_code;
+  public Long getZip_code() {
+    return zip_code;
   }
 
-  public void setGame_created_zip_code(Long game_created_zip_code) {
-    this.game_created_zip_code = game_created_zip_code;
+  public void setZip_code(Long zip_code) {
+    this.zip_code = zip_code;
   }
 
-  public Long getGame_rating() {
-    return game_rating;
+  public Long getRating() {
+    return rating;
   }
 
-  public void setGame_rating(Long game_rating) {
-    this.game_rating = game_rating;
+  public void setRating(Long rating) {
+    this.rating = rating;
   }
 
-  public Long getGame_isactive() {
-    return game_isactive;
+  public Long getIsactive() {
+    return isactive;
   }
 
-  public void setGame_isactive(Long game_isactive) {
-    this.game_isactive = game_isactive;
+  public void setIsactive(Long isactive) {
+    this.isactive = isactive;
+  }
+
+  public List<AppFile> getGame_files() {
+    return game_files;
+  }
+
+  public void setGame_files(List<AppFile> game_files) {
+    this.game_files = game_files;
   }
 }
