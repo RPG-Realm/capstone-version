@@ -3,7 +3,7 @@ package com.rpgrealm.rpgrealm.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name="files")
+@Table(name="app_files")
 public class AppFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

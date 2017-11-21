@@ -54,10 +54,10 @@ public class User {
     private String user_created_time;
 
 //    mapped properties
-    @OneToMany(mappedBy = "user")
-    private List<AppFile> user_User_files;
+    @OneToMany(mappedBy = "users")
+    private List<AppFile> user_files;
 
-    @OneToMany(mappedBy = "game_master")
+    @OneToMany(mappedBy = "games")
     private List<Game> games;
 
     public User() {
@@ -199,12 +199,12 @@ public class User {
         this.user_created_time = user_created_time;
     }
 
-    public List<AppFile> getUser_User_files() {
-        return user_User_files;
+    public List<AppFile> getUser_files() {
+        return user_files;
     }
 
-    public void setUser_User_files(List<AppFile> user_User_files) {
-        this.user_User_files = user_User_files;
+    public void setUser_files(List<AppFile> user_files) {
+        this.user_files = user_files;
     }
 
     public List<Game> getGames() {
