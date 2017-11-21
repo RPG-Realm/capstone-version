@@ -22,7 +22,7 @@ public class Game {
 
   @ManyToOne
   @JoinColumn(name = "user_id")
-  private User master;
+  private User game_master;
 
   @Column
   private String voice_server;
@@ -97,12 +97,12 @@ public class Game {
     this.type = type;
   }
 
-  public User getMaster() {
-    return master;
+  public User getGame_master() {
+    return game_master;
   }
 
-  public void setMaster(User master) {
-    this.master = master;
+  public void setGame_master(User game_master) {
+    this.game_master = game_master;
   }
 
   public String getVoice_server() {

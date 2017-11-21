@@ -54,10 +54,10 @@ public class User {
     private String user_created_time;
 
 //    mapped properties
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "user")
     private List<AppFile> user_files;
 
-    @OneToMany(mappedBy = "games")
+    @OneToMany(mappedBy = "game_master")
     private List<Game> games;
 
     public User() {
