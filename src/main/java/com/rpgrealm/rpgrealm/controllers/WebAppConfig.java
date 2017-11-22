@@ -9,6 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
   @EnableWebMvc
   public class WebAppConfig extends WebMvcConfigurerAdapter {
 
+    // This controller extends the webMVC built into spring and overrides the "/" to point to our /home instead of static/index.html
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
       registry.addRedirectViewController("/", "/home");
