@@ -34,7 +34,7 @@ public UsersController(UserRepository usrRep){
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
-        return "users/registration";
+        return "register";
     }
 
     @PostMapping("/register")
@@ -46,7 +46,7 @@ public UsersController(UserRepository usrRep){
 //        user.setPassword(hash);
 //        repository.save(user);
 
-        return "redirect:/login";
+        return "/login";
     }
 
     @GetMapping("/profile/{id}")
