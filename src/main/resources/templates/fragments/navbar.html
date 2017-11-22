@@ -6,26 +6,16 @@
 </head>
 <body>
 
-<p>You should not see this</p>
-
 <nav id="my-nav" class="navbar navbar-default" th:fragment="mainNavbar">
-    <ul class="nav navbar-nav">
-        <li><a href="/">Index</a></li>
-        <!--<li sec:authorize="!isAuthenticated()">-->
-            <a href="/login">Login</a>
+    <div class="topnav">
+        <a class="active" href="#home">Home</a>
+        <a href="/user_profile">Your Profile</a>
+        <a href="/create_character">Create Character</a>
+        <a href="/create_game">Create Game</a>
+        <a href="/search_games">View Games</a>
+    </div>
 
-        <!--<li sec:authorize="!isAuthenticated()">-->
-            <a href="/register">Register</a>
-       <!--
-        <li sec:authorize="isAuthenticated()">
-            <form th:action="@{/logout}" th:method="post">
-                <button class="btn-link btn" style="margin-top: 8px">Logout</button>
-            </form>
-        </li>-->
-    </ul>
 </nav>
-
-<p>You should not see this</p>
 
 </body>
 </html>
