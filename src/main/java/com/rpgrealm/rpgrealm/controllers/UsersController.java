@@ -4,16 +4,24 @@
 package com.rpgrealm.rpgrealm.controllers;
 
 import com.rpgrealm.rpgrealm.models.User;
+import com.rpgrealm.rpgrealm.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
 public class UsersController {
+private final UserRepository usrRep;
 
+@Autowired
+public UsersController(UserRepository usrRep){
+    this.usrRep=usrRep;
+}
 
 //    private PasswordEncoder encoder;
 //    private UsersRepository repository;
@@ -41,8 +49,20 @@ public class UsersController {
         return "redirect:/login";
     }
 
-    @GetMapping("/profile")
-    public String showProfile(Model model){
-        return "profile";
+    @GetMapping("/profile/{id}")
+    public String showProfile(Model model, @PathVariable Long id){
+        model.addAttribute("user", usrRep.findOne(id));
+        return "user/profile";
     }
+
+    @GetMapping("profile/{id}/edit")
+    public String showEditProfileForm(Model model, @PathVariable Long id){
+        return "user/edit";
+    }
+    @PostMapping("profile/{id}/edit")
+    public String EditProfilePost(Model model, @PathVariable Long id){
+
+        return "redirect:/user/profile";
+    }
+
 }
