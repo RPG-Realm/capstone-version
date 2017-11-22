@@ -16,11 +16,11 @@
         </li>
         <!--<li sec:authorize="!isAuthenticated()">-->
             <a href="/register">Register</a>
-        </li>
-        <li sec:authorize="isAuthenticated()">
+
+        <!--<li sec:authorize="isAuthenticated()">
             <form th:action="@{/logout}" th:method="post">
                 <button class="btn-link btn" style="margin-top: 8px">Logout</button>
-            </form>
+            </form>-->
         </li>
     </ul>
 </nav>
