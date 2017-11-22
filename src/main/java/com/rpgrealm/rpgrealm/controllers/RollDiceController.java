@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class RollDiceController {
 
     @GetMapping("/roll-dice")
-    public String showPage(){
+    public String rollDice(){
         return "roll-dice";
     }
 

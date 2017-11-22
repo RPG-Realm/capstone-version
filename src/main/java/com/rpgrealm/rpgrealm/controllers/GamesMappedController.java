@@ -7,9 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
-    @GetMapping("/home")
-    public String showHomePage() {
-        return "home";
-    }
+public class GamesMappedController {
+  @GetMapping("/games_mapped")
+  public String showGamesMapped() {
+    return "games_mapped";
+  }
 }

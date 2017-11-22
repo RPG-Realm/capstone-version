@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments/head :: main-header('All posts')"></head>
+<body>
+<nav th:include="fragments/navbar :: mainNavbar"></nav>
+
+<!-- Content of the page -->
+<div>
+	<h1>Your Search Results: <a href="games_mapped">[View on Map]</a></h1>
+	<a href="/view_game"><h3>Warhammer</h3></a>
+	<a href="/view_game"><h3>CyberPunk 2020</h3></a>
+	<a href="/view_game"><h3>Dungeons and Dragons</h3></a>
+	<a href="/view_game"><h3>Rifts</h3></a>
+	<a href="/view_game"><h3>GURPS</h3></a>
+	<a href="/view_game"><h3>Call of Ctuhulu</h3></a>
+</div>
+
+<footer th:include="fragments/footer :: footer"></footer>
+</body>
+</html>
