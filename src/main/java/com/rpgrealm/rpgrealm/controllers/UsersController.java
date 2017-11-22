@@ -40,4 +40,9 @@ public class UsersController {
 
         return "redirect:/login";
     }
+
+    @GetMapping("/profile")
+    public String showProfile(Model model){
+        return "profile";
+    }
 }
