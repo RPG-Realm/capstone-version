@@ -44,6 +44,7 @@ body {
 	border: 1px #3a3a3a;
 	box-sizing: border-box;
 	padding-left: 20px;
+	padding-right: 20px;
 	background-color: #000000;
 }
 
@@ -78,10 +79,12 @@ body {
 }
 
 .bottomnav {
-	color: #333333;
+	background-color: #333333;
 	text-align: center;
 	padding: 14px 16px;
-	height: 20px;
+	height: 50px;
+	box-sizing: border-box;
+	margin-top: 40px;
 }
 
 .formdiv {
@@ -89,7 +92,7 @@ body {
 }
 .form_fields {
 	font-size: 20px;
-	border-radius: 5px;
+	border-radius: 8px;
 	background-color: #333333;
 	color: white;
 	padding: 7px;
