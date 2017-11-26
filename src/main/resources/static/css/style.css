@@ -1,8 +1,14 @@
+* {
+	box-sizing: border-box;
+}
+
 body {
-	margin:0;
 	font-family: Verdana;
 	background-color: #000000;
 	color: #ffffff;
+	max-width: 1080px;
+	margin: 0 auto !important;
+	float: none !important;
 }
 
 a:visited {
@@ -49,8 +55,7 @@ a:hover {
 
 .container-top {
 	width: 100%;
-	border: 1px #3a3a3a;
-	box-sizing: border-box;
+	border: 0px solid blue;
 	padding-left: 10px;
 	padding-top: 5px;
 	background-color: #000000;
@@ -58,36 +63,49 @@ a:hover {
 
 .container-main {
 	width: 100%;
-	border: 1px #3a3a3a;
-	box-sizing: border-box;
-	padding-left: 20px;
-	padding-right: 20px;
+	border: 0px solid blue;
 	background-color: #000000;
 }
 
 .inner-container {
-	max-width: 1000px;
-	border: 1px #000000;
+	width: 100%;
+	margin: 0 auto !important;
+	float: none !important;
+	border: 0px solid blue;
 	border-radius: 20px;
-	box-sizing: border-box;
 	padding: 10px;
 	background-color: #333333;
-
+	height: auto;
 }
 
 .login-container {
 	align-content: center;
 	width: 100%;
-	border: 3px #000000;
+	border: 1px solid #000000;
 	border-radius: 20px;
-	box-sizing: border-box;
 	background-color: #333333;
 	background-image: url("/images/login/fireplace.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
 	padding: 10%;
+	height: 570px;
 }
+
+.registration-container {
+	align-content: center;
+	width: 100%;
+	border: 1px solid #000000;
+	border-radius: 20px;
+	background-color: #333333;
+	background-image: url("/images/register/woods_painting.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	padding: 5%;
+	height: 100%;
+}
+
 
 .center {
 	margin: auto;
@@ -98,7 +116,6 @@ a:hover {
 	background-color: #333333;
 	padding: 14px 16px;
 	height: 50px;
-	box-sizing: border-box;
 	margin-top: 40px;
 }
 
@@ -126,3 +143,23 @@ input {
 	box-shadow: 0 0 10px rgba(81, 203, 238, 1);
 }
 
+.row {
+	display:table;
+	width: 100%;
+}
+
+.column {
+	display: table-cell;
+	border: black solid 0px;
+	padding: 10px;
+	text-align: right;
+	width: 100%;
+}
+
+.form_container {
+	width: 450px;
+	border: blue solid 0px;
+	border-radius: 20px;
+	background-color:rgba(0, 0, 0, 0.5);
+	padding: 20px;
+}
