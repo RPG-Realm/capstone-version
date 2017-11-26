@@ -1,4 +1,9 @@
-body {margin:0;}
+body {
+	margin:0;
+	font-family: Verdana;
+	background-color: #000000;
+	color: #ffffff;
+}
 
 .topnav {
 	overflow: hidden;
@@ -12,14 +17,80 @@ body {margin:0;}
 	padding: 14px 16px;
 	text-decoration: none;
 	font-size: 17px;
+	transition: all 0.9s ease 0s;
 }
 
 .topnav a:hover {
-	background-color: #ddd;
-	color: black;
+	background-color: #616161;
+	color: white;
 }
 
 .topnav a.active {
 	background-color: #4CAF50;
+	color: black;
+}
+
+.container-top {
+	width: 100%;
+	border: 1px #3a3a3a;
+	box-sizing: border-box;
+	padding-left: 10px;
+	padding-top: 5px;
+	background-color: #000000;
+}
+
+.container-main {
+	width: 100%;
+	border: 1px #3a3a3a;
+	box-sizing: border-box;
+	padding-left: 20px;
+	background-color: #000000;
+}
+
+.inner-container {
+	max-width: 1000px;
+	border: 1px #000000;
+	border-radius: 20px;
+	box-sizing: border-box;
+	padding: 20px;
+	background-color: #333333;
+
+}
+
+.login-container {
+	align-content: center;
+	width: 100%;
+	height: 100%;
+	border: 3px #000000;
+	border-radius: 20px;
+	box-sizing: border-box;
+	background-color: #333333;
+	background-image: url("/images/login/fireplace.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	padding: 10%;
+}
+
+.center {
+	margin: auto;
+	width: 50%;
+}
+
+.bottomnav {
+	color: #333333;
+	text-align: center;
+	padding: 14px 16px;
+	height: 20px;
+}
+
+.formdiv {
+	padding: 10px;
+}
+.form_fields {
+	font-size: 20px;
+	border-radius: 5px;
+	background-color: #333333;
 	color: white;
+	padding: 7px;
 }

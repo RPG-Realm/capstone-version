@@ -3,13 +3,25 @@
 <head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
-
 <!-- Content of the page -->
-<div>
-	<h1>Login to RPG-Realm...</h1><br/>
-	<p>LOGIN</p>
-</div>
+<div class="three-column-middle">
+<div class="container-main">
+	<h2>Please Login... Your Fate Awaits You.</h2>
+	<div class="inner-container">
+		<div class="login-container">
+			<form>
+				<div class="formdiv">username:</div>
+				<div class="formdiv"><input type="text" name="username" class="form_fields"/></div>
+				<div class="formdiv">password:</div>
+				<div class="formdiv"><input type="text" name="password" class="form_fields"/></div>
+				<div class="formdiv"><input type="submit" value="Submit" class="form_fields"/></div>
+			</form>
 
+		</div>
+	</div>
+
+</div>
+</div>
 <footer th:include="fragments/footer :: footer"></footer>
 </body>
 </html>

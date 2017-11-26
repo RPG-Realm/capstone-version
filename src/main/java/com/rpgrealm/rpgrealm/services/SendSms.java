@@ -7,10 +7,10 @@ import com.twilio.rest.lookups.v1.PhoneNumber;
 
 
 public class SendSms {
-  // Find your Account Sid and Token at twilio.com/user/account
+/*  // Find your Account Sid and Token at twilio.com/user/account
   public static final String ACCOUNT_SID = "";
   public static final String AUTH_TOKEN = "";
-/*
+
   public static void sendTxt(String phoneNumber, String textMessage) {
 
     Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
