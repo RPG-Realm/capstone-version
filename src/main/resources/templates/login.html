@@ -8,12 +8,12 @@
     <h2>Please Login... Your Fate Awaits You.</h2>
     <div class="inner-container">
         <div class="login-container">
-            <form>
+            <form action="/login" method="post" th:object="${user}">
                 <div class="formdiv">Username:</div>
-                <div class="formdiv"><input type="text" name="username" class="form_fields"/></div>
+                <div class="formdiv"><input type="text" class="form_fields" th:field="*{username}"/></div>
                 <div class="formdiv"></div>
                 <div class="formdiv">Password:</div>
-                <div class="formdiv"><input type="password" name="password" class="form_fields"/></div>
+                <div class="formdiv"><input type="password"  class="form_fields" th:field="*{password}"/></div>
                 <div class="formdiv"></div>
                 <div class="formdiv"></div>
                 <div class="formdiv"><input type="submit" value=" Login &nbsp;" class="form_fields"/></div>
