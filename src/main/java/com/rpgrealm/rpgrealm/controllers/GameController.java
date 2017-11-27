@@ -34,7 +34,6 @@ public class GameController {
     return "redirect:view-game";
   }
 
-
   @GetMapping("/view-game/{id}")
   public String viewGame(@PathVariable Long id, Model model) {
 
