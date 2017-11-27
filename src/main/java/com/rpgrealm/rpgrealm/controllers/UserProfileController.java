@@ -11,5 +11,12 @@ public class UserProfileController {
   @GetMapping("/user_profile")
   public String showUserProfile() {
     return "user_profile";
+
+
+  }
+
+  @GetMapping("/user_profile/edit")
+  public String editUserProfile() {
+    return "user_profile_edit";
   }
 }
