@@ -1,165 +1,204 @@
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-	font-family: Verdana;
-	background-color: #000000;
-	color: #ffffff;
-	max-width: 1080px;
-	margin: 0 auto !important;
-	float: none !important;
+    font-family: Verdana;
+    background-color: #000000;
+    color: #ffffff;
+    max-width: 1080px;
+    margin: 0 auto !important;
+    float: none !important;
 }
 
 a:visited {
-	color: white;
+    color: white;
 }
 
 a {
-	color: white;
-	text-decoration: none;
+    color: white;
+    text-decoration: none;
 }
 
 a:hover {
-	color: darkred;
-	text-decoration: underline;
+    color: darkred;
+    text-decoration: underline;
 }
 
 .topnav {
-	overflow: hidden;
-	background-color: #333;
+    overflow: hidden;
+    background-color: #333;
 }
 
 .topnav a {
-	float: left;
-	color: #f2f2f2;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	font-size: 17px;
-	transition: all 0.9s ease 0s;
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    transition: all 0.9s ease 0s;
 }
 
 .topnav a:hover {
-	background-color: rgba(24,24,24,1);
-	box-shadow: 0 0 20px rgba(81, 203, 238, 1);
-	color: white;
+    background-color: rgba(24, 24, 24, 1);
+    box-shadow: 0 0 20px rgba(81, 203, 238, 1);
+    color: white;
 }
 
 .topnav a.active {
-	background-color: rgba(24,24,24,1);
-	box-shadow: 0 0 5px white;
-	color: white;
+    background-color: rgba(24, 24, 24, 1);
+    box-shadow: 0 0 5px white;
+    color: white;
 
 }
 
 .container-top {
-	width: 100%;
-	border: 0px solid blue;
-	padding-left: 10px;
-	padding-top: 5px;
-	background-color: #000000;
+    width: 100%;
+    border: 0px solid blue;
+    padding-left: 10px;
+    padding-top: 5px;
+    background-color: #000000;
 }
 
 .container-main {
-	width: 100%;
-	border: 0px solid blue;
-	background-color: #000000;
+    width: 100%;
+    border: 0px solid blue;
+    background-color: #000000;
 }
 
 .inner-container {
-	width: 100%;
-	margin: 0 auto !important;
-	float: none !important;
-	border: 0px solid blue;
-	border-radius: 20px;
-	padding: 10px;
-	background-color: #333333;
-	height: auto;
+    width: 100%;
+    margin: 0 auto !important;
+    float: none !important;
+    border: 0px solid blue;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #333333;
+    height: auto;
 }
 
 .login-container {
-	align-content: center;
-	width: 100%;
-	border: 1px solid #000000;
-	border-radius: 20px;
-	background-color: #333333;
-	background-image: url("/images/login/fireplace.jpg");
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center center;
-	padding: 10%;
-	height: 570px;
+    align-content: center;
+    width: 100%;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    background-color: #333333;
+    background-image: url("/images/login/fireplace.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding: 10%;
+    height: 570px;
 }
 
 .registration-container {
-	align-content: center;
-	width: 100%;
-	border: 1px solid #000000;
-	border-radius: 20px;
-	background-color: #333333;
-	background-image: url("/images/register/woods_painting.jpg");
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center center;
-	padding: 5%;
-	height: 100%;
+    align-content: center;
+    width: 100%;
+    border: 0px solid black;
+    border-radius: 20px;
+    background-color: #333333;
+    background-image: url("/images/register/woods_painting.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding: 5%;
+    height: 100%;
 }
 
+.home-container {
+    align-content: center;
+    width: 100%;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    background-color: #333333;
+    background-image: url("/images/home/dungeon_background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding: 5%;
+    height: 570px;
+}
 
 .center {
-	margin: auto;
-	width: 50%;
+    margin: auto;
+    width: 50%;
 }
 
 .bottomnav {
-	background-color: #333333;
-	padding: 14px 16px;
-	height: 50px;
-	margin-top: 40px;
-}
-
-.formdiv {
-	padding: 5px;
+    background-color: #333333;
+    padding: 14px 16px;
+    height: 50px;
+    margin-top: 40px;
 }
 
 input {
-	font-size: 17px;
-	border-radius: 10px;
-	box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-	border: 1px solid black;
-	background-color: #333333;
-	color: white;
-	padding: 5px;
-	padding-left: 10px;
-	-webkit-transition: all 0.30s ease-in-out;
-	-moz-transition: all 0.30s ease-in-out;
-	-ms-transition: all 0.30s ease-in-out;
-	-o-transition: all 0.30s ease-in-out;
-	outline: none;
+    font-size: 17px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid black;
+    background-color: #333333;
+    color: white;
+    padding: 5px;
+    padding-left: 10px;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
 }
 
 .form_fields:hover {
-	box-shadow: 0 0 10px rgba(81, 203, 238, 1);
+    box-shadow: 0 0 10px rgba(81, 203, 238, 1);
 }
 
 .row {
-	display:table;
-	width: 100%;
+    display: table;
+    width: 100%;
 }
 
 .column {
-	display: table-cell;
-	border: black solid 0px;
-	padding: 10px;
-	text-align: right;
-	width: 100%;
+    display: table-cell;
+    border: black solid 0px;
+    padding: 10px;
+    text-align: right;
+    width: 100%;
 }
 
 .form_container {
-	width: 450px;
-	border: blue solid 0px;
-	border-radius: 20px;
-	background-color:rgba(0, 0, 0, 0.5);
-	padding: 20px;
+    width: 450px;
+    border: blue solid 0px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+
+.formdiv {
+    padding: 5px;
+}
+
+.form_container {
+    width: 450px;
+    border: blue solid 0px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+
+.glow_button {
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    width: 300px;
+}
+
+.glow_button:hover {
+    box-shadow: 0 0 30px rgba(81, 203, 238, 1);
 }

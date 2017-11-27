@@ -3,19 +3,22 @@
 <head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
+<div class="container-main">
+    <h2>Join Other Worlds at RPG Realm</h2>
+    <div class="inner-container">
+        <div class="home-container">
 
-<!-- Content of the page -->
-<div>
-	<h1>Welcome to RPG-Realm.org!</h1><br/>
+            <div class="glow_button">
+                <a href="/login"><img src="/images/home/login.gif"/></a>
+            </div>
+            <br/>
+            <div class="glow_button">
+                <a href="/register"><img src="/images/home/register.gif"/></a>
+            </div>
 
-	<div>
-		<a href="/login"><h3>Login</h3></a>
-		<a href="/register"><h3>Register</h3></a>
-	</div>
-
-
+        </div>
+    </div>
 </div>
-
 <footer th:include="fragments/footer :: footer"></footer>
 </body>
 </html>
