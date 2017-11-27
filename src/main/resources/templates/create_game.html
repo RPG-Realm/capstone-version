@@ -9,22 +9,22 @@
 	<div class="inner-container">
 		<div class="registration-container">
 			<div class="form_container">
-				<form>
+				<form action="/create_game" method="post" th:object="${game}">
 					<div class="row">
 						<div class="column">Campaign Name:</div>
-						<div class="column"><input type="text" name="name" class="form_fields"/></div>
+						<div class="column"><input type="text" class="form_fields" th:field="*{name}"/></div>
 					</div>
 					<div class="row">
 						<div class="column">Game Type:</div>
-						<div class="column"><input type="text" name="type" class="form_fields"/></div>
+						<div class="column"><input type="text" class="form_fields" th:field="*{type}"/></div>
 					</div>
 					<div class="row">
 						<div class="column">Description:</div>
-						<div class="column"><input type="text" name="description" class="form_fields"/></div>
+						<div class="column"><input type="text" class="form_fields" th:field="*{description}"/></div>
 					</div>
 					<div class="row">
-						<div class="column">Birth Date:</div>
-						<div class="column"><input type="text" name="rating" class="form_fields"/></div>
+						<div class="column">Rating:</div>
+						<div class="column"><input type="text" class="form_fields" th:field="*{rating}"/></div>
 					</div>
 					<div class="row">
 						<div class="column"></div>
