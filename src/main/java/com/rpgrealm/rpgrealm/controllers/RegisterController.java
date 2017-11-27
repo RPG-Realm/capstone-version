@@ -44,6 +44,11 @@ public class RegisterController {
 //        user.setPassword(hash);
 //        repository.save(user);
 
-        return "/login";
+//        this should not be hardcoded in production
+        user.setUser_created_time("0");
+        usrRep.save(user);
+
+
+        return "redirect:/login";
     }
 }
