@@ -15,6 +15,9 @@ public class Character {
   private String name;
 
   @Column
+  private String description;
+
+  @Column
   private String type;
 
   @OneToOne
@@ -45,6 +48,22 @@ public class Character {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public List<AppFile> getCharacter_files() {
+    return character_files;
+  }
+
+  public void setCharacter_files(List<AppFile> character_files) {
+    this.character_files = character_files;
   }
 
   public String getType() {

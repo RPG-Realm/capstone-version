@@ -3,24 +3,50 @@
  */
 package com.rpgrealm.rpgrealm.controllers;
 
+import com.rpgrealm.rpgrealm.models.Character;
+import com.rpgrealm.rpgrealm.repositories.CharacterRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class CharacterController {
-  @GetMapping("/create_character")
-  public String createCharacter() {
-    return "create_character";
+
+  private final CharacterRepository charRep;
+
+  public CharacterController(CharacterRepository charRep) {
+    this.charRep = charRep;
   }
 
-  @GetMapping("/view_character")
-  public String viewCharacter() {
-    return "view_character";
+  @GetMapping("/create-character")
+  public String showCharacterForm(Model model) {
+    model.addAttribute("character", new Character());
+    return "create-character";
   }
 
-  @GetMapping("/edit_character")
-  public String editCharacter() {
-    return "edit_character";
+  @PostMapping("/create-character")
+  public String createCharacter(@ModelAttribute Character character) {
+    charRep.save(character);
+    return "redirect:/view-character";
+  }
+
+  @GetMapping("/view-character")
+  public String viewCharacter(Model model) {
+    model.addAttribute("character", new Character());
+    return "view-character";
+  }
+
+  @GetMapping("/edit-character")
+  public String showEditCharacterForm(Model model) {
+    model.addAttribute("character", new Character());
+    return "view-character";
+  }
+
+  @PostMapping("/edit-character")
+  public String editCharacter(@ModelAttribute Character character) {
+    return "view-character";
   }
 
 }

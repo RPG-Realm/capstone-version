@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class UserController {
   @GetMapping("/user_profile")
   public String showUser() {
-    return "user_profile";
+    return "user-profile";
   }
 
   @GetMapping("/user_profile/edit")

@@ -10,22 +10,18 @@
 
 		<div class="registration-container">
 			<div class="form_container">
-				<form>
+				<form action="/create-character" method="post" th:object="${character}">
 					<div class="row">
-						<div class="column">Character Name:</div>
-						<div class="column"><input type="text" name="name" class="form_fields"/></div>
+						<div class="column">Name:</div>
+						<div class="column"><input type="text" name="name" class="form_fields" th:field="*{name}"/></div>
 					</div>
 					<div class="row">
-						<div class="column">Character Type:</div>
-						<div class="column"><input type="password" name="type" class="form_fields"/></div>
+						<div class="column">Type:</div>
+						<div class="column"><input type="text" name="type" class="form_fields" th:field="*{type}"/></div>
 					</div>
 					<div class="row">
-						<div class="column">Character Image:</div>
-						<div class="column"><input type="text" name="image" class="form_fields"/></div>
-					</div>
-					<div class="row">
-						<div class="column">Character File:</div>
-						<div class="column"><input type="text" name="file" class="form_fields"/></div>
+						<div class="column">Description:</div>
+						<div class="column"><input type="text" name="type" class="form_fields" th:field="*{description}"/></div>
 					</div>
 					<div class="row">
 						<div class="column"></div>
