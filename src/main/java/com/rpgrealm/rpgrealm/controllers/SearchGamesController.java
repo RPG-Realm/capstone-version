@@ -16,11 +16,11 @@ public class SearchGamesController {
   public SearchGamesController(GameRepository gameRep){
     this.gameRep=gameRep;
   }
-  @GetMapping("/search_games")
+  @GetMapping("/search-games")
   public String showSearchResults(Model model) {
     model.addAttribute("gameList",gameRep.findAll());
 
-    return "search_games";
+    return "search-games";
   }
 
   @GetMapping("/games_mapped")
