@@ -4,6 +4,7 @@
 package com.rpgrealm.rpgrealm.controllers;
 
 import com.rpgrealm.rpgrealm.models.User;
+import com.rpgrealm.rpgrealm.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RegisterController {
 
+    private final UserRepository usrRep;
+
+    public RegisterController(UserRepository usrRep){
+        this.usrRep=usrRep;
+    }
 
 //    private PasswordEncoder encoder;
 //    private UsersRepository repository;
