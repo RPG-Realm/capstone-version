@@ -3,14 +3,24 @@
  */
 package com.rpgrealm.rpgrealm.controllers;
 
+
+import com.rpgrealm.rpgrealm.models.Game;
+import com.rpgrealm.rpgrealm.repositories.GameRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class GameController {
+  private final GameRepository gameRep;
+
+  public GameController(GameRepository gameRep){
+    this.gameRep=gameRep;
+  }
 
   @GetMapping("/create_game")
-  public String createGame() {
+  public String createGame(Model model) {
+    model.addAttribute("game", new Game());
     return "create_game";
   }
 
