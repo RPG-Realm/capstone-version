@@ -48,7 +48,7 @@ a:hover {
 
 .topnav a.active {
     background-color: rgba(24, 24, 24, 1);
-    box-shadow: 0 0 5px white;
+    box-shadow: 0 0 20px rgba(81, 203, 238, 1);
     color: white;
 
 }
@@ -149,7 +149,11 @@ input {
 }
 
 .form_fields:hover {
-    box-shadow: 0 0 10px rgba(81, 203, 238, 1);
+    box-shadow: 0 0 15px rgba(81, 203, 238, 1);
+}
+
+.form_fields:focus {
+    box-shadow: 0 0 15px rgba(81, 203, 238, 1);
 }
 
 .row {
