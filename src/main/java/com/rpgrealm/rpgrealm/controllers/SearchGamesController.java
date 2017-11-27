@@ -12,4 +12,10 @@ public class SearchGamesController {
   public String showSearchResults() {
     return "search_games";
   }
+
+  @GetMapping("/games_mapped")
+  public String mappedGame() {
+    return "games_mapped";
+  }
+
 }

@@ -24,9 +24,4 @@ public class GameController {
     return "create_game";
   }
 
-  @GetMapping("/games_mapped")
-  public String mappedGame() {
-    return "games_mapped";
-  }
-
 }
