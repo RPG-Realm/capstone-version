@@ -3,13 +3,24 @@
  */
 package com.rpgrealm.rpgrealm.controllers;
 
+import com.rpgrealm.rpgrealm.models.Character;
+import com.rpgrealm.rpgrealm.repositories.CharacterRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class CharacterController {
+
+  private final CharacterRepository charRep;
+
+  public CharacterController(CharacterRepository charRep) {
+    this.charRep = charRep;
+  }
+
   @GetMapping("/create_character")
-  public String createCharacter() {
+  public String createCharacter(Model model) {
+    model.addAttribute("character",new Character());
     return "create_character";
   }
 
