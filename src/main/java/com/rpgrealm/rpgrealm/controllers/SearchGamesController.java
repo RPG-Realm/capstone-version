@@ -3,13 +3,23 @@
  */
 package com.rpgrealm.rpgrealm.controllers;
 
+import com.rpgrealm.rpgrealm.repositories.GameRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class SearchGamesController {
+  private final GameRepository gameRep;
+
+  public SearchGamesController(GameRepository gameRep){
+    this.gameRep=gameRep;
+  }
   @GetMapping("/search_games")
-  public String showSearchResults() {
+  public String showSearchResults(Model model) {
+
+
     return "search_games";
   }
 }

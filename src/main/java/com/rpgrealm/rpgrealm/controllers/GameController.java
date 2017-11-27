@@ -6,9 +6,11 @@ package com.rpgrealm.rpgrealm.controllers;
 
 import com.rpgrealm.rpgrealm.models.Game;
 import com.rpgrealm.rpgrealm.repositories.GameRepository;
+import com.rpgrealm.rpgrealm.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class GameController {
@@ -23,6 +25,13 @@ public class GameController {
     model.addAttribute("game", new Game());
     return "create_game";
   }
+
+  @PostMapping("/create_game")
+  public String saveGameToDb(Game game){
+    gameRep.save(game);
+    return "redirect:view_game";
+  }
+
 
   @GetMapping("/view_game")
   public String viewGame() {
