@@ -9,22 +9,22 @@
 	<div class="inner-container">
 		<div class="registration-container">
 			<div class="form_container">
-				<form>
+				<form action="/register" method="post" th:object="${user}">
 					<div class="row">
 						<div class="column">Username:</div>
-						<div class="column"><input type="text" name="username" class="form_fields"/></div>
+						<div class="column"><input type="text" class="form_fields" th:field="*{username}"/></div>
 					</div>
 					<div class="row">
 						<div class="column">Password:</div>
-						<div class="column"><input type="password" name="password" class="form_fields"/></div>
+						<div class="column"><input type="password" class="form_fields" th:field="*{password}"/></div>
 					</div>
 					<div class="row">
 						<div class="column">Email Address:</div>
-						<div class="column"><input type="text" name="email_address" class="form_fields"/></div>
+						<div class="column"><input type="text" class="form_fields" th:field="*{email}"/></div>
 					</div>
 					<div class="row">
 						<div class="column">Birth Date:</div>
-						<div class="column"><input type="text" name="birth_date" class="form_fields"/></div>
+						<div class="column"><input type="text" class="form_fields" th:field="*{birth_date}"/></div>
 					</div>
 					<div class="row">
 						<div class="column"></div>
