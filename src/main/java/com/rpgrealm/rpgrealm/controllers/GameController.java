@@ -10,6 +10,7 @@ import com.rpgrealm.rpgrealm.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -21,30 +22,38 @@ public class GameController {
     this.gameRep=gameRep;
   }
 
-  @GetMapping("/create_game")
+  @GetMapping("/create-game")
   public String createGame(Model model) {
     model.addAttribute("game", new Game());
-    return "create_game";
+    return "create-game";
   }
 
-  @PostMapping("/create_game")
+  @PostMapping("/create-game")
   public String saveGameToDb(Game game){
     gameRep.save(game);
-    return "redirect:view_game";
+    return "redirect:view-game";
   }
 
 
-  @GetMapping("/view_game/{id}")
+  @GetMapping("/view-game/{id}")
   public String viewGame(@PathVariable Long id, Model model) {
 
     model.addAttribute("game",gameRep.findOne(id));
-    return "view_game";
+    return "view-game";
   }
 
-  @GetMapping("/edit_game")
-  public String editGame() {
-    return "create_game";
+  @GetMapping("/edit-game/{id}")
+  public String editGame(@PathVariable Long id, Model model) {
+    model.addAttribute("game", gameRep.findOne(id));
+    return "edit-game";
   }
+  @PostMapping("edit-game/{id}")
+  public String commitEditGame(@PathVariable Long id, @ModelAttribute Game game){
+
+    gameRep.save(game);
+    return "home";
+  }
+
 
   @GetMapping("/games_mapped")
   public String mappedGame() {

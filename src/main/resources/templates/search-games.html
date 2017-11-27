@@ -9,7 +9,7 @@
 <div th:each="game : ${gameList}">
 	<p th:text="${game.name}"></p>
 	<p th:text="${game.description}"></p>
-	<a th:href="'/view_game/'+${game.id}">Link to game</a>
+	<a th:href="'/view-game/'+${game.id}">Link to game</a>
 	<!--<a href="/view_game"><h3>Warhammer</h3></a>-->
 	<!--<a href="/view_game"><h3>CyberPunk 2020</h3></a>-->
 	<!--<a href="/view_game"><h3>Dungeons and Dragons</h3></a>-->
