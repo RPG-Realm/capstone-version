@@ -18,7 +18,7 @@ public class SearchGamesController {
   }
   @GetMapping("/search_games")
   public String showSearchResults(Model model) {
-
+    model.addAttribute("gameList",gameRep.findAll());
 
     return "search_games";
   }

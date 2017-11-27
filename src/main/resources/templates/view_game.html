@@ -5,9 +5,11 @@
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 
 <!-- Content of the page -->
-<div>
-	<h1>View Active Campaign</h1>
-	<h3>Warhammer Campaign: "Quest to the Iron Mountain"</h3>
+<h1>View Active Campaign</h1>
+<div th:object="${game}">
+	<p th:text="${game.name}"></p>
+	<p th:text="${game.description}"></p>
+
 </div>
 
 <footer th:include="fragments/footer :: footer"></footer>
