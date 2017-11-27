@@ -7,9 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class CreateCharacterController {
-  @GetMapping("/create_character")
-  public String createCharacter() {
-    return "create_character";
+public class UserController {
+  @GetMapping("/user_profile")
+  public String showUser() {
+    return "user_profile";
+  }
+
+  @GetMapping("/user_profile/edit")
+  public String editUser() {
+    return "user_profile_edit";
   }
 }
