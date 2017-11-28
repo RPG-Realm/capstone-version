@@ -15,6 +15,6 @@ public class UserController {
 
   @GetMapping("/user-profile/edit")
   public String editUser() {
-    return "user-profile_edit";
+    return "user-profile-edit";
   }
 }
