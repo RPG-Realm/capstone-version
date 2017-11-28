@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments/head :: main-header('All posts')"></head>
+<body>
+<nav th:include="fragments/navbar :: mainNavbar"></nav>
+
+<!-- Content of the page -->
+<div th:each="character: ${characterList}">
+    <h2 th:text="${character.name}"></h2>
+    <h3 th:text="${character.type}"></h3>
+    <p th:text="${character.description}"></p>
+    <a th:href="'view-character/'+${character.id}"></a>
+</div>
+
+<footer th:include="fragments/footer :: footer"></footer>
+</body>
+</html>
