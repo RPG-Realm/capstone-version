@@ -3,23 +3,24 @@
 <head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
-
-<!-- Content of the page -->
-<h1>Your Search Results: <a href="games_mapped">[View on Map]</a></h1>
-<div th:each="game : ${gameList}">
-	<p th:text="${game.name}"></p>
-	<p th:text="${game.description}"></p>
-	<a th:href="'/view-game/'+${game.id}">Link to game</a>
-	<!--<a href="/view_game"><h3>Warhammer</h3></a>-->
-	<!--<a href="/view_game"><h3>CyberPunk 2020</h3></a>-->
-	<!--<a href="/view_game"><h3>Dungeons and Dragons</h3></a>-->
-	<!--<a href="/view_game"><h3>Rifts</h3></a>-->
-	<!--<a href="/view_game"><h3>GURPS</h3></a>-->
-	<!--<a href="/view_game"><h3>Call of Ctuhulu</h3></a>-->
-
-
+<div class="container-main">
+    <h2>Search Results: Games <a href="games_mapped">[View on Map]</a></h2>
+    <div class="inner-container">
+        <div class="game-container">
+            <div th:each="game : ${gameList}">
+                <p th:text="${game.name}"></p>
+                <p th:text="${game.description}"></p>
+                <a th:href="'/view-game/'+${game.id}">Link to game</a>
+                <!--<a href="/view_game"><h3>Warhammer</h3></a>-->
+                <!--<a href="/view_game"><h3>CyberPunk 2020</h3></a>-->
+                <!--<a href="/view_game"><h3>Dungeons and Dragons</h3></a>-->
+                <!--<a href="/view_game"><h3>Rifts</h3></a>-->
+                <!--<a href="/view_game"><h3>GURPS</h3></a>-->
+                <!--<a href="/view_game"><h3>Call of Ctuhulu</h3></a>-->
+            </div>
+        </div>
+    </div>
 </div>
-
 <footer th:include="fragments/footer :: footer"></footer>
 </body>
 </html>
