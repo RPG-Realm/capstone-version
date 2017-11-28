@@ -3,16 +3,22 @@
 <head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
-
 <!-- Content of the page -->
-<div>
-	<h1>User Profile</h1>
-	<h3>Chase Hammock</h3>
-	<h3>1983 Oakwell Farms Pkwy. APT 416</h3>
-	<h3>San Antonio, Texas, 78218</h3>
-	<h3>512-501-0416</h3>
-	<a href="/search_games?chase837"><h3>View Your Games</h3></a>
-	<a href="/view_character?chase837"><h3>View Your Character</h3></a>
+<div class="container-main">
+    <h2>View Active Campaign</h2>
+    <div class="inner-container">
+        <div class="user-container">
+            <div>
+                <h1>User Profile</h1>
+                <h3>Chase Hammock</h3>
+                <h3>1983 Oakwell Farms Pkwy. APT 416</h3>
+                <h3>San Antonio, Texas, 78218</h3>
+                <h3>512-501-0416</h3>
+                <a href="/search_games?chase837"><h3>View Your Games</h3></a>
+                <a href="/view_character?chase837"><h3>View Your Character</h3></a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <footer th:include="fragments/footer :: footer"></footer>
