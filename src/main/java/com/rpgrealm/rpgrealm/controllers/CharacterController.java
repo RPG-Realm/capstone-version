@@ -52,11 +52,11 @@ public class CharacterController {
   @GetMapping("/edit-character/{id}")
   public String showEditCharacterForm(Model model, @PathVariable Long id) {
     model.addAttribute("character", charRep.findOne(id));
-    return "view-character";
+    return "edit-character";
   }
 
   @PostMapping("/edit-character/{id}")
-  public String editCharacter(@ModelAttribute Character character) {
+  public String editCharacter(@ModelAttribute Character character, @PathVariable Long id) {
     charRep.save(character);
     return "view-character";
   }
