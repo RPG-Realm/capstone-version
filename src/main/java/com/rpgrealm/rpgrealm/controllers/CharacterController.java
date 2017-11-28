@@ -34,7 +34,7 @@ public class CharacterController {
   public String createCharacter(@ModelAttribute Character character) {
     character.setPlayer(usrRep.findOne(1L));
     charRep.save(character);
-    return "redirect:/view-character";
+    return "redirect:/view-character/{id}";
   }
 
   @GetMapping("/view-character/{id}")
