@@ -5,17 +5,17 @@
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 
 <!-- Content of the page -->
-<h1>Your Search Results: <a href="games_mapped">[View on Map]</a></h1>
+<h1>Your Search Results: <a href="games-mapped">[View on Map]</a></h1>
 <div th:each="game : ${gameList}">
 	<p th:text="${game.name}"></p>
 	<p th:text="${game.description}"></p>
 	<a th:href="'/view-game/'+${game.id}">Link to game</a>
-	<!--<a href="/view_game"><h3>Warhammer</h3></a>-->
-	<!--<a href="/view_game"><h3>CyberPunk 2020</h3></a>-->
-	<!--<a href="/view_game"><h3>Dungeons and Dragons</h3></a>-->
-	<!--<a href="/view_game"><h3>Rifts</h3></a>-->
-	<!--<a href="/view_game"><h3>GURPS</h3></a>-->
-	<!--<a href="/view_game"><h3>Call of Ctuhulu</h3></a>-->
+	<!--<a href="/view-game"><h3>Warhammer</h3></a>-->
+	<!--<a href="/view-game"><h3>CyberPunk 2020</h3></a>-->
+	<!--<a href="/view-game"><h3>Dungeons and Dragons</h3></a>-->
+	<!--<a href="/view-game"><h3>Rifts</h3></a>-->
+	<!--<a href="/view-game"><h3>GURPS</h3></a>-->
+	<!--<a href="/view-game"><h3>Call of Ctuhulu</h3></a>-->
 
 
 </div>

@@ -23,9 +23,9 @@ public class SearchGamesController {
     return "search-games";
   }
 
-  @GetMapping("/games_mapped")
+  @GetMapping("/games-mapped")
   public String mappedGame() {
-    return "games_mapped";
+    return "games-mapped";
   }
 
 }
