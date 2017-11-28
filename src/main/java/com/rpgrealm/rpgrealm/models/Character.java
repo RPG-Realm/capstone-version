@@ -31,6 +31,14 @@ public class Character {
   @OneToMany(mappedBy = "character")
   private List<AppFile> character_files;
 
+  public User getPlayer() {
+    return player;
+  }
+
+  public void setPlayer(User player) {
+    this.player = player;
+  }
+
   @ManyToOne
   @JoinColumn(name = "user_id")
   private User player;

@@ -60,6 +60,14 @@ public class User {
     @OneToMany(mappedBy = "game_master")
     private List<Game> games;
 
+    public List<Character> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(List<Character> characters) {
+        this.characters = characters;
+    }
+
     @OneToMany(mappedBy = "player")
     private List<Character> characters;
 
