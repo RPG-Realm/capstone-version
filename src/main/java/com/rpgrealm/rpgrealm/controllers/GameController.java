@@ -42,7 +42,7 @@ public class GameController {
   }
 
   @GetMapping("/view-game/")
-  public String viewGame(@PathVariable Long id, Model model) {
+  public String viewblankGame(@PathVariable Long id, Model model) {
 
     model.addAttribute("game",gameRep.findOne(id));
     return "view-game";
