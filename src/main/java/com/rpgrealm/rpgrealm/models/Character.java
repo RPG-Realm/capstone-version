@@ -21,15 +21,27 @@ public class Character {
   private String type;
 
   @OneToOne
-  private AppFile image_id;
+  private AppFile image;
 
   @OneToOne
-  private AppFile file_id;
+  private AppFile pdf;
 
   // mapped properties
 
   @OneToMany(mappedBy = "character")
   private List<AppFile> character_files;
+
+  public User getPlayer() {
+    return player;
+  }
+
+  public void setPlayer(User player) {
+    this.player = player;
+  }
+
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  private User player;
 
   public Character() {
   }
@@ -74,20 +86,20 @@ public class Character {
     this.type = type;
   }
 
-  public AppFile getImage_id() {
-    return image_id;
+  public AppFile getImage() {
+    return image;
   }
 
-  public void setImage_id(AppFile image_id) {
-    this.image_id = image_id;
+  public void setImage(AppFile image) {
+    this.image = image;
   }
 
-  public AppFile getFile_id() {
-    return file_id;
+  public AppFile getPdf() {
+    return pdf;
   }
 
-  public void setFile_id(AppFile file_id) {
-    this.file_id = file_id;
+  public void setPdf(AppFile pdf) {
+    this.pdf = pdf;
   }
 
   public List<AppFile> getCharacter() {
