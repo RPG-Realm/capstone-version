@@ -60,6 +60,9 @@ public class User {
     @OneToMany(mappedBy = "game_master")
     private List<Game> games;
 
+    @OneToMany(mappedBy = "player")
+    private List<Character> characters;
+
     public User() {
     }
 

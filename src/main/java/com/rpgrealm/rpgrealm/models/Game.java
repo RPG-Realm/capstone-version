@@ -28,7 +28,7 @@ public class Game {
   private String voice_server;
 
   @OneToOne
-  private AppFile image_id;
+  private AppFile image;
 
   @Column
   private String play_time;
@@ -113,12 +113,12 @@ public class Game {
     this.voice_server = voice_server;
   }
 
-  public AppFile getImage_id() {
-    return image_id;
+  public AppFile getImage() {
+    return image;
   }
 
-  public void setImage_id(AppFile image_id) {
-    this.image_id = image_id;
+  public void setImage(AppFile image) {
+    this.image = image;
   }
 
   public String getPlay_time() {
