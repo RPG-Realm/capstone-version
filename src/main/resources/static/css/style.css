@@ -89,7 +89,7 @@ a:hover {
     background-repeat: no-repeat;
     background-position: center center;
     padding: 7%;
-    height: 450px;
+    height: 570px;
 }
 
 .registration-container {
@@ -103,7 +103,7 @@ a:hover {
     background-repeat: no-repeat;
     background-position: center center;
     padding: 5%;
-    height: 100%;
+    height: 570px;
 }
 
 .home-container {
@@ -113,6 +113,34 @@ a:hover {
     border-radius: 20px;
     background-color: #333333;
     background-image: url("/images/home/demon_background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding: 5%;
+    height: 570px;
+}
+
+.game-container {
+    align-content: center;
+    width: 100%;
+    border: 0px solid black;
+    border-radius: 20px;
+    background-color: #333333;
+    background-image: url("/images/game/dungeon.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding: 5%;
+    height: 570px;
+}
+
+.map-container {
+    align-content: center;
+    width: 100%;
+    border: 0px solid black;
+    border-radius: 20px;
+    background-color: #333333;
+    background-image: url("/images/game/map.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;

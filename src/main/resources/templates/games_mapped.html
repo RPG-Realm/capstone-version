@@ -3,13 +3,17 @@
 <head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
-
 <!-- Content of the page -->
-<div>
-	<h1>View Available Games on Google Maps</h1>
-	<p></p>
-</div>
+<div class="container-main">
+	<h2>Games Mapped: View Available Games Nearby...</h2>
+	<div class="inner-container">
+		<div class="map-container">
 
+		</div>
+
+	</div>
+
+</div>
 <footer th:include="fragments/footer :: footer"></footer>
 </body>
 </html>
