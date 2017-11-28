@@ -8,10 +8,12 @@
 <div class="inner-container">
     <div class="character-container">
 
-        <div>
-            <h3>Jarbin the Slayer of Somerset</h3>
-            <h4>Warrior, 14th Level</h4>
+        <div th:object="${character}">
+            <h3 th:text="*{name}"></h3>
+            <h4 th:text="*{type}"></h4>
             <h4>(Photo of Jarbin)</h4>
+            <p th:text="*{description}"></p>
+            <a th:href="'/edit-character/'+*{id}">Edit Character</a>
         </div>
 
     </div>
