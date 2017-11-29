@@ -67,10 +67,11 @@ public class GameController {
   @GetMapping("/join-game/{id}")
   public String joinGameForm(@PathVariable Long id, Model model){
     model.addAttribute("game", gameRep.findOne(id));
-    model.addAttribute("characterList", charRep.findByUserId(1L));
+    model.addAttribute("characterList", charRep.findByUserId(4L));
     return "select-character";
   }
 
+//  drop the get request in the url, just use the post from ajax. Use @RequestAttribute to get the names from ajax
   @PostMapping("/join-game/{id}")
   public String commitJoinGame(@PathVariable Long id, @ModelAttribute Character character){
 

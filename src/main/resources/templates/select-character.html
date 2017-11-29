@@ -15,17 +15,26 @@
         <p th:text="${game.description}"></p>
     </div>
     <h1>Please select a character</h1>
-    <form th:action="'/join-game/'+${game.id}" method="post" th:object="${character}">
+</div>
         <div th:each="character: ${characterList}">
             <h2 th:text="${character.name}"></h2>
             <h3 th:text="${character.type}"></h3>
             <p th:text="${character.description}"></p>
-            <input type="checkbox" class="form_fields" th:field="*{id}"/>
+            <input name="select_character" th:value="${character.id}" type="radio" th:text="${character.name}"/>
         </div>
-        <input type="submit" value=" Submit and Register &nbsp;" class="form_fields"/>
-    </form>
+        <button type="submit">Select this character</button>
 
 </div>
+
+<script>
+    $.ajax("'/join-game/'+${game.id}", {
+        type: "POST",
+        data: {
+            game:
+            name:"value"
+        }
+    }).done(console.log("AJAX sent succesful"))
+</script>
 
 <footer th:include="fragments/footer :: footer"></footer>
 </body>
