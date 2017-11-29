@@ -30,7 +30,7 @@ public class GameController {
   @PostMapping("/create-game")
   public String saveGameToDb(Game game){
     gameRep.save(game);
-    return "redirect:view-game";
+    return "redirect:home";
   }
 
   @GetMapping("/view-game/{id}")
