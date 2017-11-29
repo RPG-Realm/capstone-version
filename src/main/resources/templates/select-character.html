@@ -20,20 +20,30 @@
             <h2 th:text="${character.name}"></h2>
             <h3 th:text="${character.type}"></h3>
             <p th:text="${character.description}"></p>
-            <input name="select_character" th:value="${character.id}" type="radio" th:text="${character.name}"/>
+            <input name="characterId" th:value="${character.id}" type="radio" th:text="${character.name}"/>
         </div>
-        <button type="submit">Select this character</button>
+        <input
+        id="csrf"
+        type="hidden"
+        th:name="${_csrf.parameterName}"
+        th:value="${_csrf.token}" />
+        <button id="join-game" type="button">Select this character</button>
 
-</div>
 
-<script>
-    $.ajax("'/join-game/'+${game.id}", {
-        type: "POST",
-        data: {
-            game:
-            name:"value"
-        }
-    }).done(console.log("AJAX sent succesful"))
+<script th:inline="javascript">
+    function joinGame() {
+        $.ajax("/join-game", {
+            type: "POST",
+            data: jQuery.param({
+                gameId: 4,
+                characterId: $('input[type=radio]:checked').val(),
+                _csrf: $("#csrf").val()
+            })
+        }).done(console.log("AJAX sent succesful"));/*.fail(function (error) {
+            console.log(error);
+        })*/
+    }
+    document.getElementById('join-game').addEventListener('click', joinGame);
 </script>
 
 <footer th:include="fragments/footer :: footer"></footer>

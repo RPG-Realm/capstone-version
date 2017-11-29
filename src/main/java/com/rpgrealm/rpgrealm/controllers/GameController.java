@@ -3,27 +3,31 @@
  */
 package com.rpgrealm.rpgrealm.controllers;
 
+import com.rpgrealm.rpgrealm.models.AppFile;
 import com.rpgrealm.rpgrealm.models.Game;
+import com.rpgrealm.rpgrealm.repositories.AppFileRepository;
 import com.rpgrealm.rpgrealm.repositories.CharacterRepository;
 import com.rpgrealm.rpgrealm.models.User;
 import com.rpgrealm.rpgrealm.repositories.GameRepository;
+import com.rpgrealm.rpgrealm.repositories.Users;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class GameController {
   private final GameRepository gameRep;
   private final CharacterRepository charRep;
+  private final AppFileRepository appRep;
+  private final Users usrRep;
 
-  public GameController(GameRepository gameRep, CharacterRepository charRep)
+  public GameController(GameRepository gameRep, CharacterRepository charRep, AppFileRepository appRep, Users usrRep)
   {
     this.gameRep=gameRep;
     this.charRep=charRep;
+    this.appRep=appRep;
+    this.usrRep=usrRep;
   }
 
   @GetMapping("/create-game")
@@ -76,8 +80,15 @@ public class GameController {
 
 //  drop the get request in the url, just use the post from ajax. Use @RequestAttribute to get the names from ajax
   
-  @PostMapping("/join-game/{id}")
-  public String commitJoinGame(@PathVariable Long id, @ModelAttribute Character character){
+  @PostMapping("/join-game")
+  public String commitJoinGame(@RequestParam Long gameId, @RequestParam Long characterId){
+    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    AppFile appfile=new AppFile();
+    appfile.setFile_url("placeholder");
+    appfile.setCharacter(charRep.findOne(characterId));
+    appfile.setUser(usrRep.findOne(user.getId()));
+    appfile.setGame(gameRep.findOne(gameId));
+    appRep.save(appfile);
 
     return "redirect:home";
   }
