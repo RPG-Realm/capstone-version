@@ -5,21 +5,26 @@
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 
 <!-- Content of the page -->
-<!--Idea for implementing. Make a form over whole mess. Game Id is a hidden form element. Characters are checkbox options
- This would send a game id and character id back to the join-game controller. This will let us attatch the game to the character on the other side.-->
+<!--Make the list of characters on the back end. Send it to front end and make checkboxes in the html. Then check
+ which ones are checked via a custom ajax request in javascript-->
 <div>
+
     <h1>You are joining</h1>
     <div th:object="${game}">
         <p th:text="${game.name}"></p>
         <p th:text="${game.description}"></p>
     </div>
     <h1>Please select a character</h1>
+    <form th:action="'/join-game/'+${game.id}" method="post" th:object="${character}">
         <div th:each="character: ${characterList}">
             <h2 th:text="${character.name}"></h2>
             <h3 th:text="${character.type}"></h3>
             <p th:text="${character.description}"></p>
-            <a th:href="'select-character/'+${character.id}"></a>
+            <input type="checkbox" class="form_fields" th:field="*{id}"/>
         </div>
+        <input type="submit" value=" Submit and Register &nbsp;" class="form_fields"/>
+    </form>
+
 </div>
 
 <footer th:include="fragments/footer :: footer"></footer>

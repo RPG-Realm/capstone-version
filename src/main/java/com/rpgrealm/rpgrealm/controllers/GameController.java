@@ -71,4 +71,10 @@ public class GameController {
     return "select-character";
   }
 
+  @PostMapping("/join-game/{id}")
+  public String commitJoinGame(@PathVariable Long id, @ModelAttribute Character character){
+
+    return "redirect:home";
+  }
+
 }
