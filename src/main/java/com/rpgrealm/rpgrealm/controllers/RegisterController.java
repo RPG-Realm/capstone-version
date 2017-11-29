@@ -4,7 +4,7 @@
 package com.rpgrealm.rpgrealm.controllers;
 
 import com.rpgrealm.rpgrealm.models.User;
-import com.rpgrealm.rpgrealm.repositories.UserRepository;
+import com.rpgrealm.rpgrealm.repositories.Users;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RegisterController {
 
-    private final UserRepository usrRep;
+    private final Users usrRep;
 
-    public RegisterController(UserRepository usrRep){
+    public RegisterController(Users usrRep){
 
         this.usrRep=usrRep;
     }

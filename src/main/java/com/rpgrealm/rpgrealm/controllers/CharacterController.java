@@ -5,7 +5,7 @@ package com.rpgrealm.rpgrealm.controllers;
 
 import com.rpgrealm.rpgrealm.models.Character;
 import com.rpgrealm.rpgrealm.repositories.CharacterRepository;
-import com.rpgrealm.rpgrealm.repositories.UserRepository;
+import com.rpgrealm.rpgrealm.repositories.Users;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class CharacterController {
 
   private final CharacterRepository charRep;
-  private final UserRepository usrRep;
+  private final Users usrRep;
 
-  public CharacterController(CharacterRepository charRep, UserRepository usrRep) {
+  public CharacterController(CharacterRepository charRep, Users usrRep) {
     this.charRep = charRep;
     this.usrRep = usrRep;
   }
