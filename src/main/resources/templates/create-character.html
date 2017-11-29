@@ -8,7 +8,6 @@
 <div class="container-main" sec:authorize="isAuthenticated()">
 	<h2>Create Your Character</h2>
 	<div class="inner-container">
-
 			<div class="character-container">
 			<div class="form_container">
 				<form th:action="@{/create-character}" method="post" th:object="${character}">
@@ -24,7 +23,6 @@
 						<div class="column">Description:</div>
 						<div class="column"><input type="text" name="type" class="form_fields" th:field="*{description}"/></div>
 					</div>
-
 					<div class="row">
 						<div class="column"></div>
 						<div class="column"><input type="submit" value=" Submit and Register &nbsp;" class="form_fields"/></div>
@@ -32,9 +30,8 @@
 				</form>
 			</div>
 		</div>
-
 	</div>
-
+    </div>
 </div>
 <footer th:include="fragments/footer :: footer"></footer>
 </body>

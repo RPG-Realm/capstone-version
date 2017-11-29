@@ -3,7 +3,6 @@
  */
 package com.rpgrealm.rpgrealm.controllers;
 
-
 import com.rpgrealm.rpgrealm.models.Game;
 import com.rpgrealm.rpgrealm.models.User;
 import com.rpgrealm.rpgrealm.repositories.GameRepository;
@@ -63,6 +62,5 @@ public class GameController {
     gameRep.save(game);
     return "home";
   }
-
 
 }
