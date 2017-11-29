@@ -4,7 +4,10 @@
 package com.rpgrealm.rpgrealm.controllers;
 
 import com.rpgrealm.rpgrealm.models.Game;
+import com.rpgrealm.rpgrealm.repositories.CharacterRepository;
+import com.rpgrealm.rpgrealm.models.User;
 import com.rpgrealm.rpgrealm.repositories.GameRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class GameController {
   private final GameRepository gameRep;
+  private final CharacterRepository charRep;
 
-  public GameController(GameRepository gameRep){
+  public GameController(GameRepository gameRep, CharacterRepository charRep)
+  {
     this.gameRep=gameRep;
+    this.charRep=charRep;
   }
 
   @GetMapping("/create-game")
@@ -28,8 +34,10 @@ public class GameController {
 
   @PostMapping("/create-game")
   public String saveGameToDb(Game game){
+    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    game.setGame_master(user);
     gameRep.save(game);
-    return "redirect:view-game";
+    return "redirect:home";
   }
 
   @GetMapping("/view-game/{id}")
@@ -39,11 +47,12 @@ public class GameController {
     return "view-game";
   }
 
-  @GetMapping("/view-game/")
-  public String viewblankGame(@PathVariable Long id, Model model) {
+  @GetMapping("/view-game/all")
+  public String viewblankGame( Model model) {
 
-    model.addAttribute("game",gameRep.findOne(id));
-    return "view-game";
+    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    model.addAttribute("gameList",gameRep.findByUserId(user.getId()));
+    return "my-games";
   }
 
   @GetMapping("/edit-game/{id}")
@@ -56,6 +65,21 @@ public class GameController {
 
     gameRep.save(game);
     return "home";
+  }
+
+  @GetMapping("/join-game/{id}")
+  public String joinGameForm(@PathVariable Long id, Model model){
+    model.addAttribute("game", gameRep.findOne(id));
+    model.addAttribute("characterList", charRep.findByUserId(4L));
+    return "select-character";
+  }
+
+//  drop the get request in the url, just use the post from ajax. Use @RequestAttribute to get the names from ajax
+  
+  @PostMapping("/join-game/{id}")
+  public String commitJoinGame(@PathVariable Long id, @ModelAttribute Character character){
+
+    return "redirect:home";
   }
 
 }

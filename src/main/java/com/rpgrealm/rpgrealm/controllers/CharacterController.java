@@ -4,8 +4,10 @@
 package com.rpgrealm.rpgrealm.controllers;
 
 import com.rpgrealm.rpgrealm.models.Character;
+import com.rpgrealm.rpgrealm.models.User;
 import com.rpgrealm.rpgrealm.repositories.CharacterRepository;
-import com.rpgrealm.rpgrealm.repositories.UserRepository;
+import com.rpgrealm.rpgrealm.repositories.Users;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class CharacterController {
 
   private final CharacterRepository charRep;
-  private final UserRepository usrRep;
+  private final Users usrRep;
 
-  public CharacterController(CharacterRepository charRep, UserRepository usrRep) {
+  public CharacterController(CharacterRepository charRep, Users usrRep) {
     this.charRep = charRep;
     this.usrRep = usrRep;
   }
@@ -32,14 +34,16 @@ public class CharacterController {
 
   @PostMapping("/create-character")
   public String createCharacter(@ModelAttribute Character character) {
-    character.setPlayer(usrRep.findOne(1L));
+    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    character.setPlayer(user);
     charRep.save(character);
-    return "redirect:/view-character";
+    return "redirect:/home";
   }
 
-  @GetMapping("/user-character/{id}")
-    public String viewAllCharacters(Model model, @PathVariable Long id){
-      model.addAttribute("characterList", charRep.findByUserId(id));
+  @GetMapping("/user-character")
+    public String viewAllCharacters(Model model){
+     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      model.addAttribute("characterList", charRep.findByUserId(user.getId()));
       return "character-list";
     }
 

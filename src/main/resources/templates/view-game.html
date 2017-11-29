@@ -5,19 +5,20 @@
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 <!-- Content of the page -->
 <div class="container-main">
-	<h2>View Active Campaign</h2>
-	<div class="inner-container">
-		<div class="game-container">
-			<div th:object="${game}">
-				<p th:text="${game.name}"></p>
-				<p th:text="${game.description}"></p>
-				<a th:href="'/edit-game/'+${game.id}">Edit Link</a>
-				<div>
+    <h2>View Active Campaign</h2>
+    <div class="inner-container">
+        <div class="game-container">
+            <div th:object="${game}">
+                <p th:text="${game.name}"></p>
+                <p th:text="${game.description}"></p>
+                <a th:href="'/edit-game/'+${game.id}">Edit Link</a>
+                <a th:href="'/join-game/'+${game.id}">Join the game!</a>
+            </div>
+          <div>
 					<button type="button" label="Upload a PDF or Image:" class="glow_button" id="upload" />
 				</div>
-			</div>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 <footer th:include="fragments/footer :: footer"></footer>
 

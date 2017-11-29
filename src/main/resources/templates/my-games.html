@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/head :: main-header('All posts')"></head>
+<body>
+<nav th:include="fragments/navbar :: mainNavbar"></nav>
+
+<!-- Content of the page -->
+<div sec:authorize="isAuthenticated()">
+    <div th:each="game : ${gameList}">
+        <p th:text="${game.name}"></p>
+        <p th:text="${game.description}"></p>
+        <a th:href="'/view-game/'+${game.id}">Link to game</a>
+    </div>
+
+</div>
+
+<footer th:include="fragments/footer :: footer"></footer>
+</body>
+</html>
