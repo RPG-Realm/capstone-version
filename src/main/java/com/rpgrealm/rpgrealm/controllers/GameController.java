@@ -5,6 +5,7 @@ package com.rpgrealm.rpgrealm.controllers;
 
 
 import com.rpgrealm.rpgrealm.models.Game;
+import com.rpgrealm.rpgrealm.repositories.CharacterRepository;
 import com.rpgrealm.rpgrealm.repositories.GameRepository;
 import com.rpgrealm.rpgrealm.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
@@ -17,9 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class GameController {
   private final GameRepository gameRep;
+  private final CharacterRepository charRep;
 
-  public GameController(GameRepository gameRep){
+  public GameController(GameRepository gameRep, CharacterRepository charRep)
+  {
     this.gameRep=gameRep;
+    this.charRep=charRep;
   }
 
   @GetMapping("/create-game")
@@ -60,5 +64,11 @@ public class GameController {
     return "home";
   }
 
+  @GetMapping("/join-game/{id}")
+  public String joinGameForm(@PathVariable Long id, Model model){
+    model.addAttribute("game", gameRep.findOne(id));
+    model.addAttribute("characterList", charRep.findByUserId(1L));
+    return "select-character";
+  }
 
 }

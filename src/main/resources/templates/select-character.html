@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments/head :: main-header('All posts')"></head>
+<body>
+<nav th:include="fragments/navbar :: mainNavbar"></nav>
+
+<!-- Content of the page -->
+<!--Idea for implementing. Make a form over whole mess. Game Id is a hidden form element. Characters are checkbox options
+ This would send a game id and character id back to the join-game controller. This will let us attatch the game to the character on the other side.-->
+<div>
+    <h1>You are joining</h1>
+    <div th:object="${game}">
+        <p th:text="${game.name}"></p>
+        <p th:text="${game.description}"></p>
+    </div>
+    <h1>Please select a character</h1>
+        <div th:each="character: ${characterList}">
+            <h2 th:text="${character.name}"></h2>
+            <h3 th:text="${character.type}"></h3>
+            <p th:text="${character.description}"></p>
+            <a th:href="'select-character/'+${character.id}"></a>
+        </div>
+</div>
+
+<footer th:include="fragments/footer :: footer"></footer>
+</body>
+</html>
