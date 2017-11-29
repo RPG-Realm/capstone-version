@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 <!-- Content of the page -->
-<div class="container-main">
+<div class="container-main" sec:authorize="isAuthenticated()">
 	<h2>Create a Campaign (Game)</h2>
 	<div class="inner-container">
 		<div class="game-container">
 			<div class="form_container">
-				<form action="/create-game" method="post" th:object="${game}">
+				<form th:action="@{/create-game}" method="post" th:object="${game}">
 					<div class="row">
 						<div class="column">Name:</div>
 						<div class="column"><input type="text" class="form_fields" th:field="*{name}"/></div>
@@ -34,9 +35,7 @@
 				</form>
 			</div>
 		</div>
-
 	</div>
-
 </div>
 <footer th:include="fragments/footer :: footer"></footer>
 </body>

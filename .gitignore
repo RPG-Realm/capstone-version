@@ -26,3 +26,4 @@ nbdist/
 /REFERENCE/
 .DS_Store
 
+/src/main/java/com/rpgrealm/rpgrealm/controllers/RpgProperties.java
