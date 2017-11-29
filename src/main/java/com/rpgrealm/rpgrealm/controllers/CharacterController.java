@@ -34,12 +34,13 @@ public class CharacterController {
 
   @PostMapping("/create-character")
   public String createCharacter(@ModelAttribute Character character) {
-    character.setPlayer(usrRep.findOne(1L));
+    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    character.setPlayer(user);
     charRep.save(character);
     return "redirect:/home";
   }
 
-  @GetMapping("/user-character/")
+  @GetMapping("/user-character")
     public String viewAllCharacters(Model model){
      User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
       model.addAttribute("characterList", charRep.findByUserId(user.getId()));
