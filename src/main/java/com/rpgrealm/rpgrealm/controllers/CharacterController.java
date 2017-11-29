@@ -4,8 +4,10 @@
 package com.rpgrealm.rpgrealm.controllers;
 
 import com.rpgrealm.rpgrealm.models.Character;
+import com.rpgrealm.rpgrealm.models.User;
 import com.rpgrealm.rpgrealm.repositories.CharacterRepository;
 import com.rpgrealm.rpgrealm.repositories.Users;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,12 +36,13 @@ public class CharacterController {
   public String createCharacter(@ModelAttribute Character character) {
     character.setPlayer(usrRep.findOne(1L));
     charRep.save(character);
-    return "redirect:/view-character";
+    return "redirect:/home";
   }
 
-  @GetMapping("/user-character/{id}")
-    public String viewAllCharacters(Model model, @PathVariable Long id){
-      model.addAttribute("characterList", charRep.findByUserId(id));
+  @GetMapping("/user-character/")
+    public String viewAllCharacters(Model model){
+     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      model.addAttribute("characterList", charRep.findByUserId(user.getId()));
       return "character-list";
     }
 

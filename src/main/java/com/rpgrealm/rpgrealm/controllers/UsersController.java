@@ -6,6 +6,7 @@ package com.rpgrealm.rpgrealm.controllers;
 import com.rpgrealm.rpgrealm.models.User;
 import com.rpgrealm.rpgrealm.repositories.Users;
 import org.hibernate.validator.constraints.ModCheck;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +43,8 @@ public class UsersController {
 
   @GetMapping("/user-profile")
   public String showUser(Model model) {
-    model.addAttribute("user", usrRep.findOne(1L));
+    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    model.addAttribute("user", user);
     return "user-profile";
   }
 
