@@ -4,17 +4,17 @@
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 <div class="container-main">
-	<h2>Your Search Results: <a href="games-mapped">[View on Map]</a></h2>
-	<div class="inner-container">
-		<div class="game-container">
-			<!-- Content of the page -->
-			<div th:each="game : ${gameList}">
-				<p th:text="${game.name}"></p>
-				<p th:text="${game.description}"></p>
-				<a th:href="'/view-game/'+${game.id}">Link to game</a>
-			</div>
-		</div>
-	</div>
+    <h2>Your Search Results: <a href="games-mapped">[View on Map]</a></h2>
+    <div class="inner-container">
+        <div class="game-container">
+            <!-- Content of the page -->
+            <div th:each="game : ${gameList}">
+                <p th:text="${game.name}"></p>
+                <p th:text="${game.description}"></p>
+                <a th:href="'/view-game/'+${game.id}">Link to game</a>
+            </div>
+        </div>
+    </div>
 </div>
 <footer th:include="fragments/footer :: footer"></footer>
 </body>
