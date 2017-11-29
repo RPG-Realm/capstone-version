@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class SearchGamesController {
   private final GameRepository gameRep;
 
+  @Autowired
+  private RpgProperties rpgProperties;
   public SearchGamesController(GameRepository gameRep) {
     this.gameRep = gameRep;
   }
@@ -25,16 +27,10 @@ public class SearchGamesController {
   }
 
   @GetMapping("/games-mapped")
-  public String mappedGame() {
+  public String mappedGames(Model model) {
+    model.addAttribute("mapsApi", rpgProperties.maps);
     return "games-mapped";
   }
 
-  @Autowired
-  private RpgProperties rpgProperties;
-
-  public String mapApi(Model model) {
-    model.addAttribute("maps", rpgProperties.maps);
-    return "edit";
-  }
-
 }
+

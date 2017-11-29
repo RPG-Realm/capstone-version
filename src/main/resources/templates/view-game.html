@@ -20,5 +20,19 @@
 	</div>
 </div>
 <footer th:include="fragments/footer :: footer"></footer>
+
+<script th:inline="javascript">
+    $.ajax({
+        type: "POST",
+        url: "/file-upload",
+        data: response,
+        success: request.getElementById("upload-status").innerHTML = "File Uploaded Successfully",
+        dataType: "json"
+    })
+    var gameId = [[${gameid}]];
+	  console.log(gameId);
+</script>
+
+</script>
 </body>
 </html>

@@ -12,6 +12,8 @@ function initMap() {
     setMarkers(map);
 }
 
+initMap();
+
 // Data for the markers consisting of a name, a LatLng and a zIndex for the
 // order in which these markers should display on top of each other.
 var beaches = [
