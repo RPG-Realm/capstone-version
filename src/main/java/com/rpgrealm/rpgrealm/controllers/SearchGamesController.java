@@ -23,6 +23,7 @@ public class SearchGamesController {
     return "search-games";
   }
 
+
   @GetMapping("/games-mapped")
   public String mappedGame() {
     return "games-mapped";
