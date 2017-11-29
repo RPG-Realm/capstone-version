@@ -9,7 +9,7 @@
 	<div class="inner-container">
 		<div class="registration-container">
 			<div class="form_container">
-				<form action="/register" method="post" th:object="${user}">
+				<form th:action="@{/sign-up}" method="post" th:object="${user}">
 					<div class="row">
 						<div class="column">Username:</div>
 						<div class="column"><input type="text" class="form_fields" th:field="*{username}"/></div>

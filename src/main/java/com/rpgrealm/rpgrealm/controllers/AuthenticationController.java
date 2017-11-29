@@ -19,21 +19,7 @@ public class AuthenticationController {
         this.usrRep=usrRep;
     }
     @GetMapping("/login")
-    public String showLoginForm(Model model) {
-        model.addAttribute("user", new User());
+    public String showLoginForm() {
         return "login";
-    }
-
-    @PostMapping("/login")
-    public String loginUser(@ModelAttribute User user){
-        boolean userExists=usrRep.findByUsername(user.getUsername())!=null;
-        System.out.println(userExists);
-        boolean passwordMatch=user.getPassword().equalsIgnoreCase(usrRep.findByUsername(user.getUsername()).getPassword());
-        System.out.println(passwordMatch);
-        if(userExists&&passwordMatch){
-            return "redirect:/profile";
-        }else{
-            return "/login";
-        }
     }
 }
