@@ -4,22 +4,13 @@
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 <div class="container-main">
-	<h2></h2>
+	<h2>Please A Player for your Campaign...</h2>
 	<div class="inner-container">
-		<h2 th:text="*{first_name}+'s User Profile'"></h2>
 		<div class="user-container">
 			<div class="form_container">
 				<!-- Content of the page -->
 				<div th:object="${user}">
-					<h2>User Profile</h2>
-					<h3 th:text="*{username}"></h3>
-					<h3 th:text="*{first_name}+' '+*{last_name}"></h3>
-					<h3 th:text="*{address_1}"></h3>
-					<h3 th:text="*{city}+', '+*{state}+' '+*{zip_code}"></h3>
-					<h3 th:text="*{phone}"></h3>
-					<a th:href="'/user-profile/edit/'+*{id}">Edit Profile</a>
-					<a th:href="'/search-games/'+*{id}"><h3>View Your Games</h3></a>
-					<a th:href="'/view-character/'+*{id}"><h3>View Your Character</h3></a>
+					SELECT PLAYER CONTENT GOES HERE
 				</div>
 			</div>
 		</div>
