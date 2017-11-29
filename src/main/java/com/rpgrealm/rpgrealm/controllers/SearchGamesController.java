@@ -4,21 +4,22 @@
 package com.rpgrealm.rpgrealm.controllers;
 
 import com.rpgrealm.rpgrealm.repositories.GameRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class SearchGamesController {
   private final GameRepository gameRep;
 
-  public SearchGamesController(GameRepository gameRep){
-    this.gameRep=gameRep;
+  public SearchGamesController(GameRepository gameRep) {
+    this.gameRep = gameRep;
   }
+
   @GetMapping("/search-games")
   public String showSearchResults(Model model) {
-    model.addAttribute("gameList",gameRep.findAll());
+    model.addAttribute("gameList", gameRep.findAll());
 
     return "search-games";
   }
@@ -26,6 +27,14 @@ public class SearchGamesController {
   @GetMapping("/games-mapped")
   public String mappedGame() {
     return "games-mapped";
+  }
+
+  @Autowired
+  private RpgProperties rpgProperties;
+
+  public String mapApi(Model model) {
+    model.addAttribute("maps", rpgProperties.maps);
+    return "edit";
   }
 
 }
