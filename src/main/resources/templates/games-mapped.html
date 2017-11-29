@@ -8,12 +8,17 @@
 	<h2>Games Mapped: View Available Games Nearby...</h2>
 	<div class="inner-container">
 		<div class="map-container">
-
+			<div id="map"></div>
+			<p th:text="*{mapsApi}"></p>
+			<p>TEST</p>
 		</div>
-
 	</div>
-
 </div>
 <footer th:include="fragments/footer :: footer"></footer>
+
+<script async="async" defer="defer"
+        th:src="'https://maps.googleapis.com/maps/api/js?key='+${mapsApi}">
+</script>
+
 </body>
 </html>

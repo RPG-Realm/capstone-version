@@ -15,6 +15,14 @@ function openPicker() {
         console.log(response);
         console.log(response.filesUploaded[0].url);
 
+        $.ajax({
+            type: "POST",
+            url: "/file-upload",
+            data: response,
+            success: request.getElementById("upload-status").innerHTML="File Uploaded Successfully",
+            dataType: "json"
+
+        });
 
 
 
