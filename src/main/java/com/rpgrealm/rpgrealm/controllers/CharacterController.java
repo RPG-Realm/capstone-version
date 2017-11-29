@@ -37,6 +37,12 @@ public class CharacterController {
     return "redirect:/view-character";
   }
 
+  @GetMapping("/user-character/{id}")
+    public String viewAllCharacters(Model model, @PathVariable Long id){
+      model.addAttribute("characterList", charRep.findByUserId(id));
+      return "character-list";
+    }
+
   @GetMapping("/view-character/{id}")
   public String viewCharacter(Model model, @PathVariable Long id) {
     model.addAttribute("character", charRep.findOne(id));
@@ -45,12 +51,12 @@ public class CharacterController {
 
   @GetMapping("/edit-character/{id}")
   public String showEditCharacterForm(Model model, @PathVariable Long id) {
-    model.addAttribute("character", new Character());
-    return "view-character";
+    model.addAttribute("character", charRep.findOne(id));
+    return "edit-character";
   }
 
   @PostMapping("/edit-character/{id}")
-  public String editCharacter(@ModelAttribute Character character) {
+  public String editCharacter(@ModelAttribute Character character, @PathVariable Long id) {
     charRep.save(character);
     return "view-character";
   }
