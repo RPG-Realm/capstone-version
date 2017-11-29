@@ -68,6 +68,7 @@ public class User {
         this.characters = characters;
     }
 
+//    refactor this out when we get appFiles stored away.
     @OneToMany(mappedBy = "player")
     private List<Character> characters;
 
