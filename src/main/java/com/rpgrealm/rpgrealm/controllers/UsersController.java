@@ -56,6 +56,8 @@ public class UsersController {
 
   @PostMapping("/user-profile/edit/{id}")
   public String commitEditUser(@PathVariable Long id, User user){
+    String hash = passwordEncoder.encode(user.getPassword());
+    user.setPassword(hash);
     usrRep.save(user);
     return "user-profile";
   }
