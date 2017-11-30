@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 <!-- Content of the page -->
@@ -8,16 +7,12 @@
 	<h2>Games Mapped: View Available Games Nearby...</h2>
 	<div class="inner-container">
 		<div class="map-container">
-
 			<div id="map-canvas">map goes here</div>
-
 		</div>
 	</div>
 </div>
 <footer th:include="fragments/footer :: footer"></footer>
-
 <script th:inline="javascript">
-
     function initMap() {
         var uluru = {lat: -25.363, lng: 131.044};
         var map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -30,13 +25,10 @@
         });
     }
 </script>
-
 <script th:src="'https://maps.googleapis.com/maps/api/js?key=AIzaSyC2l4f1Cybdy8Xr-IAze1e-uTCGNsYb_Cw'">
 </script>
-
 <script th:inline="javascript">
     window.onload = initMap();
 </script>
-
 </body>
 </html>
