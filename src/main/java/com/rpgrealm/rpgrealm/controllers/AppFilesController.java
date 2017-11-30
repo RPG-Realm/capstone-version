@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class FilesController {
+public class AppFilesController {
 
   private final AppFileRepository fileRep;
   private final GameRepository gameRep;
 
-  public FilesController(AppFileRepository fileRep, GameRepository gameRep) {
+  public AppFilesController(AppFileRepository fileRep, GameRepository gameRep) {
     this.fileRep = fileRep;
     this.gameRep = gameRep;
   }
