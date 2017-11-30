@@ -13,7 +13,7 @@
 				<form th:action="'/user-profile/edit/'+${user.id}" method="post" th:object="${user}">
 					<div class="row">
 						<div class="column">Username:</div>
-						<div class="column"><span th:text="*{username}" class="form_fields"></span></div>
+						<div class="column"><input type="text" th:field="*{username}" class="form_fields"/></div>
 					</div>
 					<div class="row">
 						<div class="column">Email:</div>
