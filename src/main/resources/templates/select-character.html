@@ -35,7 +35,7 @@
         $.ajax("/join-game", {
             type: "POST",
             data: jQuery.param({
-                gameId: 4,
+                gameId: ${game.id},
                 characterId: $('input[type=radio]:checked').val(),
                 _csrf: $("#csrf").val()
             })

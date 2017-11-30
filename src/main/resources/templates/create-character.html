@@ -5,12 +5,12 @@
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 <!-- Content of the page -->
-<div class="container-main">
+<div class="container-main" sec:authorize="isAuthenticated()">
     <h2>Create Your Character</h2>
     <div class="inner-container">
         <div class="character-container">
             <div class="form_container">
-                <form action="/create-character" method="post" th:object="${character}">
+                <form th:action="@{/create-character}" method="post" th:object="${character}">
                     <div class="row">
                         <div class="column">Name:</div>
                         <div class="column"><input type="text" name="name" class="form_fields" th:field="*{name}"/>

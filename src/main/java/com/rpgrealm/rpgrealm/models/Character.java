@@ -28,20 +28,9 @@ public class Character {
 
   // mapped properties
 
-  @OneToMany(mappedBy = "character")
+  @OneToMany(mappedBy = "character", cascade = CascadeType.ALL)
   private List<AppFile> character_files;
 
-  public User getPlayer() {
-    return player;
-  }
-
-  public void setPlayer(User player) {
-    this.player = player;
-  }
-
-  @ManyToOne
-  @JoinColumn(name = "user_id")
-  private User player;
 
   public Character() {
   }

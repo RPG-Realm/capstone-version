@@ -37,7 +37,7 @@ public class GameController {
   }
 
   @PostMapping("/create-game")
-  public String saveGameToDb(Game game){
+  public String saveGameToDb(@ModelAttribute Game game){
     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     game.setGame_master(user);
     gameRep.save(game);
@@ -89,6 +89,7 @@ public class GameController {
     appfile.setUser(usrRep.findOne(user.getId()));
     appfile.setGame(gameRep.findOne(gameId));
     appRep.save(appfile);
+
 
     return "redirect:home";
   }
