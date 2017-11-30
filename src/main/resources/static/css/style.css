@@ -94,7 +94,7 @@ a:hover {
 	background-repeat: no-repeat;
 	background-position: center center;
 	padding: 7%;
-	height: 570px;
+	min-height: 570px;
 }
 
 .registration-container {
@@ -108,7 +108,7 @@ a:hover {
 	background-repeat: no-repeat;
 	background-position: center center;
 	padding: 5%;
-	height: 570px;
+	min-height: 570px;
 }
 
 .home-container {
@@ -122,7 +122,7 @@ a:hover {
 	background-repeat: no-repeat;
 	background-position: center center;
 	padding: 5%;
-	height: 570px;
+	min-height: 570px;
 }
 
 .game-container {
@@ -136,7 +136,7 @@ a:hover {
 	background-repeat: no-repeat;
 	background-position: center center;
 	padding: 5%;
-	height: 570px;
+	min-height: 570px;
 }
 
 .map-container {
@@ -150,7 +150,7 @@ a:hover {
 	background-repeat: no-repeat;
 	background-position: center center;
 	padding: 5%;
-	height: 570px;
+	min-height: 570px;
 }
 
 .character-container {
@@ -164,7 +164,7 @@ a:hover {
 	background-repeat: no-repeat;
 	background-position: center center;
 	padding: 5%;
-	height: 570px;
+	min-height: 570px;
 }
 
 .user-container {
@@ -178,7 +178,7 @@ a:hover {
 	background-repeat: no-repeat;
 	background-position: center center;
 	padding: 5%;
-	height: 570px;
+	min-height: 570px;
 }
 
 .center {
@@ -225,6 +225,15 @@ select {
 	-o-transition: all 0.30s ease-in-out;
 	outline: none;
 	width: 233px;
+	:hover
+}
+
+.select:hover {
+	box-shadow: 0 0 15px rgba(81, 203, 238, 1);
+}
+
+.select:focus {
+	box-shadow: 0 0 15px rgba(81, 203, 238, 1);
 }
 
 .form_fields:hover {
