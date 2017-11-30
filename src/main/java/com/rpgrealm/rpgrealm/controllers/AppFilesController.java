@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-public class FilesController {
+public class AppFilesController {
 
   private final AppFileRepository fileRep;
 
-  public FilesController(AppFileRepository fileRep) {
+  public AppFilesController(AppFileRepository fileRep) {
     this.fileRep = fileRep;
   }
 
