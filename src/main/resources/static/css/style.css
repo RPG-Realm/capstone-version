@@ -23,11 +23,13 @@ a {
 a:hover {
 	color: darkred;
 	text-decoration: underline;
+	border-radius: 5px;
 }
 
 .topnav {
 	overflow: hidden;
 	background-color: #333;
+	border-radius: 5px;
 }
 
 .topnav a {
@@ -38,18 +40,21 @@ a:hover {
 	text-decoration: none;
 	font-size: 17px;
 	transition: all 0.9s ease 0s;
+	border-radius: 5px;
 }
 
 .topnav a:hover {
 	background-color: rgba(24, 24, 24, 1);
 	box-shadow: 0 0 20px rgba(81, 203, 238, 1);
 	color: white;
+	border-radius: 5px;
 }
 
 .topnav a.active {
 	background-color: rgba(24, 24, 24, 1);
 	box-shadow: 0 0 20px rgba(81, 203, 238, 1);
 	color: white;
+	border-radius: 5px;
 
 }
 
@@ -183,9 +188,10 @@ a:hover {
 
 .bottomnav {
 	background-color: #333333;
-	padding: 14px 16px;
+	padding: 16px 16px;
 	height: 50px;
 	margin-top: 40px;
+	border-radius: 5px;
 }
 
 input {
@@ -202,6 +208,23 @@ input {
 	-ms-transition: all 0.30s ease-in-out;
 	-o-transition: all 0.30s ease-in-out;
 	outline: none;
+}
+
+select {
+	font-size: 17px;
+	border-radius: 10px;
+	box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+	border: 1px solid black;
+	background-color: #333333;
+	color: white;
+	padding: 5px;
+	padding-left: 10px;
+	-webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+	-o-transition: all 0.30s ease-in-out;
+	outline: none;
+	width: 233px;
 }
 
 .form_fields:hover {
@@ -265,8 +288,8 @@ input {
 }
 
 #map-canvas {
-	width: 400px;
-	height: 400px;
+	width: 90%;
+	height: 90%;
 }
      /* Always set the map height explicitly to define the size of the div
       * element that contains the map. */

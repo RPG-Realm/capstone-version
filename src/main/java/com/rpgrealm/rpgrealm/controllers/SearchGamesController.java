@@ -28,7 +28,7 @@ public class SearchGamesController {
 
   @GetMapping("/games-mapped")
   public String mappedGames(Model model) {
-    model.addAttribute("mapsApi", rpgProperties.maps);
+    model.addAttribute("mapsApi", rpgProperties.mapsApi);
     return "games-mapped";
   }
 
