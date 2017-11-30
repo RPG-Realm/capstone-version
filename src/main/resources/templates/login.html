@@ -6,12 +6,7 @@
 <!-- Content of the page -->
 <div class="container-main">
 	<h2>Please Login... Your Fate Awaits You.</h2>
-	<div th:if="${param.error}">
-		Invalid Username and Password
-	</div>
-	<div th:if="${param.logout}">
-		You have been logged out.
-	</div>
+
 	<div class="inner-container">
 		<div class="login-container">
 			<div class="form_container">
@@ -25,6 +20,12 @@
 					<div class="formdiv"></div>
 					<div class="formdiv"><input type="submit" value=" Login &nbsp;" class="form_fields"/></div>
 				</form>
+				<div class="invalid" th:if="${param.error}">
+					Invalid Username and Password
+				</div>
+				<div class="system-message" th:if="${param.logout}">
+					You have been successfully logged out.
+				</div>
 			</div>
 		</div>
 	</div>

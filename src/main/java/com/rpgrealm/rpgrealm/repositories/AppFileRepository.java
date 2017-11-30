@@ -4,6 +4,7 @@ import com.rpgrealm.rpgrealm.models.AppFile;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 @Repository
 public interface AppFileRepository extends CrudRepository<AppFile, String> {
   // empty interface body
