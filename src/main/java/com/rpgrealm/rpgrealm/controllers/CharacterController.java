@@ -52,7 +52,8 @@ public class CharacterController {
   @GetMapping("/user-character")
     public String viewAllCharacters(Model model){
      User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-      model.addAttribute("characterList", charRep.findByUserId(user.getId()));
+//      This needs to refactored by way of appRep
+     model.addAttribute("characterList", charRep.findByUserId(user.getId()));
       return "character-list";
     }
 
