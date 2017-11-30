@@ -5,20 +5,30 @@
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 <!-- Content of the page -->
 <div class="container-main">
-	<h2>Games Mapped: View Available Games Nearby...</h2>
-	<div class="inner-container">
-		<div class="map-container">
-			<div id="map"></div>
-			<p th:text="*{mapsApi}"></p>
-			<p>TEST</p>
-		</div>
-	</div>
+    <h2>Games Mapped: View Available Games Nearby...</h2>
+    <div class="inner-container">
+        <div class="map-container">
+            <div id="map-canvas"></div>
+        </div>
+    </div>
 </div>
 <footer th:include="fragments/footer :: footer"></footer>
-
-<script async="async" defer="defer"
-        th:src="'https://maps.googleapis.com/maps/api/js?key='+${mapsApi}">
+<script th:src="'https://maps.googleapis.com/maps/api/js?key=AIzaSyC2l4f1Cybdy8Xr-IAze1e-uTCGNsYb_Cw'">
 </script>
+<script th:inline="javascript">
+    (function() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map-canvas'), {
+            zoom: 4,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+    })();
+</script>
+
 
 </body>
 </html>
