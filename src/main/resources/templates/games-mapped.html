@@ -2,23 +2,38 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
-<nav th:include="fragments/navbar :: mainNavbar"></nav>
-<!-- Content of the page -->
-<div class="container-main">
-	<h2>Games Mapped: View Available Games Nearby...</h2>
-	<div class="inner-container">
-		<div class="map-container">
-			<div id="map"></div>
-			<p th:text="*{mapsApi}"></p>
-			<p>TEST</p>
-		</div>
-	</div>
-</div>
-<footer th:include="fragments/footer :: footer"></footer>
 
-<script async="async" defer="defer"
-        th:src="'https://maps.googleapis.com/maps/api/js?key='+${mapsApi}">
+<!-- Content of the page -->
+
+<div id="map-canvas"></div>
+</body>
+
+<footer>
+
+<script th:src="'https://maps.googleapis.com/maps/api/js?key=AIzaSyC2l4f1Cybdy8Xr-IAze1e-uTCGNsYb_Cw'">
 </script>
 
-</body>
+<script th:inline="javascript">
+
+    (function() {
+        "use strict";
+
+        // Set our map options
+        var mapOptions = {
+            // Set the zoom level
+            zoom: 19,
+
+            // This sets the center of the map at our location
+            center: {
+                lat:  29.426791,
+                lng: -98.489602
+            }
+        };
+
+        // Render the map
+        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+    })();
+
+</script>
+</footer>
 </html>

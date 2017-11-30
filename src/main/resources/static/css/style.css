@@ -264,10 +264,9 @@ input {
     box-shadow: 0 0 30px rgba(81, 203, 238, 1);
 }
 
-
+#map-canvas {
+	width: 400px;
+	height: 400px;
+}
      /* Always set the map height explicitly to define the size of the div
       * element that contains the map. */
- #map {
-     height: 95%;
-     width: 95%;
- }
