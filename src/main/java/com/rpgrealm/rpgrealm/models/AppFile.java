@@ -24,7 +24,7 @@ public class AppFile {
     @JoinColumn(name="game_id")
     private Game game;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="character_id")
     private Character character;
 
