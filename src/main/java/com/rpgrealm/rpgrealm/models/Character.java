@@ -26,10 +26,17 @@ public class Character {
   @OneToOne
   private AppFile pdf;  //Redundant, don't use
 
+//  Many to Many table
+  @ManyToMany(mappedBy = "characters")
+  private List<Game> games;
   // mapped properties
 
   @OneToMany(mappedBy = "character", cascade = CascadeType.ALL)
   private List<AppFile> character_files;
+
+  @ManyToOne
+  @JoinColumn (name="user_id")
+  private User user;
 
 
   public Character() {
@@ -59,14 +66,6 @@ public class Character {
     this.description = description;
   }
 
-  public List<AppFile> getCharacter_files() {
-    return character_files;
-  }
-
-  public void setCharacter_files(List<AppFile> character_files) {
-    this.character_files = character_files;
-  }
-
   public String getType() {
     return type;
   }
@@ -91,11 +90,27 @@ public class Character {
     this.pdf = pdf;
   }
 
-  public List<AppFile> getCharacter() {
+  public List<Game> getGames() {
+    return games;
+  }
+
+  public void setGames(List<Game> games) {
+    this.games = games;
+  }
+
+  public List<AppFile> getCharacter_files() {
     return character_files;
   }
 
-  public void setCharacter(List<AppFile> character) {
+  public void setCharacter_files(List<AppFile> character_files) {
     this.character_files = character_files;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
   }
 }
