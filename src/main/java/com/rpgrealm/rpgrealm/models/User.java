@@ -60,6 +60,9 @@ public class User {
     @OneToMany(mappedBy = "game_master")
     private List<Game> games;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Character> characters;
+
     public User() {
     }
 
@@ -221,5 +224,13 @@ public class User {
 
     public void setGames(List<Game> games) {
         this.games = games;
+    }
+
+    public List<Character> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(List<Character> characters) {
+        this.characters = characters;
     }
 }

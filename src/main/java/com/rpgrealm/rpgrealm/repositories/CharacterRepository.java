@@ -19,7 +19,10 @@ public interface CharacterRepository extends CrudRepository<Character, Long> {
 //    List<Character> findByUserId(Long user_id);
 
     @Query( nativeQuery = true,
-            value =
-            "SELECT * FROM characters c JOIN app_files af on af.character_id = c.id WHERE af.user_id = ?;")
+            value=
+            "SELECT * FROM characters WHERE user_id=?")
     List<Character> findByUserId(Long user_id);
+
+    // where name =?1 and description = ?2 or typ = ?3
+    List<Character> findByNameAndDescriptionOrType(String name, String description, String type);
 }

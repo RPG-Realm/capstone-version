@@ -4,6 +4,7 @@
 package com.rpgrealm.rpgrealm.controllers;
 
 import com.rpgrealm.rpgrealm.models.AppFile;
+import com.rpgrealm.rpgrealm.models.Character;
 import com.rpgrealm.rpgrealm.models.Game;
 import com.rpgrealm.rpgrealm.repositories.AppFileRepository;
 import com.rpgrealm.rpgrealm.repositories.CharacterRepository;
@@ -14,6 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class GameController {
@@ -73,8 +76,9 @@ public class GameController {
 
   @GetMapping("/join-game/{id}")
   public String joinGameForm(@PathVariable Long id, Model model){
+    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     model.addAttribute("game", gameRep.findOne(id));
-    model.addAttribute("characterList", charRep.findByUserId(4L));
+    model.addAttribute("characterList", charRep.findByUserId(user.getId()));
     return "select-character";
   }
 
@@ -83,14 +87,11 @@ public class GameController {
   @PostMapping("/join-game")
   public String commitJoinGame(@RequestParam Long gameId, @RequestParam Long characterId){
     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    AppFile appfile=new AppFile();
-    appfile.setFile_url("placeholder");
-    appfile.setCharacter(charRep.findOne(characterId));
-    appfile.setUser(usrRep.findOne(user.getId()));
-    appfile.setGame(gameRep.findOne(gameId));
-    appRep.save(appfile);
-
-
+    Game gameJoined = gameRep.findOne(gameId);
+    List<Character> gamesCharacters = gameJoined.getCharacters();
+    gamesCharacters.add(charRep.findOne(characterId));
+    gameJoined.setCharacters(gamesCharacters);
+    gameRep.save(gameJoined);
     return "redirect:home";
   }
 

@@ -14,6 +14,6 @@ public interface GameRepository extends CrudRepository<Game, Long> {
     // are the methods that come from CrudRepository
     @Query( nativeQuery = true,
             value=
-                    "SELECT * FROM games WHERE user_id =?1")
+                    "SELECT * FROM games WHERE owner_id =?1")
     List<Game> findByUserId(Long user_id);
 }

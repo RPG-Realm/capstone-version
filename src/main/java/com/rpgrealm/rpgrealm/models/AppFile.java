@@ -55,6 +55,14 @@ public class AppFile {
         this.file_name = file_name;
     }
 
+    public String getMime_type() {
+        return mime_type;
+    }
+
+    public void setMime_type(String mime_type) {
+        this.mime_type = mime_type;
+    }
+
     public User getUser() {
         return user;
     }

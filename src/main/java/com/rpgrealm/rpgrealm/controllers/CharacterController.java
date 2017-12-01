@@ -39,12 +39,7 @@ public class CharacterController {
   @PostMapping("/create-character")
   public String createCharacter(@ModelAttribute Character character) {
     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    AppFile appfile =new AppFile();
-    appfile.setFile_url("placeholder");
-    appfile.setUser(user);
-    appfile.setCharacter(character);
-    character.setPdf(appfile);
-    appRep.save(appfile);
+    character.setUser(user);
     charRep.save(character);
     return "redirect:/home";
   }

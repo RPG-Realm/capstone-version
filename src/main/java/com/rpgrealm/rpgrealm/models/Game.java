@@ -3,6 +3,8 @@ package com.rpgrealm.rpgrealm.models;
 import javax.persistence.*;
 import java.util.List;
 
+import static javax.persistence.CascadeType.ALL;
+
 @Entity
 @Table(name = "games")
 public class Game {
@@ -56,6 +58,14 @@ public class Game {
 
   @Column
   private Long isactive;
+  //Many to many relationship
+  @ManyToMany(cascade = ALL)
+  @JoinTable(
+          name="characters_in_games",
+          joinColumns = {@JoinColumn(name="game_id")},
+          inverseJoinColumns = {@JoinColumn(name="character_id")}
+  )
+  private List<Character> characters;
 
   // mapped properties
 
@@ -191,6 +201,14 @@ public class Game {
 
   public void setIsactive(Long isactive) {
     this.isactive = isactive;
+  }
+
+  public List<Character> getCharacters() {
+    return characters;
+  }
+
+  public void setCharacters(List<Character> characters) {
+    this.characters = characters;
   }
 
   public List<AppFile> getGame_files() {
