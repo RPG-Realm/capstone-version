@@ -9,6 +9,8 @@ body {
 	max-width: 1080px;
 	margin: 0 auto !important;
 	float: none !important;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 a:visited {
@@ -300,6 +302,16 @@ select {
 	width: 100%;
 	min-height: 570px;
 	border-radius: 10px;
+}
+
+.invalid {
+	color: darkred;
+	margin-top: 15px;
+}
+
+.system-message {
+	color: lavenderblush;
+	margin-top: 15px;
 }
      /* Always set the map height explicitly to define the size of the div
       * element that contains the map. */

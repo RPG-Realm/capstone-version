@@ -15,25 +15,72 @@
                 <a th:href="'/join-game/'+${game.id}">Join the game!</a>
             </div>
           <div>
-					<button type="button" label="Upload a PDF or Image:" class="glow_button" id="upload" />
+					<button type="button" label="Upload a PDF or Image:" class="glow_button" id="upload">Upload File</button>
 				</div>
+            <div id="upload-status"></div>
         </div>
     </div>
 </div>
+<input
+        id="csrf"
+        type="hidden"
+        th:name="${_csrf.parameterName}"
+        th:value="${_csrf.token}" />
+
 <footer th:include="fragments/footer :: footer"></footer>
-
-
-
+<script src="https://static.filestackapi.com/v3/filestack.js"></script>
 <script th:inline="javascript">
-    $.ajax({
-        type: "POST",
-        url: "/file-upload",
-        data: response,
-        success: request.getElementById("upload-status").innerHTML = "File Uploaded Successfully",
-        dataType: "json"
-    })
-    var gameId = [[${gameid}]];
-	  console.log(gameId);
+
+var fsClient = filestack.init('AEI1UqHQ4QfmBMMZ6KMFmz');
+
+function openPicker() {
+    fsClient.pick({
+        fromSources: ["local_file_system", "url", "imagesearch", "googledrive"],
+        accept: ["image/*"],
+        transformations: {
+            crop: {
+                force: true,
+                aspectRatio: 1
+            }
+        },
+        maxSize: 2000000
+    }).then(function (response) {
+
+// console log the output
+        console.log(response);
+        console.log(response.filesUploaded[0].url);
+        console.log("here is the game ID: " + /*[[${game.id}]]*/);
+        console.log(/*[[${_csrf.token}]]*/);
+        console.log(/*[[${_csrf.parameterName}]]*/);
+        var url = response.filesUploaded[0].url;
+        var mimetype = response.filesUploaded[0].mimetype;
+        var filename = response.filesUploaded[0].filename;
+// Send ajax to file-upload controller
+        $.ajax({
+            type: "POST",
+            url: "/upload-file",
+            data: {
+                response: url,
+                gameId: /*[[${game.id}]]*/,
+                _csrf  : /*[[${_csrf.token}]]*/,
+                mimetype : mimetype,
+                filename: filename
+                  },
+
+            success: "File upload completed successfully",
+            dataType: "json"
+
+
+        }).done(function () {
+            request.getElementById("upload-status").innerHTML = "File Uploaded Successfully";
+        });
+    });
+}
+document.getElementById("upload").addEventListener("click", function(){
+openPicker();
+});
+
+
 </script>
 
 </body>

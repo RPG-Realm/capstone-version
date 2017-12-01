@@ -21,11 +21,7 @@ function openPicker() {
             data: response,
             success: request.getElementById("upload-status").innerHTML="File Uploaded Successfully",
             dataType: "json"
-
         });
-
-
-
     });
 }
 

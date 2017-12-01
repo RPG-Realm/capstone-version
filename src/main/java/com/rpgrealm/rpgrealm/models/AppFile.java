@@ -15,6 +15,9 @@ public class AppFile {
     @Column
     private String file_name;
 
+    @Column
+    private String mime_type; //added because file type is really nice to know
+
 //    foreign keys
     @ManyToOne
     @JoinColumn(name= "user_id")
