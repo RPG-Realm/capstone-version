@@ -15,7 +15,12 @@ public class AppFile {
     @Column
     private String file_name;
 
-//    foreign keys
+    @Column
+    private String mimetype;
+
+
+
+    //    foreign keys
     @ManyToOne
     @JoinColumn(name= "user_id")
     private User user;
@@ -74,5 +79,13 @@ public class AppFile {
 
     public void setCharacter(Character character) {
         this.character = character;
+    }
+
+    public String getMimetype() {
+        return mimetype;
+    }
+
+    public void setMimetype(String mimetype) {
+        this.mimetype = mimetype;
     }
 }

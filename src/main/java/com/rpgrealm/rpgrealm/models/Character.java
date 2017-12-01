@@ -20,11 +20,7 @@ public class Character {
   @Column
   private String type;
 
-  @OneToOne
-  private AppFile image;
 
-  @OneToOne
-  private AppFile pdf;
 
   // mapped properties
 
@@ -75,21 +71,7 @@ public class Character {
     this.type = type;
   }
 
-  public AppFile getImage() {
-    return image;
-  }
 
-  public void setImage(AppFile image) {
-    this.image = image;
-  }
-
-  public AppFile getPdf() {
-    return pdf;
-  }
-
-  public void setPdf(AppFile pdf) {
-    this.pdf = pdf;
-  }
 
   public List<AppFile> getCharacter() {
     return character_files;
