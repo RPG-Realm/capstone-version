@@ -5,6 +5,7 @@ package com.rpgrealm.rpgrealm.controllers;
 
 import com.rpgrealm.rpgrealm.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class SearchGamesController {
   private final GameRepository gameRep;
 
-  @Autowired
-  private RpgProperties rpgProperties;
+  @Value("${mapsApi}")
+  private String mapsApi;
   public SearchGamesController(GameRepository gameRep) {
     this.gameRep = gameRep;
   }
@@ -28,7 +29,7 @@ public class SearchGamesController {
 
   @GetMapping("/games-mapped")
   public String mappedGames(Model model) {
-    model.addAttribute("mapsApi", rpgProperties.mapsApi);
+    model.addAttribute("mapsApi", mapsApi);
     return "games-mapped";
   }
 

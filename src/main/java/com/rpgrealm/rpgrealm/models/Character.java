@@ -21,10 +21,10 @@ public class Character {
   private String type;
 
   @OneToOne
-  private AppFile image;
+  private AppFile image; //Redundant, don't use
 
   @OneToOne
-  private AppFile pdf;
+  private AppFile pdf;  //Redundant, don't use
 
   // mapped properties
 
