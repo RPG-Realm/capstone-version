@@ -21,14 +21,14 @@ public class Game {
   private String type;
 
   @ManyToOne
-  @JoinColumn(name = "user_id")
+  @JoinColumn(name = "owner_id") //Renamed for clarity
   private User game_master;
 
   @Column
   private String voice_server;
 
   @OneToOne
-  private AppFile image;
+  private AppFile banner; //Renamed for clarity
 
   @Column
   private String play_time;
@@ -113,12 +113,12 @@ public class Game {
     this.voice_server = voice_server;
   }
 
-  public AppFile getImage() {
-    return image;
+  public AppFile getBanner() {
+    return banner;
   }
 
-  public void setImage(AppFile image) {
-    this.image = image;
+  public void setBanner(AppFile banner) {
+    this.banner = banner;
   }
 
   public String getPlay_time() {

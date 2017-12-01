@@ -54,7 +54,7 @@ function openPicker() {
         console.log(/*[[${_csrf.parameterName}]]*/);
         var url = response.filesUploaded[0].url;
         var mimetype = response.filesUploaded[0].mimetype;
-        var mimetype = response.filesUploaded[0].filename;
+        var filename = response.filesUploaded[0].filename;
 // Send ajax to file-upload controller
         $.ajax({
             type: "POST",

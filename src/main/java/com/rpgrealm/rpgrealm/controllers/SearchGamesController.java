@@ -16,6 +16,9 @@ public class SearchGamesController {
 @Value("${mapsApi}")
 private String mapsApi;
 
+  @Value("${mapsApi}")
+  private String mapsApi;
+
   public SearchGamesController(GameRepository gameRep) {
     this.gameRep = gameRep;
   }

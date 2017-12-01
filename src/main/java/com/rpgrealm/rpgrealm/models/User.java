@@ -47,7 +47,7 @@ public class User {
     private String web_site;
 
     @OneToOne
-    private AppFile profile_photo;
+    private AppFile profile_photo; //Redundant don't use?
 
     @Column(nullable = false)
     // Maybe consider the Date type
