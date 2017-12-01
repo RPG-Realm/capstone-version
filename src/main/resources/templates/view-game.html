@@ -5,83 +5,123 @@
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 <!-- Content of the page -->
 <div class="container-main">
-    <h2>View Active Campaign</h2>
-    <div class="inner-container">
-        <div class="game-container">
-            <div th:object="${game}">
-                <p th:text="${game.name}"></p>
-                <p th:text="${game.description}"></p>
-                <a th:href="'/edit-game/'+${game.id}">Edit Link</a>
-                <a th:href="'/join-game/'+${game.id}">Join the game!</a>
-            </div>
-          <div>
-					<button type="button" label="Upload a PDF or Image:" class="glow_button" id="upload">Upload File</button>
-				</div>
-            <div id="upload-status"></div>
-        </div>
-    </div>
+	<h2>View Active Campaign</h2>
+	<div class="inner-container">
+		<div class="game-container">
+
+
+			<h1>Chat</h1>
+
+			<form id="joinChatForm" th:action="@{/mvc/chat}" data-bind="visible: activePollingXhr() == null">
+				<p>
+					<label for="user">User: </label>
+					<input id="user" name="user" type="text" data-bind="value: userName"/>
+					<input name="messageIndex" type="hidden" data-bind="value: messageIndex"/>
+					<button id="start" type="submit" data-bind="click: joinChat">Join Chat</button>
+				</p>
+			</form>
+
+			<form id="leaveChatForm" th:action="@{/mvc/chat}" data-bind="visible: activePollingXhr() != null">
+				<p>
+					You're chatting as <strong data-bind="text: userName"></strong>
+					<button id="leave" type="submit" data-bind="click: leaveChat">Leave Chat</button>
+				</p>
+			</form>
+
+			<div data-bind="visible: activePollingXhr() != null">
+				<textarea rows="15" cols="60" readonly="readonly" data-bind="text: chatContent"></textarea>
+			</div>
+
+			<form id="postMessageForm" th:action="@{/mvc/chat}" data-bind="visible: activePollingXhr() != null">
+				<p>
+					<input id="message" name="message" type="text" data-bind="value: message" />
+					<button id="post" type="submit" data-bind="click: postMessage">Post</button>
+				</p>
+			</form>
+
+			<script type="text/javascript" src="../../../resources/js/jquery-1.7.2.min.js" th:src="@{/resources/js/jquery-1.7.2.min.js}"></script>
+			<script type="text/javascript" src="../../../resources/js/knockout-2.0.0.js" th:src="@{/resources/js/knockout-2.0.0.js}"></script>
+			<script type="text/javascript" src="../../../resources/js/chat.js" th:src="@{/resources/js/chat.js}"></script>
+
+
+
+			<div th:object="${game}">
+				<p th:text="${game.name}"></p>
+				<p th:text="${game.description}"></p>
+				<a th:href="'/edit-game/'+${game.id}">Edit Link</a>
+				<a th:href="'/join-game/'+${game.id}">Join the game!</a>
+			</div>
+			<div>
+				<button type="button" label="Upload a PDF or Image:" class="glow_button" id="upload">Upload File</button>
+			</div>
+			<span id="upload-status"></span>
+		</div>
+	</div>
 </div>
-<input
-        id="csrf"
-        type="hidden"
-        th:name="${_csrf.parameterName}"
-        th:value="${_csrf.token}" />
 
 <footer th:include="fragments/footer :: footer"></footer>
+
+<script src="/js/sendbird-min.js"></script>
+
 <script src="https://static.filestackapi.com/v3/filestack.js"></script>
 <script th:inline="javascript">
 
-var fsClient = filestack.init('AEI1UqHQ4QfmBMMZ6KMFmz');
+    var fsClient = filestack.init('AEI1UqHQ4QfmBMMZ6KMFmz');
 
-function openPicker() {
-    fsClient.pick({
-        fromSources: ["local_file_system", "url", "imagesearch", "googledrive"],
-        accept: ["image/*"],
-        transformations: {
-            crop: {
-                force: true,
-                aspectRatio: 1
-            }
-        },
-        maxSize: 2000000
-    }).then(function (response) {
+    function openPicker() {
+        fsClient.pick({
+            fromSources: ["local_file_system", "url", "imagesearch", "googledrive"],
+            accept: ["image/*"],
+            transformations: {
+                crop: {
+                    force: true,
+                    aspectRatio: 1
+                }
+            },
+            maxSize: 2000000
+        }).then(function (response) {
 
 // console log the output
-        console.log(response);
-        console.log(response.filesUploaded[0].url);
-        console.log("here is the game ID: " + /*[[${game.id}]]*/);
-        console.log(/*[[${_csrf.token}]]*/);
-        console.log(/*[[${_csrf.parameterName}]]*/);
-        var url = response.filesUploaded[0].url;
-        var mimetype = response.filesUploaded[0].mimetype;
-        var mimetype = response.filesUploaded[0].filename;
+            console.log(response);
+            console.log(response.filesUploaded[0].url);
+            console.log("here is the game ID: " + /*[[${game.id}]]*/);
+            console.log(/*[[${_csrf.token}]]*/);
+            console.log(/*[[${_csrf.parameterName}]]*/);
+            var url = response.filesUploaded[0].url;
+            var mimetype = response.filesUploaded[0].mimetype;
+            var filename = response.filesUploaded[0].filename;
 // Send ajax to file-upload controller
-        $.ajax({
-            type: "POST",
-            url: "/upload-file",
-            data: {
-                response: url,
-                gameId: /*[[${game.id}]]*/,
-                _csrf  : /*[[${_csrf.token}]]*/,
-                mimetype : mimetype,
-                filename: filename
-                  },
+            $.ajax({
+                type: "POST",
+                url: "/upload-file",
+                data: {
+                    response: url,
+                    gameId: /*[[${game.id}]]*/,
+                    _csrf: /*[[${_csrf.token}]]*/,
+                    mimetype: mimetype,
+                    filename: filename
+                },
 
-            success: "File upload completed successfully",
-            dataType: "json"
+                success: "File upload completed successfully",
+                dataType: "json"
 
-
-        }).done(function () {
-            request.getElementById("upload-status").innerHTML = "File Uploaded Successfully";
+            }).done(function () {
+                request.getElementById("upload-status").innerHTML = "File Uploaded Successfully";
+            });
         });
-    });
-}
-document.getElementById("upload").addEventListener("click", function(){
-openPicker();
-});
+    }
 
+    document.getElementById("upload").addEventListener("click", function () {
+        openPicker();
+    });
 
 </script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+<script type="text/javascript">
+    // jQuery Document
+    $(document).ready(function(){
 
+    });
+</script>
 </body>
 </html>
