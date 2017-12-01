@@ -1,26 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-
 </head>
 <body>
-
 <nav id="my-nav" class="navbar navbar-default" th:fragment="mainNavbar">
     <div class="container-top"><img src="/images/main/logo.jpg"/></div>
     <div class="topnav">
-
         <a href="/home">Home</a>
         <a href="/user-profile">Your Profile</a>
         <a href="/create-character">Create Character</a>
         <a href="/create-game">Create Game</a>
         <a href="/search-games">View Games</a>
-        <form th:action="@{/logout}" th:method="post">
-            <button class="btn-link btn" style="margin-top: 8px">Logout</button>
-        </form>
+        <a sec:authorize="isAuthenticated()" href="javascript: document.myform.submit()">Logout</a>
     </div>
-
+    <form type="hidden" name="myform" th:action="@{/logout}" th:method="post">
+    </form>
 </nav>
-
 </body>
 </html>
