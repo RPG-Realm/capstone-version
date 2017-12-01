@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 <!-- Content of the page -->
 <div class="container-main">
 	<h2>Please Login... Your Fate Awaits You.</h2>
-
 	<div class="inner-container">
-		<div class="login-container">
+		<div sec:authorize="isAnonymous()" class="login-container">
 			<div class="form_container">
 				<form th:action="@{/login}" method="post">
 					<div class="formdiv">Username:</div>
