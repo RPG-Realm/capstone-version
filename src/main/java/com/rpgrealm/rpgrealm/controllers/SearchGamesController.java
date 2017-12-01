@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class SearchGamesController {
   private final GameRepository gameRep;
+@Value("${mapsApi}")
+private String mapsApi;
 
   @Value("${mapsApi}")
   private String mapsApi;
+
   public SearchGamesController(GameRepository gameRep) {
     this.gameRep = gameRep;
   }
