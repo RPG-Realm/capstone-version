@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -40,11 +41,12 @@ public class GameController {
   }
 
   @PostMapping("/create-game")
-  public String saveGameToDb(@ModelAttribute Game game){
+  public String saveGameToDb(@ModelAttribute Game game, RedirectAttributes redirectAttributes){
     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     game.setGame_master(user);
     gameRep.save(game);
-    return "redirect:home";
+    redirectAttributes.addAttribute("id",game.getId());
+    return "redirect:/view-game/{id}";
   }
 
   @GetMapping("/view-game/{id}")
@@ -68,10 +70,11 @@ public class GameController {
     return "edit-game";
   }
   @PostMapping("edit-game/{id}")
-  public String commitEditGame(@PathVariable Long id, @ModelAttribute Game game){
+  public String commitEditGame(@ModelAttribute Game game, RedirectAttributes redirectAttributes){
 
     gameRep.save(game);
-    return "home";
+    redirectAttributes.addAttribute("id",game.getId());
+    return "redirect:/view-game/{id}";
   }
 
   @GetMapping("/join-game/{id}")
@@ -85,14 +88,15 @@ public class GameController {
 //  drop the get request in the url, just use the post from ajax. Use @RequestAttribute to get the names from ajax
   
   @PostMapping("/join-game")
-  public String commitJoinGame(@RequestParam Long gameId, @RequestParam Long characterId){
+  public String commitJoinGame(@RequestParam Long gameId, @RequestParam Long characterId, RedirectAttributes redirectAttributes){
     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Game gameJoined = gameRep.findOne(gameId);
     List<Character> gamesCharacters = gameJoined.getCharacters();
     gamesCharacters.add(charRep.findOne(characterId));
     gameJoined.setCharacters(gamesCharacters);
     gameRep.save(gameJoined);
-    return "redirect:home";
+    redirectAttributes.addAttribute("id",gameId);
+    return "redirect:/view-game/{id}";
   }
 
 }
