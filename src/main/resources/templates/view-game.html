@@ -17,6 +17,10 @@
 					<button type="button" label="Upload a PDF or Image:" class="glow_button" id="upload">Upload File</button>
 				</div>
             <div id="upload-status"></div>
+            <div th:each="character: ${characterList} "><!--Active characters-->
+                <h4 th:text="${character.name}"></h4>
+                <h6 th:text="${hashTest.get(character)}"></h6>
+            </div>
         </div>
     </div>
 </div>

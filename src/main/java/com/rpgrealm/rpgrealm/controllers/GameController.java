@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -52,7 +53,18 @@ public class GameController {
   @GetMapping("/view-game/{id}")
   public String viewGame(@PathVariable Long id, Model model) {
 
-    model.addAttribute("game",gameRep.findOne(id));
+    Game activeGame=gameRep.findOne(id);
+    List<Character> characterList=activeGame.getCharacters();
+    HashMap<Character, String> gamePair =new HashMap<>();
+    for(Character character: characterList){
+      gamePair.put(character, character.getUser().getUsername());
+    }
+    System.out.println(gamePair);
+
+    model.addAttribute("game",activeGame);
+    model.addAttribute("characterList",characterList);
+    model.addAttribute("hashTest", gamePair);
+
     return "view-game";
   }
 
