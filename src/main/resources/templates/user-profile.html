@@ -11,6 +11,7 @@
 				<!-- Content of the page -->
 				<div th:object="${user}">
 					<h2>User Profile</h2>
+					<img th:object="${profilePhoto}" th:src="*{file_url}" th:alt="*{file_name}"/>
 					<h3 th:text="*{username}"></h3>
 					<h3 th:text="*{first_name}+' '+*{last_name}"></h3>
 					<h3 th:text="*{address_1}"></h3>
@@ -20,6 +21,7 @@
 					<a href="/view-game/all"><h3>View Your Games</h3></a>
 					<a href="/user-character"><h3>View Your Characters</h3></a>
 				</div>
+
 			</div>
 		</div>
 	</div>
