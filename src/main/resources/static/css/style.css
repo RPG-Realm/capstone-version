@@ -227,7 +227,7 @@ select {
 	-o-transition: all 0.30s ease-in-out;
 	outline: none;
 	width: 233px;
-	:hover
+:hover
 }
 
 .select:hover {
@@ -295,7 +295,7 @@ select {
 }
 
 .glow_button:hover {
-    box-shadow: 0 0 30px rgba(81, 203, 238, 1);
+	box-shadow: 0 0 30px rgba(81, 203, 238, 1);
 }
 
 #map-canvas {
@@ -313,5 +313,5 @@ select {
 	color: lavenderblush;
 	margin-top: 15px;
 }
-     /* Always set the map height explicitly to define the size of the div
-      * element that contains the map. */
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
