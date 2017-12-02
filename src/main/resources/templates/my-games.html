@@ -4,15 +4,12 @@
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 
-<!-- Content of the page -->
-<div sec:authorize="isAuthenticated()">
-    <div th:each="game : ${gameList}">
-        <p th:text="${game.name}"></p>
-        <p th:text="${game.description}"></p>
-        <a th:href="'/view-game/'+${game.id}">Link to game</a>
-    </div>
+    <span class="glow-button" th:each="game : ${gameList}">
+        <span class="glow-button"><a th:href="'/view-game/'+${game.id}">Link to game</a></span>
+        <span class="glow-button" th:text="${game.name}"></span>
+        <span class="glow-button" th:text="${game.description}"></span>
 
-</div>
+    </span>
 
 <footer th:include="fragments/footer :: footer"></footer>
 </body>

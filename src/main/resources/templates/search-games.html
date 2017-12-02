@@ -8,10 +8,11 @@
     <div class="inner-container">
         <div class="game-container">
             <!-- Content of the page -->
-                <div class="row" th:each="game : ${gameList}">
-                    <div class="column"><a th:href="'/view-game/'+${game.id}">View Game ></a></div>
-                    <div class="column" th:text="${game.name}"></div>
-                    <div class="column" th:text="${game.description}"></div>
+
+                <div class="container2" th:each="game : ${gameList}">
+                    <div class="column-left"><a th:href="'/view-game/'+${game.id}">View Game ></a></div>
+                    <div class="column-middle" th:text="${game.name}"></div>
+                    <div class="column-right" th:text="${game.description}"></div>
                 </div>
         </div>
     </div>

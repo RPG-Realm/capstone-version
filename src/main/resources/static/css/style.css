@@ -24,7 +24,7 @@ a {
 
 a:hover {
 	color: darkred;
-	text-decoration: underline;
+	text-decoration: none;
 	border-radius: 5px;
 }
 
@@ -183,11 +183,6 @@ a:hover {
 	min-height: 570px;
 }
 
-.center {
-	margin: auto;
-	width: 50%;
-}
-
 .bottomnav {
 	background-color: #333333;
 	padding: 16px 16px;
@@ -227,7 +222,7 @@ select {
 	-o-transition: all 0.30s ease-in-out;
 	outline: none;
 	width: 233px;
-:hover
+
 }
 
 .select:hover {
@@ -258,6 +253,20 @@ select {
 	text-align: right;
 	width: 100%;
 }
+
+.game-row:after {
+width: 100%;
+	box-sizing: border-box;
+	border: solid green 3px;
+	height: 100px;
+}
+
+.game-column {
+	float: left;
+	width: 33.33%;
+	height: 100px;
+}
+
 
 .form_container {
 	width: 450px;
@@ -315,3 +324,31 @@ select {
 }
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
+
+.container2 {
+	display: flex;
+	border-radius: 10px;
+	box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+	border: 3px solid black;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 5px;
+	margin-bottom: 6px;
+}
+.column-left{
+	float: left;
+	width: 15%;
+	min-width: 8em;
+	border: 0px solid black;
+	text-wrap: none;
+}
+
+.column-right{
+	float: right;
+	width: 33%;
+	border: 0px solid black;
+}
+.column-middle{
+	display: inline-block;
+	width: 33%;
+	border: 0px solid black;
+}
