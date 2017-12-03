@@ -14,8 +14,8 @@
                 <!-- Content of the page -->
                 <div th:object="${user}">
 					<img class="user-photo" th:if="${profilePhoto !=null}" th:object="${profilePhoto}" th:src="*{file_url}" th:alt="*{file_name}"/>
-                    <img class="user-photo" id="user-photo" th:if="${profilePhoto == null}" th:alt="'No Photo'" src="/images/main/small-shield"/>
-					<h3 th:text="'User Name: '+*{username}"></h3>
+    <img class="user-photo" id="user-photo" th:if="${profilePhoto == null}" th:alt="'No Photo'" src="/images/main/small-shield"/>
+					          <h3 th:text="'User Name: '+*{username}"></h3>
 					<h3 th:text="*{first_name}+' '+*{last_name}"></h3>
 					<h3 th:text="*{address_1}"></h3>
 					<h3 th:text="*{city}+', '+*{state}+' '+*{zip_code}"></h3>
@@ -25,13 +25,13 @@
             <br/>
             <div class="form_container">
             <div class="glow-button">
-                <a th:href="'/user-profile/edit/'+${user.id}"><img src="/images/user/edit-profile.gif"/></a>
+                <a th:href="'/user-profile/edit/'+${user.id}">Edit User Profile</a>
             </div>
             <div class="glow-button">
-                <a href="/view-game/all"><img src="/images/user/view-your-games.gif"/></a>
+                <a href="/view-game/all">View Your Games</a>
             </div>
             <div class="glow-button">
-                <a href="/user-character"><img src="/images/user/view-characters.gif"/></a>
+                <a href="/user-character">View Characters</a>
             </div>
                 <!-- Filestack -->
                 <div>
