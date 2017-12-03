@@ -56,9 +56,14 @@ public class CharacterController {
     }
 
   @GetMapping("/view-character/{id}")
-  public String viewCharacter(Model model, @PathVariable String id) {
-      Long idAsLong= Long.parseLong(id);
-      model.addAttribute("character", charRep.findOne(idAsLong));
+  public String viewCharacter(Model model, @PathVariable Long id) {
+      Character character =charRep.findOne(id);
+      AppFile pdf=character.getPdf();
+      AppFile portrait=character.getImage();
+
+      model.addAttribute("character", character);
+      model.addAttribute("pdf", pdf);
+      model.addAttribute("portrait", portrait);
     return "view-character";
   }
 

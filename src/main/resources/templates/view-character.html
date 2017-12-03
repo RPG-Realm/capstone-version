@@ -9,7 +9,8 @@
         <div th:object="${character}">
             <h3 th:text="*{name}"></h3>
             <h4 th:text="*{type}"></h4>
-            <h4>(Photo of Jarbin)</h4>
+            <img th:if="${portrait !=null}" th:object="${portrait}" th:src="*{file_url}" th:alt="*{file_name}"/>
+            <a th:if="${pdf !=null}" th:object="${pdf}" th:href="*{file_url}" >Character sheet</a>
             <p th:text="*{description}"></p>
             <a th:href="'/edit-character/'+*{id}">Edit Character</a>
         </div>
