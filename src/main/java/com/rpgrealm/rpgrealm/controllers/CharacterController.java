@@ -50,8 +50,12 @@ public class CharacterController {
   @GetMapping("/user-character")
     public String viewAllCharacters(Model model){
      User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+     User dbUser=usrRep.findOne(user.getId());
 //      This needs to refactored by way of appRep
      model.addAttribute("characterList", charRep.findByUserId(user.getId()));
+     model.addAttribute("user", dbUser);
+     AppFile profilePhoto= dbUser.getProfile_photo();
+
       return "character-list";
     }
 

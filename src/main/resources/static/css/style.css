@@ -20,7 +20,7 @@ a:visited {
 a {
 	color: white;
 	text-decoration: none;
-	transition: all 4.0s ease 0s;
+	transition: all 15.0s ease 0s;
 }
 
 a:hover {
@@ -97,7 +97,7 @@ a:hover {
 }
 .title-column-left {
 	float: left;
-	width: 30%;
+	display: inline-block;
 	border: 0px solid black;
 	text-wrap: none;
 	font-size: 1.5em;
@@ -106,9 +106,13 @@ a:hover {
 }
 .title-column-right{
 	padding-top: 10px;
+	padding-left: 10px;
 	display: inline-block;
 	width: 30%;
 	border: 0px solid black;
+	white-space: nowrap;
+	overflow: hidden;
+	float:right;
 }
 
 .bottomnav {
@@ -135,7 +139,7 @@ a:hover {
 	min-height: 570px;
 }
 
-.registration-container {
+.user-container {
 	align-content: center;
 	width: 100%;
 	border: 0px solid black;
@@ -316,7 +320,7 @@ width: 100%;
 	padding: 20px;
 }
 
-.glow_button {
+.glow-button {
 	color: white;
 	border-radius: 10px;
 	box-shadow: 0 0 5px rgba(81, 203, 238, 1);
@@ -329,9 +333,11 @@ width: 100%;
 	-o-transition: all 0.30s ease-in-out;
 	outline: none;
 	width: 300px;
+	margin-bottom: 10px;
+	text-align: center;
 }
 
-.glow_button:hover {
+.glow-button:hover {
 	box-shadow: 0 0 30px rgba(81, 203, 238, 1);
 }
 
@@ -390,3 +396,14 @@ width: 100%;
 	text-wrap: none;
 }
 
+.user-photo {
+	height: 100px;
+	width: 100px;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+.red-text {
+	color: darkred;
+	font-size: 1.2em;
+	font-weight: bold;
+}
