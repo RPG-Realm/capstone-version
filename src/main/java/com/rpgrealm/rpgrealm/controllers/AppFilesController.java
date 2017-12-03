@@ -2,6 +2,7 @@ package com.rpgrealm.rpgrealm.controllers;
 
 import com.fasterxml.jackson.annotation.JacksonInject;
 import com.rpgrealm.rpgrealm.models.AppFile;
+import com.rpgrealm.rpgrealm.models.Character;
 import com.rpgrealm.rpgrealm.models.User;
 import com.rpgrealm.rpgrealm.repositories.AppFileRepository;
 import com.rpgrealm.rpgrealm.repositories.CharacterRepository;
@@ -34,7 +35,7 @@ public class AppFilesController {
     return "/home";
   }
 
-  @PostMapping("upload-file")
+  @PostMapping("/upload-file")
   public String createFile(@JacksonInject String response, @JacksonInject Long gameId, @JacksonInject String filename, @JacksonInject String mimetype) {
 
     System.out.println(response);
@@ -50,7 +51,7 @@ public class AppFilesController {
     return "/home";
   }
 
-  @PostMapping("upload-file/user-profile")
+  @PostMapping("/upload-file/user-profile")
   public String userProfilePicture(@JacksonInject String response, @JacksonInject String filename, @JacksonInject String mimetype){
     AppFile appFile = new AppFile();
     User principalUser=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -64,6 +65,30 @@ public class AppFilesController {
     fileRep.save(appFile);
     usrRep.save(user);
 
+    return "/home";
+  }
+
+  @PostMapping("/upload-file/character-files")
+  public String characterFiles(@JacksonInject String response, @JacksonInject String filename, @JacksonInject String mimetype, @JacksonInject Long characterId){
+
+      AppFile appFile =new AppFile();
+      User principalUser=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      User user=usrRep.findOne(principalUser.getId());
+      Character character=charRep.findOne(characterId);
+      appFile.setFile_url(response);
+    appFile.setFile_name(filename);
+    appFile.setMime_type(mimetype);
+    appFile.setCharacter(character);
+    appFile.setUser(user);
+    fileRep.save(appFile);
+    if(mimetype.equalsIgnoreCase("application/pdf")){
+        character.setPdf(appFile);
+
+    }else if(mimetype.equalsIgnoreCase("image/jpeg")|| mimetype.equalsIgnoreCase("image/png")){
+        character.setImage(appFile);
+
+    }
+    charRep.save(character);
     return "/home";
   }
 }

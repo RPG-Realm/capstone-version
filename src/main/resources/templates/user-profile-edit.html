@@ -12,10 +12,10 @@
 	<div class="inner-container">
 		<div class="user-container" sec:authorize="isAuthenticated()">
 			<div class="form_container">
-				<form th:action="'/user-profile/edit/'+${user.id}" method="post" th:object="${user}">
+				<form th:action="@{'/user-profile/edit/'+${user.id}}" method="post" th:object="${user}">
 					<div class="row">
 						<div class="column">Username:</div>
-						<div class="column"><input type="text" th:field="*{username}" class="form_fields" th:readonly="readonly"/></div>
+						<div class="column"><input type="text" th:field="*{username}" class="form_fields" /></div>
 					</div>
 					<div class="row">
 						<div class="column">Email:</div>
@@ -23,7 +23,7 @@
 					</div>
 					<div class="row">
 						<div class="column">User created time:</div>
-						<div class="column"><input type="text" th:field="*{user_created_time}" class="form_fields" th:readonly="readonly"/></div>
+						<div class="column"><input type="text" th:field="*{user_created_time}" class="form_fields" /></div>
 					</div>
 					<div class="row">
 						<div class="column">Password:</div>
@@ -158,71 +158,15 @@
 						<div class="column"></div>
 						<div class="column"><input type="submit" value=" Submit Profile Changes &nbsp;" class="form_fields"/></div>
 					</div>
+					<div class="column"><input type="hidden" th:field="*{profile_photo}" class="form_fields"/></div>
 				</form>
 			</div>
 		</div>
-		<!-- Filestack -->
-			<div>
-				<button type="button" label="Upload a PDF or Image:" class="glow_button" id="upload">Upload File</button>
-			</div>
-			<div id="upload-status"></div>
+
 	</div>
 </div>
-<input
-		id="csrf"
-		type="hidden"
-		th:name="${_csrf.parameterName}"
-		th:value="${_csrf.token}" />
+
 <footer th:include="fragments/footer :: footer"></footer>
-<script src="https://static.filestackapi.com/v3/filestack.js"></script>
-<script th:inline="javascript">
-    var fsClient = filestack.init('AEI1UqHQ4QfmBMMZ6KMFmz');
 
-    function openPicker() {
-        fsClient.pick({
-            fromSources: ["local_file_system", "url", "imagesearch", "googledrive"],
-            accept: ["image/*"],
-            transformations: {
-                crop: {
-                    force: true,
-                    aspectRatio: 1
-                }
-            },
-            maxSize: 2000000
-        }).then(function (response) {
-
-// console log the output
-            console.log(response);
-            console.log(response.filesUploaded[0].url);
-
-            console.log(/*[[${_csrf.token}]]*/);
-            console.log(/*[[${_csrf.parameterName}]]*/);
-            var url = response.filesUploaded[0].url;
-            var mimetype = response.filesUploaded[0].mimetype;
-            var filename = response.filesUploaded[0].filename;
-// Send ajax to file-upload controller
-            $.ajax({
-                type: "POST",
-                url: "/upload-file/user-profile",
-                data: {
-                    response: url,
-                    _csrf  : /*[[${_csrf.token}]]*/,
-                    mimetype : mimetype,
-                    filename: filename
-                },
-
-                success: "File upload completed successfully",
-                dataType: "json"
-
-
-            }).done(function () {
-                request.getElementById("upload-status").innerHTML = "File Uploaded Successfully";
-            });
-        });
-    }
-    document.getElementById("upload").addEventListener("click", function(){
-        openPicker();
-    });
-</script>
 </body>
 </html>
