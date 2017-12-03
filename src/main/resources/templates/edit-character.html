@@ -31,12 +31,76 @@
                     </div>
                 </form>
             </div>
+            <div>
+                <button type="button" label="Upload a PDF or Image:" class="glow_button" id="upload">Upload File</button>
+            </div>
+            <div id="upload-status"></div>
+
         </div>
 
     </div>
 
 </div>
+<input
+        id="csrf"
+        type="hidden"
+        th:name="${_csrf.parameterName}"
+        th:value="${_csrf.token}" />
 
 <footer th:include="fragments/footer :: footer"></footer>
+
+<script src="https://static.filestackapi.com/v3/filestack.js"></script>
+<script th:inline="javascript">
+
+    var fsClient = filestack.init('AEI1UqHQ4QfmBMMZ6KMFmz');
+
+    function openPicker() {
+        fsClient.pick({
+            fromSources: ["local_file_system", "url", "imagesearch", "googledrive"],
+            accept: ["image/*",".pdf"],
+            transformations: {
+                crop: {
+                    force: true,
+                    aspectRatio: 1
+                }
+            },
+            maxSize: 2000000
+        }).then(function (response) {
+
+// console log the output
+            console.log(response);
+            console.log(response.filesUploaded[0].url);
+            console.log(/*[[${_csrf.token}]]*/);
+            console.log(/*[[${_csrf.parameterName}]]*/);
+            var url = response.filesUploaded[0].url;
+            var mimetype = response.filesUploaded[0].mimetype;
+            var filename = response.filesUploaded[0].filename;
+// Send ajax to file-upload controller
+            $.ajax({
+                type: "POST",
+                url: "/upload-file/character-files",
+                data: {
+                    response: url,
+                    characterId: /*[[${character.id}]]*/,
+                    _csrf  : /*[[${_csrf.token}]]*/,
+                    mimetype : mimetype,
+                    filename: filename
+                },
+
+                success: "File upload completed successfully",
+                dataType: "json"
+
+
+            }).done(function () {
+                request.getElementById("upload-status").innerHTML = "File Uploaded Successfully";
+            });
+        });
+    }
+    document.getElementById("upload").addEventListener("click", function(){
+        openPicker();
+    });
+
+
+</script>
 </body>
 </html>

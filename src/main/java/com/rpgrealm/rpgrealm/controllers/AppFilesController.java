@@ -42,4 +42,16 @@ public class AppFilesController {
     fileRep.save(appfile);
     return "/home";
   }
+
+  @PostMapping("upload-file/character-files")
+  public String characterFiles(@JacksonInject String response, @JacksonInject String filename, @JacksonInject String mimetype, @JacksonInject Long characterId){
+    AppFile appFile =new AppFile();
+    appFile.setFile_url(response);
+    appFile.setFile_name(filename);
+    appFile.setMime_type(mimetype);
+    appFile.setCharacter(charRcharacterId);
+
+
+    return "/home";
+  }
 }
