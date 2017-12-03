@@ -72,7 +72,9 @@ public class GameController {
   public String viewblankGame( Model model) {
 
     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User dbUser=usrRep.findOne(user.getId());
     model.addAttribute("gameList",gameRep.findByUserId(user.getId()));
+    model.addAttribute("user",dbUser);
     return "my-games";
   }
 
