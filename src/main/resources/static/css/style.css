@@ -396,3 +396,8 @@ width: 100%;
 	text-wrap: none;
 }
 
+.user-photo {
+	height: 100px;
+	width: 100px;
+	background-color: rgba(0, 0, 0, 0.8);
+}
