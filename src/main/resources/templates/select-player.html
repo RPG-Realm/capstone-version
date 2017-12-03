@@ -1,19 +1,23 @@
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 <div class="container-main">
-	<h2>Please A Player for your Campaign...</h2>
-	<div class="inner-container">
-		<div class="user-container">
-			<div class="form_container">
-				<!-- Content of the page -->
-				<div th:object="${user}">
-					SELECT PLAYER CONTENT GOES HERE
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="title-container">
+        <div class="title-column-left">Select a Player for the Game:</div>
+        <div class="title-column-right"><img src="/images/main/small-sword.jpg"/></div>
+    </div>
+    <div class="inner-container">
+        <div class="user-container"  sec:authorize="isAuthenticated()">
+            <div class="form_container">
+                <!-- Content of the page -->
+                <div th:object="${user}">
+                    SELECT PLAYER CONTENT GOES HERE
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <footer th:include="fragments/footer :: footer"></footer>
 </body>

@@ -3,42 +3,40 @@
 <head th:replace="fragments/head :: main-header('Edit Game')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
-
-<!--Content of the page-->
-<div class="container-main" sec:authorize="isAuthenticated()">
-    <h2 th:text="'&nbsp;&nbsp; Edit Game: '+*{game.name}"></h2>
-    <div class="inner-container">
-        <div class="game-container">
-            <div class="form_container">
-                <form th:action="@{'/edit-game/'+${game.id}}" method="post" th:object="${game}">
-                    <div class="row">
-                        <div class="column">Campaign Name:</div>
-                        <div class="column"><input type="text" class="form_fields" th:field="*{name}"/></div>
-                    </div>
-                    <div class="row">
-                        <div class="column">Game Type:</div>
-                        <div class="column"><input type="text" class="form_fields" th:field="*{type}"/></div>
-                    </div>
-                    <div class="row">
-                        <div class="column">Description:</div>
-                        <div class="column"><input type="text" class="form_fields" th:field="*{description}"/></div>
-                    </div>
-                    <div class="column">Rating:</div>
-                    <div class="column">
-                        <select th:field="*{rating}">
-                            <option value="1">Rated R (18+)</option>
-                            <option value="0">Rated PG (18-)</option>
-                        </select>
-                    </div>
-                    <div class="row">
-                        <div class="column"></div>
-                        <div class="column"><input type="submit" value=" Submit and Register &nbsp;"
-                                                   class="form_fields"/></div>
-                    </div>
-                </form>
-            </div>
+<div class="title-container">
+    <div class="title-column-left" th:text="'Edit Game: '+${game.name}"></div>
+    <div class="title-column-right"><img src="/images/search/treasure_chest.jpg"/></div>
+</div>
+<div class="inner-container">
+    <div class="game-container"  sec:authorize="isAuthenticated()">
+        <div class="form_container">
+            <form th:action="@{'/edit-game/'+${game.id}}" method="post" th:object="${game}">
+                <div class="row">
+                    <div class="column">Campaign Name:</div>
+                    <div class="column"><input type="text" class="form_fields" th:field="*{name}"/></div>
+                </div>
+                <div class="row">
+                    <div class="column">Game Type:</div>
+                    <div class="column"><input type="text" class="form_fields" th:field="*{type}"/></div>
+                </div>
+                <div class="row">
+                    <div class="column">Description:</div>
+                    <div class="column"><input type="text" class="form_fields" th:field="*{description}"/></div>
+                </div>
+                <div class="column">Rating:</div>
+                <div class="column">
+                    <select th:field="*{rating}">
+                        <option value="1">Rated R (18+)</option>
+                        <option value="0">Rated PG (18-)</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="column"></div>
+                    <div class="column"><input type="submit" value=" Submit and Register &nbsp;"
+                                               class="form_fields"/></div>
+                </div>
+            </form>
         </div>
-
     </div>
 
 </div>

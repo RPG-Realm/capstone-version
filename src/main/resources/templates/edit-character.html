@@ -3,36 +3,35 @@
 <head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
-
-<!-- Content of the page -->
-<div class="container-main" sec:authorize="isAuthenticated()">
-    <h2>Create Your Character</h2>
-    <div class="inner-container">
-
-        <div class="character-container">
-            <div class="form_container">
-                <form th:action="@{'/edit-character/'+${character.id}}" method="post" th:object="${character}">
-                    <div class="row">
-                        <div class="column">Name:</div>
-                        <div class="column"><input type="text" name="name" class="form_fields" th:field="*{name}"/></div>
+<div class="title-container">
+    <div class="title-column-left">Your Search Results:</div>
+    <div class="title-column-right"><img src="/images/main/knight-helmet.jpg"/></div>
+</div>
+<div class="inner-container">
+    <div class="character-container" sec:authorize="isAuthenticated()">
+        <div class="form_container">
+            <form th:action="@{'/edit-character/'+${character.id}}" method="post" th:object="${character}">
+                <div class="row">
+                    <div class="column">Name:</div>
+                    <div class="column"><input type="text" name="name" class="form_fields" th:field="*{name}"/></div>
+                </div>
+                <div class="row">
+                    <div class="column">Type:</div>
+                    <div class="column"><input type="text" name="type" class="form_fields" th:field="*{type}"/></div>
+                </div>
+                <div class="row">
+                    <div class="column">Description:</div>
+                    <div class="column"><input type="text" name="type" class="form_fields" th:field="*{description}"/>
                     </div>
-                    <div class="row">
-                        <div class="column">Type:</div>
-                        <div class="column"><input type="text" name="type" class="form_fields" th:field="*{type}"/></div>
+                </div>
+                <div class="formdiv"></div>
+                <div class="row">
+                    <div class="column"></div>
+                    <div class="column"><input type="submit" value=" Submit and Register &nbsp;" class="form_fields"/>
                     </div>
-                    <div class="row">
-                        <div class="column">Description:</div>
-                        <div class="column"><input type="text" name="type" class="form_fields" th:field="*{description}"/></div>
-                    </div>
-                    <div class="formdiv"></div>
-                    <div class="row">
-                        <div class="column"></div>
-                        <div class="column"><input type="submit" value=" Submit and Register &nbsp;" class="form_fields"/></div>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
-
     </div>
 
 </div>

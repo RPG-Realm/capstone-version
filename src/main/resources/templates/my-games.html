@@ -3,14 +3,22 @@
 <head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
-
-    <span class="glow-button" th:each="game : ${gameList}">
-        <span class="glow-button"><a th:href="'/view-game/'+${game.id}">Link to game</a></span>
-        <span class="glow-button" th:text="${game.name}"></span>
-        <span class="glow-button" th:text="${game.description}"></span>
-
-    </span>
-
+<div class="title-container">
+    <div class="title-column-left" th:text="${user.first_name}+''s Games"></div>
+    <div class="title-column-right"><img src="/images/search/treasure_chest.jpg"/></div>
+</div>
+<div class="inner-container">
+    <div class="game-container" sec:authorize="isAuthenticated()">
+        <div class="search-list-container" th:each="game : ${gameList}">
+            <div class="column-left"><a th:href="'/view-game/'+${game.id}" th:text="${game.name}"></a></div>
+            <div class="column-middle"><a th:href="'/view-game/'+${game.id}" th:text="${game.description}"></a></div>
+            <div class="column-right"><a th:href="'/view-game/'+${game.id}" th:text="${game.type}"></a></div>
+            <div class="column-rating" th:if="${game.rating} == 0" th:text="'Rated R'"></div>
+            <div class="column-rating" th:if="${game.rating} == 1" th:text="'Rated PG'"></div>
+        </div>
+    </div>
+</div>
+</div>
 <footer th:include="fragments/footer :: footer"></footer>
 </body>
 </html>
