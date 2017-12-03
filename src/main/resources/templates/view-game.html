@@ -1,21 +1,28 @@
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 <!-- Content of the page -->
 <div class="container-main">
-    <h2>View Active Campaign</h2>
+    <div class="title-container">
+        <div class="title-column-left" th:text="'View Active Campaign: '+${game.name}"></div>
+        <div class="title-column-right"><img src="/images/main/small-scroll.jpg"/></div>
+    </div>
     <div class="inner-container">
         <div class="game-container">
+
             <div th:object="${game}">
                 <p th:text="${game.name}"></p>
                 <p th:text="${game.description}"></p>
                 <a th:href="'/edit-game/'+${game.id}">Edit Link</a>
                 <a th:href="'/join-game/'+${game.id}">Join the game!</a>
             </div>
-          <div>
-					<button type="button" label="Upload a PDF or Image:" class="glow_button" id="upload">Upload File</button>
-				</div>
+            <div>
+                <button type="button" label="Upload a PDF or Image:" class="glow_button" id="upload">Upload
+                    File
+                </button>
+            </div>
             <div id="upload-status"></div>
         </div>
     </div>
@@ -24,60 +31,61 @@
         id="csrf"
         type="hidden"
         th:name="${_csrf.parameterName}"
-        th:value="${_csrf.token}" />
+        th:value="${_csrf.token}"/>
 
 <footer th:include="fragments/footer :: footer"></footer>
 <script src="https://static.filestackapi.com/v3/filestack.js"></script>
 <script th:inline="javascript">
 
-var fsClient = filestack.init('AEI1UqHQ4QfmBMMZ6KMFmz');
+    var fsClient = filestack.init('AEI1UqHQ4QfmBMMZ6KMFmz');
 
-function openPicker() {
-    fsClient.pick({
-        fromSources: ["local_file_system", "url", "imagesearch", "googledrive"],
-        accept: ["image/*"],
-        transformations: {
-            crop: {
-                force: true,
-                aspectRatio: 1
-            }
-        },
-        maxSize: 2000000
-    }).then(function (response) {
+    function openPicker() {
+        fsClient.pick({
+            fromSources: ["local_file_system", "url", "imagesearch", "googledrive"],
+            accept: ["image/*"],
+            transformations: {
+                crop: {
+                    force: true,
+                    aspectRatio: 1
+                }
+            },
+            maxSize: 2000000
+        }).then(function (response) {
 
 // console log the output
-        console.log(response);
-        console.log(response.filesUploaded[0].url);
-        console.log("here is the game ID: " + /*[[${game.id}]]*/);
-        console.log(/*[[${_csrf.token}]]*/);
-        console.log(/*[[${_csrf.parameterName}]]*/);
-        var url = response.filesUploaded[0].url;
-        var mimetype = response.filesUploaded[0].mimetype;
-        var filename = response.filesUploaded[0].filename;
+            console.log(response);
+            console.log(response.filesUploaded[0].url);
+            console.log("here is the game ID: " + /*[[${game.id}]]*/);
+            console.log(/*[[${_csrf.token}]]*/);
+            console.log(/*[[${_csrf.parameterName}]]*/);
+            var url = response.filesUploaded[0].url;
+            var mimetype = response.filesUploaded[0].mimetype;
+            var filename = response.filesUploaded[0].filename;
 // Send ajax to file-upload controller
-        $.ajax({
-            type: "POST",
-            url: "/upload-file",
-            data: {
-                response: url,
-                gameId: /*[[${game.id}]]*/,
-                _csrf  : /*[[${_csrf.token}]]*/,
-                mimetype : mimetype,
-                filename: filename
-                  },
+            $.ajax({
+                type: "POST",
+                url: "/upload-file",
+                data: {
+                    response: url,
+                    gameId: /*[[${game.id}]]*/,
+                    _csrf: /*[[${_csrf.token}]]*/,
+                    mimetype: mimetype,
+                    filename: filename
+                },
 
-            success: "File upload completed successfully",
-            dataType: "json"
+                success: "File upload completed successfully",
+                dataType: "json"
 
 
-        }).done(function () {
-            request.getElementById("upload-status").innerHTML = "File Uploaded Successfully";
+            }).done(function () {
+                request.getElementById("upload-status").innerHTML = "File Uploaded Successfully";
+            });
         });
+    }
+
+    document.getElementById("upload").addEventListener("click", function () {
+        openPicker();
     });
-}
-document.getElementById("upload").addEventListener("click", function(){
-openPicker();
-});
 
 
 </script>

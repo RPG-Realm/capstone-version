@@ -3,31 +3,31 @@
 <head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
-<!-- Content of the page -->
-<div class="container-main">
-	<h2>Please Login... Your Fate Awaits You.</h2>
-	<div class="inner-container">
-		<div sec:authorize="isAnonymous()" class="login-container">
-			<div class="form_container">
-				<form th:action="@{/login}" method="post">
-					<div class="formdiv">Username:</div>
-					<div class="formdiv"><input type="text" name="username" class="form_fields"/></div>
-					<div class="formdiv"></div>
-					<div class="formdiv">Password:</div>
-					<div class="formdiv"><input type="password" name="password" class="form_fields"/></div>
-					<div class="formdiv"></div>
-					<div class="formdiv"></div>
-					<div class="formdiv"><input type="submit" value=" Login &nbsp;" class="form_fields"/></div>
-				</form>
-				<div class="invalid" th:if="${param.error}">
-					Invalid Username and Password
-				</div>
-				<div class="system-message" th:if="${param.logout}">
-					You have been successfully logged out.
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="title-container">
+    <div class="title-column-left">Please Login to Unlock the Universe Beyond</div>
+    <div class="title-column-right"><img src="/images/main/small-key.jpg"/></div>
+</div>
+<div class="inner-container">
+    <div sec:authorize="isAnonymous()" class="login-container">
+        <div class="form_container">
+            <form th:action="@{/login}" method="post">
+                <div class="formdiv">Username:</div>
+                <div class="formdiv"><input type="text" name="username" class="form_fields"/></div>
+                <div class="formdiv"></div>
+                <div class="formdiv">Password:</div>
+                <div class="formdiv"><input type="password" name="password" class="form_fields"/></div>
+                <div class="formdiv"></div>
+                <div class="formdiv"></div>
+                <div class="formdiv"><input type="submit" value=" Login &nbsp;" class="form_fields"/></div>
+            </form>
+            <div class="invalid" th:if="${param.error}">
+                Invalid Username and Password
+            </div>
+            <div class="system-message" th:if="${param.logout}">
+                You have been successfully logged out.
+            </div>
+        </div>
+    </div>
 </div>
 <footer th:include="fragments/footer :: footer"></footer>
 </body>

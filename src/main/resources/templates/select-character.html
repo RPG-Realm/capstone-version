@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
@@ -6,15 +7,21 @@
 <!-- Content of the page -->
 <!--Make the list of characters on the back end. Send it to front end and make checkboxes in the html. Then check
  which ones are checked via a custom ajax request in javascript-->
-<div>
-
-    <h1>You are joining</h1>
-    <div th:object="${game}">
-        <p th:text="${game.name}"></p>
-        <p th:text="${game.description}"></p>
-    </div>
-    <h1>Please select a character</h1>
+<div class="title-container">
+    <div class="title-column-left" th:text="'Edit Game: '+${game.name}"></div>
+    <div class="title-column-right"><img src="/images/main/knight-helmet.jpg"/></div>
 </div>
+<div class="inner-container">
+    <div class="character-container"  sec:authorize="isAuthenticated()">
+
+        <div>
+            <h1>You are joining</h1>
+            <div th:object="${game}">
+                <p th:text="${game.name}"></p>
+                <p th:text="${game.description}"></p>
+            </div>
+            <h1>Please select a character</h1>
+        </div>
         <div th:each="character: ${characterList}">
             <h2 th:text="${character.name}"></h2>
             <h3 th:text="${character.type}"></h3>
@@ -22,30 +29,33 @@
             <input name="characterId" th:value="${character.id}" type="radio" th:text="${character.name}"/>
         </div>
         <input
-        id="csrf"
-        type="hidden"
-        th:name="${_csrf.parameterName}"
-        th:value="${_csrf.token}" />
+                id="csrf"
+                type="hidden"
+                th:name="${_csrf.parameterName}"
+                th:value="${_csrf.token}"/>
         <button id="join-game" type="button">Select this character</button>
 
 
-<script th:inline="javascript">
-    function joinGame() {
-        $.ajax("/join-game", {
-            type: "POST",
-            data: jQuery.param({
+        <script th:inline="javascript">
+            function joinGame() {
+                $.ajax("/join-game", {
+                    type: "POST",
+                    data: jQuery.param({
 //                gameId: ${game.id},
-                gameId:/*[[${game.id}]]*/,
-                characterId: $('input[type=radio]:checked').val(),
-                _csrf: $("#csrf").val()
-            })
-        }).done(console.log("AJAX sent succesful"));/*.fail(function (error) {
-            console.log(error);
-        })*/
-    }
-    document.getElementById('join-game').addEventListener('click', joinGame);
-</script>
+                        gameId:/*[[${game.id}]]*/,
+                        characterId: $('input[type=radio]:checked').val(),
+                        _csrf: $("#csrf").val()
+                    })
+                }).done(console.log("AJAX sent succesful"));
+                /*.fail(function (error) {
+                            console.log(error);
+                        })*/
+            }
 
+            document.getElementById('join-game').addEventListener('click', joinGame);
+        </script>
+    </div>
+</div>
 <footer th:include="fragments/footer :: footer"></footer>
 </body>
 </html>

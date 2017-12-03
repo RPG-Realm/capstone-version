@@ -1,12 +1,14 @@
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
-<!-- Content of the page -->
-<div class="container-main">
-    <h2>Games Mapped: View Available Games Nearby...</h2>
-    <div class="inner-container">
-        <div class="map-container">
+<div class="title-container">
+    <div class="title-column-left">Game Location: </div>
+    <div class="title-column-right"><img src="/images/search/compass.jpg"/></div>
+</div>
+<div class="inner-container">
+    <div class="game-container">
             <div id="map-canvas"></div>
         </div>
     </div>

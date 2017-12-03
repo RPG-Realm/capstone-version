@@ -1,16 +1,23 @@
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/head :: main-header('All posts')"></head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
-
-<!-- Content of the page -->
-<div th:each="character: ${characterList}">
-    <h2 th:text="${character.name}"></h2>
-    <h3 th:text="${character.type}"></h3>
-    <p th:text="${character.description}"></p>
-    <a th:href="'/view-character/'+${character.id}">View Character</a>
+<div class="title-container">
+    <div class="title-column-left">Available Characters:</div>
+    <div class="title-column-right"><img src="/images/search/treasure_chest.jpg"/></div>
 </div>
-
+<div class="inner-container">
+    <div class="game-container" sec:authorize="isAuthenticated()">
+        <!-- Content of the page -->
+        <div th:each="character: ${characterList}">
+            <h2 th:text="${character.name}"></h2>
+            <h3 th:text="${character.type}"></h3>
+            <p th:text="${character.description}"></p>
+            <a th:href="'/view-character/'+${character.id}">View Character</a>
+        </div>
+    </div>
+</div>
 <footer th:include="fragments/footer :: footer"></footer>
 </body>
 </html>
