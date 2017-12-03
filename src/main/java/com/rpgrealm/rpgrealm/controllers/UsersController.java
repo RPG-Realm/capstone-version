@@ -55,16 +55,20 @@ public class UsersController {
     return "user-profile";
   }
 
-  @GetMapping("/user-profile/edit/{id}")
-  public String editUser(@PathVariable Long id, Model model) {
-    model.addAttribute("user", usrRep.findOne(id));
+  @GetMapping("/user-profile/edit")
+  public String editUser( Model model) {
+    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User dbUser=usrRep.findOne(user.getId());
+    model.addAttribute("user", dbUser);
     return "user-profile-edit";
   }
 
-  @PostMapping("/user-profile/edit/{id}")
-  public String commitEditUser(@PathVariable Long id, User user){
+  @PostMapping("/user-profile/edit")
+  public String commitEditUser( @ModelAttribute User user){
+    System.out.println(user.getId());
     String hash = passwordEncoder.encode(user.getPassword());
     user.setPassword(hash);
+    user.setProfile_photo(user.getProfile_photo());
     usrRep.save(user);
     return "user-profile";
   }

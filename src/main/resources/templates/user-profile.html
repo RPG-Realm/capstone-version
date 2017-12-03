@@ -17,7 +17,7 @@
 					<h3 th:text="*{address_1}"></h3>
 					<h3 th:text="*{city}+', '+*{state}+' '+*{zip_code}"></h3>
 					<h3 th:text="*{phone}"></h3>
-					<a th:href="'/user-profile/edit/'+*{id}">Edit Profile</a>
+					<a href="/user-profile/edit">Edit Profile</a>
 					<a href="/view-game/all"><h3>View Your Games</h3></a>
 					<a href="/user-character"><h3>View Your Characters</h3></a>
 				</div>
