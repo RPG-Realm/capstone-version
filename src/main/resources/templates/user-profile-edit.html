@@ -12,10 +12,10 @@
 	<div class="inner-container">
 		<div class="user-container" sec:authorize="isAuthenticated()">
 			<div class="form_container">
-				<form th:action="'/user-profile/edit/'+${user.id}" method="post" th:object="${user}">
+				<form th:action="@{'/user-profile/edit/'+${user.id}}" method="post" th:object="${user}">
 					<div class="row">
 						<div class="column">Username:</div>
-						<div class="column"><input type="text" th:field="*{username}" class="form_fields" th:readonly="readonly"/></div>
+						<div class="column"><input type="text" th:field="*{username}" class="form_fields" /></div>
 					</div>
 					<div class="row">
 						<div class="column">Email:</div>
@@ -23,7 +23,7 @@
 					</div>
 					<div class="row">
 						<div class="column">User created time:</div>
-						<div class="column"><input type="text" th:field="*{user_created_time}" class="form_fields" th:readonly="readonly"/></div>
+						<div class="column"><input type="text" th:field="*{user_created_time}" class="form_fields" /></div>
 					</div>
 					<div class="row">
 						<div class="column">Password:</div>
@@ -158,6 +158,7 @@
 						<div class="column"></div>
 						<div class="column"><input type="submit" value=" Submit Profile Changes &nbsp;" class="form_fields"/></div>
 					</div>
+					<div class="column"><input type="hidden" th:field="*{profile_photo}" class="form_fields"/></div>
 				</form>
 			</div>
 		</div>
