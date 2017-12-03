@@ -3,7 +3,9 @@
  */
 package com.rpgrealm.rpgrealm.controllers;
 
+import com.rpgrealm.rpgrealm.models.AppFile;
 import com.rpgrealm.rpgrealm.models.User;
+import com.rpgrealm.rpgrealm.repositories.AppFileRepository;
 import com.rpgrealm.rpgrealm.repositories.Users;
 import org.hibernate.validator.constraints.ModCheck;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,12 +20,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class UsersController {
   private final Users usrRep;
+  private final AppFileRepository fileRep;
   private PasswordEncoder passwordEncoder;
 
-  public UsersController(Users usrRep, PasswordEncoder passwordEncoder)
+  public UsersController(Users usrRep, PasswordEncoder passwordEncoder, AppFileRepository fileRep)
   {
     this.usrRep=usrRep;
     this.passwordEncoder=passwordEncoder;
+    this.fileRep = fileRep;
   }
 
   @GetMapping("/sign-up")
@@ -45,7 +49,9 @@ public class UsersController {
   public String showUser(Model model) {
     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     User dbUser=usrRep.findOne(user.getId());
+    AppFile profilePhoto= dbUser.getProfile_photo();
     model.addAttribute("user", dbUser);
+    model.addAttribute("profilePhoto",profilePhoto);
     return "user-profile";
   }
 
