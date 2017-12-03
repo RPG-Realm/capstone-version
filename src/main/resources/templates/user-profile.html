@@ -17,7 +17,7 @@
                     <img id="user-photo" class="user-photo" th:if="${profilePhoto !=null}" th:object="${profilePhoto}"
                          th:src="*{file_url}" th:alt="*{file_name}"/>
                     <img id="user-photo" class="user-photo" th:if="${profilePhoto == null}" th:alt="'No Photo'"
-                         src="/images/main/small-shield"/>
+                         src="/images/main/small-shield.jpg"/>
                     </div>
                     <div id="upload-status"></div>
                     <h3 th:text="'User Name: '+*{username}"></h3>
