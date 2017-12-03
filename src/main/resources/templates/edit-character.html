@@ -4,7 +4,7 @@
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 <div class="title-container">
-    <div class="title-column-left">Your Search Results:</div>
+    <div class="title-column-left" th:text="'Edit Character:  '+${character.name}"></div>
     <div class="title-column-right"><img src="/images/main/knight-helmet.jpg"/></div>
 </div>
 <div class="inner-container">
@@ -24,7 +24,6 @@
                     <div class="column"><input type="text" name="type" class="form_fields" th:field="*{description}"/>
                     </div>
                 </div>
-                <div class="formdiv"></div>
                 <div class="row">
                     <div class="column"></div>
                     <div class="column"><input type="submit" value=" Submit and Register &nbsp;" class="form_fields"/>
