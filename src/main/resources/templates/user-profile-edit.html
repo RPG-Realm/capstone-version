@@ -9,7 +9,7 @@
 	<div class="inner-container">
 		<div class="registration-container">
 			<div class="form_container">
-				<form th:action="@{/user-profile/edit}" method="post" th:object="${user}">
+				<form th:action="@{'/user-profile/edit/'+${user.id}}" method="post" th:object="${user}">
 					<div class="row">
 						<div class="column">Username:</div>
 						<div class="column"><input type="text" th:field="*{username}" class="form_fields" /></div>
