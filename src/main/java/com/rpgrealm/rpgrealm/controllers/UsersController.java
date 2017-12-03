@@ -64,6 +64,6 @@ public class UsersController {
     String hash = passwordEncoder.encode(user.getPassword());
     user.setPassword(hash);
     usrRep.save(user);
-    return "/user-profile";
+    return "redirect:/user-profile";
   }
 }
