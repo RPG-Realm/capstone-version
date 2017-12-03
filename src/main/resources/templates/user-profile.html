@@ -13,31 +13,33 @@
             <div class="form_container">
                 <!-- Content of the page -->
                 <div th:object="${user}">
-					<img class="user-photo" th:if="${profilePhoto !=null}" th:object="${profilePhoto}" th:src="*{file_url}" th:alt="*{file_name}"/>
-    <img class="user-photo" id="user-photo" th:if="${profilePhoto == null}" th:alt="'No Photo'" src="/images/main/small-shield"/>
-					          <h3 th:text="'User Name: '+*{username}"></h3>
-					<h3 th:text="*{first_name}+' '+*{last_name}"></h3>
-					<h3 th:text="*{address_1}"></h3>
-					<h3 th:text="*{city}+', '+*{state}+' '+*{zip_code}"></h3>
-					<h3 th:text="'Phone: '+*{phone}"></h3>
-				</div>
+                    <div class="user-photo-container">
+                    <img id="user-photo" class="user-photo" th:if="${profilePhoto !=null}" th:object="${profilePhoto}"
+                         th:src="*{file_url}" th:alt="*{file_name}"/>
+                    <img id="user-photo" class="user-photo" th:if="${profilePhoto == null}" th:alt="'No Photo'"
+                         src="/images/main/small-shield"/>
+                    </div>
+                    <div id="upload-status"></div>
+                    <h3 th:text="'User Name: '+*{username}"></h3>
+                    <h3 th:text="*{first_name}+' '+*{last_name}"></h3>
+                    <h3 th:text="*{address_1}"></h3>
+                    <h3 th:text="*{city}+', '+*{state}+' '+*{zip_code}"></h3>
+                    <h3 th:text="'Phone: '+*{phone}"></h3>
+                </div>
             </div>
             <br/>
             <div class="form_container">
-            <div class="glow-button">
-                <a th:href="'/user-profile/edit/'+${user.id}">Edit User Profile</a>
-            </div>
-            <div class="glow-button">
-                <a href="/view-game/all">View Your Games</a>
-            </div>
-            <div class="glow-button">
-                <a href="/user-character">View Characters</a>
-            </div>
-                <!-- Filestack -->
-                <div>
-                    <button type="button" label="Upload a PDF or Image:" class="glow_button" id="upload">Upload File</button>
+                <div class="glow-button">
+                    <a th:href="'/user-profile/edit/'+${user.id}">Edit User Profile</a>
                 </div>
-                <div id="upload-status"></div>
+                <div class="glow-button">
+                    <a href="/view-game/all">View Your Games</a>
+                </div>
+                <div class="glow-button">
+                    <a href="/user-character">View Characters</a>
+                </div>
+                <!-- Filestack -->
+                <div class="formdiv"></div>
             </div>
         </div>
     </div>
@@ -46,7 +48,7 @@
         id="csrf"
         type="hidden"
         th:name="${_csrf.parameterName}"
-        th:value="${_csrf.token}" />
+        th:value="${_csrf.token}"/>
 <footer th:include="fragments/footer :: footer"></footer>
 
 <script src="https://static.filestackapi.com/v3/filestack.js"></script>
@@ -81,24 +83,22 @@
                 url: "/upload-file/user-profile",
                 data: {
                     response: url,
-                    _csrf  : /*[[${_csrf.token}]]*/,
-                    mimetype : mimetype,
+                    _csrf: /*[[${_csrf.token}]]*/,
+                    mimetype: mimetype,
                     filename: filename
-                },
-
-                success: "File upload completed successfully",
-                dataType: "json"
-
-
+                }
             }).done(function () {
-                request.getElementById("upload-status").innerHTML = "File Uploaded Successfully";
-
+                $("#upload-status").html("File Uploaded Successfully");
+                console.log("File was uploaded");
+                $("#user-photo").fadeOut(400);
+                $("#user-photo").attr("src",url).delay(3000).fadeIn(3000);
             });
         });
+
     }
-    document.getElementById("upload").addEventListener("click", function(){
-        openPicker();
-    });
+
+    $("#user-photo").click(openPicker);
+
 </script>
 </body>
 </html>
