@@ -18,8 +18,8 @@
                          th:src="*{file_url}" th:alt="*{file_name}"/>
                     <img id="user-photo" class="user-photo" th:if="${profilePhoto == null}" th:alt="'No Photo'"
                          src="/images/main/small-shield"/>
-                    </div>
-                    <div id="upload-status"></div>
+                    </div><br/>
+                    <span id="upload-status"></span>
                     <h3 th:text="'User Name: '+*{username}"></h3>
                     <h3 th:text="*{first_name}+' '+*{last_name}"></h3>
                     <h3 th:text="*{address_1}"></h3>
@@ -90,14 +90,23 @@
             }).done(function () {
                 $("#upload-status").html("File Uploaded Successfully");
                 console.log("File was uploaded");
-                $("#user-photo").fadeOut(400);
-                $("#user-photo").attr("src",url).delay(3000).fadeIn(3000);
+                $("#user-photo").fadeOut(100).delay(400);
+                $("#user-photo").attr("src",url).delay(400).fadeIn(500);
             });
         });
 
     }
 
     $("#user-photo").click(openPicker);
+
+
+        $("#user-photo").hover(function () {
+            $(".upload-status").html("Change Your Image");
+        });
+        $("#user-photo").mouseleave(function () {
+            $(".upload-status").html("");
+
+    });
 
 </script>
 </body>
