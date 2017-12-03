@@ -14,7 +14,7 @@
                 <!-- Content of the page -->
                 <div th:object="${user}">
 					<img class="user-photo" th:if="${profilePhoto !=null}" th:object="${profilePhoto}" th:src="*{file_url}" th:alt="*{file_name}"/>
-                    <img class="user-photo" id="user-photo" th:if="${profilePhoto == null}" th:alt="'No Photo'" src="/images/main/small-shield"/>
+                    <img class="user-photo" id="user-photo" th:if="${profilePhoto == null}" th:alt="'No Photo'" src="/images/main/small-shield.jpg"/>
 					<h3 th:text="'User Name: '+*{username}"></h3>
 					<h3 th:text="*{first_name}+' '+*{last_name}"></h3>
 					<h3 th:text="*{address_1}"></h3>
@@ -91,7 +91,8 @@
 
 
             }).done(function () {
-                request.getElementById("upload-status").innerHTML = "File Uploaded Successfully";
+                document.getElementById("upload-status").innerHTML = "File Uploaded Successfully";
+                $('#user-photo').attr('src', url).attr('alt', filename).load();
 
             });
         });
