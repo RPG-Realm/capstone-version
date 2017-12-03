@@ -12,13 +12,18 @@
         <div class="user-container" sec:authorize="isAuthenticated()">
             <div class="form_container">
                 <!-- Content of the page -->
-                <div th:object="${user}">
-                    <h3 th:text="'User Name: '+*{username}"></h3>
-                    <h3 th:text="*{first_name}+' '+*{last_name}"></h3>
-                    <h3 th:text="*{address_1}"></h3>
-                    <h3 th:text="*{city}+', '+*{state}+' '+*{zip_code}"></h3>
-                    <h3 th:text="'Phone: '+*{phone}"></h3>
-                </div>
+               				<div th:object="${user}">
+					<h2>User Profile</h2>
+					<img th:if="${profilePhoto !=null}" th:object="${profilePhoto}" th:src="*{file_url}" th:alt="*{file_name}"/>
+					<h3 th:text="*{username}"></h3>
+					<h3 th:text="*{first_name}+' '+*{last_name}"></h3>
+					<h3 th:text="*{address_1}"></h3>
+					<h3 th:text="*{city}+', '+*{state}+' '+*{zip_code}"></h3>
+					<h3 th:text="*{phone}"></h3>
+					<a th:href="'/user-profile/edit/'+*{id}">Edit Profile</a>
+					<a href="/view-game/all"><h3>View Your Games</h3></a>
+					<a href="/user-character"><h3>View Your Characters</h3></a>
+				</div>
             </div>
             <br/>
             <div class="form_container">

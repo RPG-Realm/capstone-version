@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface AppFileRepository extends CrudRepository<AppFile, String> {
+public interface AppFileRepository extends CrudRepository<AppFile, Long> {
   // empty interface body
   // we can define custom methods here, but for the exercise, all we need
   // are the methods that come from CrudRepository
