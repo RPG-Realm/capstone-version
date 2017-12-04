@@ -12,6 +12,13 @@
     <div class="inner-container">
 
         <div class="game-container">
+            <div class="banner-photo-container">
+                <img id="banner-photo" class="user-photo" th:if="${bannerPhoto !=null}"
+                     th:object="${bannerPhoto}"
+                     th:src="*{file_url}" th:alt="*{file_name}"/>
+                <img id="banner-photo" class="user-photo" th:if="${bannerPhoto == null}" th:alt="'No Photo'"
+                     src="/images/main/large-shield.jpg"/>
+            </div>
             <div th:object="${owner}">
                 <h1 th:text="'Owner is '+${owner.username} "></h1>
             </div>
@@ -34,6 +41,12 @@
                 </button>
             </div>
             <div id="upload-status"></div>
+            <div>
+                <button type="button" label="Upload a PDF or Image:" class="glow_button" id="banner-select">Upload
+                    Banner
+                </button>
+            </div>
+            <div id="banner-status"></div>
             <div th:each="character: ${characterList} "><!--Active characters-->
                 <h4 th:text="${character.name}"></h4>
                 <h6 th:text="${hashUser.get(character)}"></h6>
@@ -89,7 +102,7 @@
                     filename: filename
                 }
             }).done(function () {
-                request.getElementById("upload-status").innerHTML = "File Uploaded Successfully";
+                document.getElementById("upload-status").innerHTML = "File Uploaded Successfully";
             });
         });
     }
@@ -98,6 +111,49 @@
         openPicker();
     });
 
+
+    function bannerPicker() {
+        fsClient.pick({
+            fromSources: ["local_file_system", "url", "imagesearch", "googledrive"],
+            accept: ["image/*"],
+            transformations: {
+                crop: {
+                    force: true,
+                    aspectRatio: 1
+                }
+            },
+            maxSize: 2000000
+        }).then(function (response) {
+
+// console log the output
+            console.log(response);
+            console.log(response.filesUploaded[0].url);
+            console.log("here is the game ID: " + /*[[${game.id}]]*/);
+            console.log(/*[[${_csrf.token}]]*/);
+            console.log(/*[[${_csrf.parameterName}]]*/);
+            var url = response.filesUploaded[0].url;
+            var mimetype = response.filesUploaded[0].mimetype;
+            var filename = response.filesUploaded[0].filename;
+// Send ajax to file-upload controller
+            $.ajax({
+                type: "POST",
+                url: "/upload-banner",
+                data: {
+                    response: url,
+                    gameId: /*[[${game.id}]]*/,
+                    _csrf: /*[[${_csrf.token}]]*/,
+                    mimetype: mimetype,
+                    filename: filename
+                }
+            }).done(function () {
+                document.getElementById("banner-status").innerHTML = "File Uploaded Successfully";
+            });
+        });
+    }
+
+    document.getElementById("banner-select").addEventListener("click", function () {
+        bannerPicker();
+    });
 
 </script>
 

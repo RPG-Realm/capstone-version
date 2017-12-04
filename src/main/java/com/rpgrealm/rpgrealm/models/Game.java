@@ -69,7 +69,7 @@ public class Game {
 
   // mapped properties
 
-  @OneToMany(mappedBy = "game")
+  @OneToMany(mappedBy = "game",cascade = CascadeType.ALL)
   private List<AppFile> game_files;
 
   public Game() {

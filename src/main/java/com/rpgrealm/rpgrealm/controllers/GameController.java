@@ -80,6 +80,7 @@ public class GameController {
     List<AppFile> gameFiles=activeGame.getGame_files();
     System.out.println(gameFiles.toString());
 
+
     model.addAttribute("game",activeGame);
     model.addAttribute("characterList",characterList);
     model.addAttribute("hashUser", gamePair);
@@ -97,6 +98,12 @@ public class GameController {
     }
 //    Passes in game owners photo
     model.addAttribute("ownerPic", ownerPhoto);
+//    Pass in game banner
+    if(activeGame.getBanner()!=null){
+      //    Get the banner file
+      AppFile bannerPhoto=activeGame.getBanner();
+      model.addAttribute("bannerPhoto",bannerPhoto);
+    }
     return "view-game";
   }
 
