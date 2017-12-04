@@ -11,7 +11,8 @@
         <a href="/create-character">Create Character</a>
         <a href="/create-game">Create Game</a>
         <a href="/search-games">View Games</a>
-        <a sec:authorize="isAuthenticated()" href="javascript: document.myform.submit()">Logout</a>
+        <a th:if="${user!=null}" href="javascript: document.myform.submit()">Logout</a>
+        <a th:if="${user==null}" href="/login">Login</a>
     </div>
 </nav>
 </body>
