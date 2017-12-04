@@ -10,48 +10,62 @@
         <div class="title-column-right"><img src="/images/main/small-scroll.jpg"/></div>
     </div>
     <div class="inner-container">
-
         <div class="game-container">
-            <div class="banner-photo-container">
-                <img id="banner-photo" class="user-photo" th:if="${bannerPhoto !=null}"
-                     th:object="${bannerPhoto}"
-                     th:src="*{file_url}" th:alt="*{file_name}"/>
-                <img id="banner-photo" class="user-photo" th:if="${bannerPhoto == null}" th:alt="'No Photo'"
-                     src="/images/main/large-shield.jpg"/>
-            </div>
-            <div th:object="${owner}">
-                <h1 th:text="'Owner is '+${owner.username} "></h1>
-            </div>
-            <div th:object="${ownerPic}">
-                <img th:src="${ownerPic.file_url}" th:alt="${ownerPic.file_name}"/>
-            </div>
-            <div th:if="${gameFiles != null}" th:each="file: ${gameFiles}">
-                <a th:href="${file.file_url}" th:text="${file.file_name}"></a>
-            </div>
-            <div th:object="${game}">
-                <p th:text="${game.name}"></p>
-                <p th:text="${game.description}"></p>
-                <a th:if="${owner}==${user}" th:href="'/edit-game/'+${game.id}">Edit Link</a>
-                <a th:if="(${owner}!=${user}) and ${myList==null}" th:href="'/join-game/'+${game.id}">Join the game!</a>
+            <div class="game-three-column">
 
-            </div>
-            <div>
-                <button th:if="${owner}==${user}" type="button" label="Upload a PDF or Image:" class="glow_button" id="upload">Upload
-                    File
-                </button>
-            </div>
-            <div id="upload-status"></div>
-            <div>
-                <button th:if="${owner}==${user}" type="button" label="Upload a PDF or Image:" class="glow_button" id="banner-select">Upload
-                    Banner
-                </button>
-            </div>
-            <div id="banner-status"></div>
-            <div th:each="character: ${characterList} "><!--Active characters-->
-                <h4 th:text="${character.name}"></h4>
-                <h6 th:text="${hashUser.get(character)}"></h6>
-                <img th:if="${hashPic.containsKey(character)}" th:src="${hashPic.get(character)}"/>
-                <img th:if="${!hashPic.containsKey(character)}" src="/images/main/small-sword.jpg"/>
+                <div class="game-column-left">
+                    <div th:each="character: ${characterList} "><!--Active characters-->
+                        <h4 th:text="${character.name}"></h4>
+                        <h6 th:text="${hashUser.get(character)}"></h6>
+                        <img th:if="${hashPic.containsKey(character)}" th:src="${hashPic.get(character)}"/>
+                        <img th:if="${!hashPic.containsKey(character)}" src="/images/main/small-sword.jpg"/>
+                    </div>
+                </div>
+
+                <div class="game-column-middle">
+                    <div class="game-dungeon-map">
+                        <img id="banner-photo" class="user-photo" th:if="${bannerPhoto !=null}"
+                             th:object="${bannerPhoto}"
+                             th:src="*{file_url}" th:alt="*{file_name}"/>
+                        <img id="banner-photo" class="user-photo" th:if="${bannerPhoto == null}" th:alt="'No Photo'"
+                             src="/images/main/large-shield.jpg"/>
+                    </div>
+                </div>
+
+                <div class="game-column-right">
+                    <div th:object="${owner}">
+                        <h3 th:text="'Owner is '+${owner.username} "></h3>
+                    </div>
+                    <div th:object="${ownerPic}">
+                        <img th:src="${ownerPic.file_url}" th:alt="${ownerPic.file_name}"/>
+                    </div>
+                    <div th:if="${gameFiles != null}" th:each="file: ${gameFiles}">
+                        <a th:href="${file.file_url}" th:text="${file.file_name}"></a>
+                    </div>
+                    <div th:object="${game}">
+                        <p th:text="${game.name}"></p>
+                        <p th:text="${game.description}"></p>
+                        <a th:if="${owner}==${user}" th:href="'/edit-game/'+${game.id}">Edit Link</a>
+                        <a th:if="(${owner}!=${user}) and ${myList==null}" th:href="'/join-game/'+${game.id}">Join the
+                            game!</a>
+                    </div>
+                    <div>
+                        <button th:if="${owner}==${user}" type="button" label="Upload a PDF or Image:"
+                                class="glow_button"
+                                id="upload">Upload
+                            File
+                        </button>
+                    </div>
+                    <div id="upload-status"></div>
+                    <div>
+                        <button th:if="${owner}==${user}" type="button" label="Upload a PDF or Image:"
+                                class="glow_button"
+                                id="banner-select">Upload
+                            Banner
+                        </button>
+                    </div>
+                    <div id="banner-status"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -71,7 +85,7 @@
     function openPicker() {
         fsClient.pick({
             fromSources: ["local_file_system", "url", "imagesearch", "googledrive"],
-            accept: ["image/*",".pdf"],
+            accept: ["image/*", ".pdf"],
             transformations: {
                 crop: {
                     force: true,
