@@ -4,7 +4,7 @@
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 <div class="title-container">
-    <div class="title-column-left" th:text="${user.first_name}+''s Games"></div>
+    <div class="title-column-left" th:text="${user.username}+'s Games'"></div>
     <div class="title-column-right"><img src="/images/search/treasure_chest.jpg"/></div>
 </div>
 <div class="inner-container">
@@ -17,7 +17,6 @@
             <div class="column-rating" th:if="${game.rating} == 1" th:text="'Rated PG'"></div>
         </div>
     </div>
-</div>
 </div>
 <footer th:include="fragments/footer :: footer"></footer>
 </body>

@@ -59,12 +59,18 @@ public class GameController {
     for(Character character: characterList){
       gamePair.put(character, character.getUser().getUsername());
     }
+    HashMap<Character, String> gameCharPics=new HashMap<>();
+    for(Character character:characterList){
+      if(character.getImage()!=null){
+        gameCharPics.put(character, character.getImage().getFile_url());
+      }
+    }
     System.out.println(gamePair);
 
     model.addAttribute("game",activeGame);
     model.addAttribute("characterList",characterList);
-    model.addAttribute("hashTest", gamePair);
-
+    model.addAttribute("hashUser", gamePair);
+    model.addAttribute("hashPic", gameCharPics);
     return "view-game";
   }
 
@@ -72,7 +78,9 @@ public class GameController {
   public String viewblankGame( Model model) {
 
     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User dbUser=usrRep.findOne(user.getId());
     model.addAttribute("gameList",gameRep.findByUserId(user.getId()));
+    model.addAttribute("user",dbUser);
     return "my-games";
   }
 
