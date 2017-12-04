@@ -46,10 +46,10 @@
                         characterId: $('input[type=radio]:checked').val(),
                         _csrf: $("#csrf").val()
                     })
-                }).done(console.log("AJAX sent succesful"));
-                /*.fail(function (error) {
-                            console.log(error);
-                        })*/
+                }).done(function(){
+                    console.log("ajax was sent");
+                    window.location.href = "http://rpg-realm.org/view-game/"+/*[[${game.id}]]*/;
+                });
             }
 
             document.getElementById('join-game').addEventListener('click', joinGame);
