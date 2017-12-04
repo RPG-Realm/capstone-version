@@ -72,6 +72,8 @@ public class GameController {
 //    Check who user is to compare versus game owner
     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     User dbUser=usrRep.findOne(user.getId());
+//    Get Owners photo
+    AppFile ownerPhoto=activeGame.getGame_master().getProfile_photo();
 //    Get a character list of the session user in the game
     List<Character> userList=charRep.findByUserAndGame(dbUser.getId(),activeGame.getId());
 //    Get all the files tied to the game
@@ -93,6 +95,8 @@ public class GameController {
     if(!gameFiles.isEmpty()){
       model.addAttribute("gameFiles",gameFiles);
     }
+//    Passes in game owners photo
+    model.addAttribute("ownerPic", ownerPhoto);
     return "view-game";
   }
 

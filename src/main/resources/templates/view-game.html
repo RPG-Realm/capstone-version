@@ -15,6 +15,9 @@
             <div th:object="${owner}">
                 <h1 th:text="'Owner is '+${owner.username} "></h1>
             </div>
+            <div th:object="${ownerPic}">
+                <img th:src="${ownerPic.file_url}" th:alt="${ownerPic.file_name}"/>
+            </div>
             <div th:if="${gameFiles != null}" th:each="file: ${gameFiles}">
                 <a th:href="${file.file_url}" th:text="${file.file_name}"></a>
             </div>
