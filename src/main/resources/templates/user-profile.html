@@ -5,7 +5,7 @@
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 <div class="container-main">
     <div class="title-container">
-        <div class="title-column-left" th:text="${user.first_name+'''s User Profile'}"></div>
+        <div class="title-column-left" th:text="${user.username+'''s User Profile'}"></div>
         <div class="title-column-right"><img src="/images/main/small-sword.jpg"/></div>
     </div>
     <div class="inner-container">
@@ -22,11 +22,21 @@
                     </div>
                     <br/>
                     <span id="upload-status"></span>
-                    <h3 th:text="'username: '+*{username}"></h3>
-                    <h3 th:text="*{first_name}+' '+*{last_name}"></h3>
-                    <h3 th:text="*{address_1}"></h3>
-                    <h3 th:text="*{city}+', '+*{state}+' '+*{zip_code}"></h3>
-                    <h3 th:text="'Phone: '+*{phone}"></h3>
+                    <h3 th:text="'Username: '+*{username}"></h3>
+
+                    <!--If you put in a first name put in a last name-->
+                    <h3 th:if="*{first_name==null}">First Name Last Name</h3>
+                    <h3 th:if="*{first_name!=null}" th:text="'Name: '+*{first_name}+' '+*{last_name}"></h3>
+
+                    <h3 th:if="*{address_1==null}">Address</h3>
+                    <h3 th:if="*{address_1!=null}" th:text="'Address '+*{address_1}"></h3>
+
+                    <!--If you put in a city, put in state and zipcode-->
+                    <h3 th:if="*{city==null}">City, State Zip Code</h3>
+                    <h3 th:if="*{city!=null}" th:text="*{city}+', '+*{state}+' '+*{zip_code}"></h3>
+
+                    <h3 th:if="*{phone==null}">Phone Number</h3>
+                    <h3 th:if="*{phone!=null}" th:text="'Phone: '+*{phone}"></h3>
                 </div>
 
                 <div class="formdiv"></div>
