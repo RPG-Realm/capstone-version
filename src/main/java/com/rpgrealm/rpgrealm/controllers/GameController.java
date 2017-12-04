@@ -69,7 +69,9 @@ public class GameController {
 
     model.addAttribute("game",activeGame);
     model.addAttribute("characterList",characterList);
+//    Attaches characters with their owners username
     model.addAttribute("hashUser", gamePair);
+//    Attaches characters with their images
     model.addAttribute("hashPic", gameCharPics);
     return "view-game";
   }
