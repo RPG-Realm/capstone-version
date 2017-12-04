@@ -24,7 +24,8 @@
                     <span id="upload-status"></span>
                     <h3 th:text="'username: '+*{username}"></h3>
                     <h3 th:text="*{first_name}+' '+*{last_name}"></h3>
-                    <h3 th:text="*{address_1}"></h3>
+                    <h3 th:if="*{address_1==null||address_1==''}">Address</h3>
+                    <h3 th:if="*{address_1!=null||address_1!=''}" th:text="*{address_1}"></h3>
                     <h3 th:text="*{city}+', '+*{state}+' '+*{zip_code}"></h3>
                     <h3 th:text="'Phone: '+*{phone}"></h3>
                 </div>
