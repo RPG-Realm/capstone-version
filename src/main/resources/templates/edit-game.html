@@ -35,7 +35,7 @@
                     <div class="column"><input type="submit" value=" Submit and Register &nbsp;"
                                                class="form_fields"/></div>
                 </div>
-                <div class="column"><input type="hidden" th:field="*{banner}" class="form_fields"/></div>
+                <div class="column"><input th:if="${game.banner!=null}" type="hidden" th:field="*{banner}" class="form_fields"/></div>
             </form>
         </div>
     </div>
