@@ -69,15 +69,24 @@ public class GameController {
         gameCharPics.put(character, character.getImage().getFile_url());
       }
     }
+//    Check who user is to compare versus game owner
     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     User dbUser=usrRep.findOne(user.getId());
+//    Get a character list of the session user
+    List<Character> userList=charRep.findByUserAndGame(dbUser.getId(),activeGame.getId());
 
     model.addAttribute("game",activeGame);
     model.addAttribute("characterList",characterList);
     model.addAttribute("hashUser", gamePair);
     model.addAttribute("hashPic", gameCharPics);
+//    gets game owner
     model.addAttribute("owner",activeGame.getGame_master());
     model.addAttribute("user",dbUser);
+//    Pass in list of a users characters to validate join.
+    if(!userList.isEmpty()){
+      model.addAttribute("myList",userList);
+    }
+
     return "view-game";
   }
 
