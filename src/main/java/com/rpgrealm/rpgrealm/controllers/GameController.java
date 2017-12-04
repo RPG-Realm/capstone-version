@@ -72,8 +72,11 @@ public class GameController {
 //    Check who user is to compare versus game owner
     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     User dbUser=usrRep.findOne(user.getId());
-//    Get a character list of the session user
+//    Get a character list of the session user in the game
     List<Character> userList=charRep.findByUserAndGame(dbUser.getId(),activeGame.getId());
+//    Get all the files tied to the game
+    List<AppFile> gameFiles=activeGame.getGame_files();
+    System.out.println(gameFiles.toString());
 
     model.addAttribute("game",activeGame);
     model.addAttribute("characterList",characterList);
@@ -86,7 +89,10 @@ public class GameController {
     if(!userList.isEmpty()){
       model.addAttribute("myList",userList);
     }
-
+//    Pass game filesList
+    if(!gameFiles.isEmpty()){
+      model.addAttribute("gameFiles",gameFiles);
+    }
     return "view-game";
   }
 

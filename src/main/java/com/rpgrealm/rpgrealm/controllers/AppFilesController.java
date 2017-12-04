@@ -37,7 +37,7 @@ public class AppFilesController {
 
   @PostMapping("/upload-file")
   public String createFile(@JacksonInject String response, @JacksonInject Long gameId, @JacksonInject String filename, @JacksonInject String mimetype) {
-
+    User principalUser=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     System.out.println(response);
     System.out.println(gameId);
     System.out.println(filename);
@@ -47,6 +47,7 @@ public class AppFilesController {
     appfile.setFile_url(response);
     appfile.setFile_name(filename);
     appfile.setMime_type(mimetype);
+    appfile.setUser(principalUser);
     fileRep.save(appfile);
     return "/home";
   }
