@@ -439,3 +439,36 @@ img {
     display: inline-block;
     padding-left: 20px;
 }
+
+.game-three-column:after {
+    display: flex;
+    border-radius: 10px;
+    /*box-shadow: 0 0 5px rgba(81, 203, 238, 1);*/
+    border: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.game-column-left {
+    float: left;
+    width: 10%;
+}
+
+.game-column-middle {
+    display: inline-block;
+    width: 80%;
+}
+
+.game-column-right {
+    float: right;
+    width: 10%;
+}
+
+.game-dungeon-map img{
+    border-radius: 5%;
+    border: 0px solid black;
+    box-shadow: 0 0 10px rgba(81, 203, 238, 1);
+    width: 500px;
+    height: 500px;
+}
