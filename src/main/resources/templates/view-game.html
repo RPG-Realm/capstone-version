@@ -16,7 +16,12 @@
                 <p th:text="${game.name}"></p>
                 <p th:text="${game.description}"></p>
                 <a th:href="'/edit-game/'+${game.id}">Edit Link</a>
-                <a th:href="'/join-game/'+${game.id}">Join the game!</a>
+                <select name="character-select" id="character-select" class="select">
+                    <div th:each="character: ${userCharacterList}">
+                        <option th:text="${character.name} +' '+ ${character.type}" th:value="${character}"></option>
+                    </div>
+                </select>
+                <button type="button" id="join-game">Join game</button>
             </div>
             <div>
                 <button type="button" label="Upload a PDF or Image:" class="glow_button" id="upload">Upload
@@ -24,7 +29,7 @@
                 </button>
             </div>
             <div id="upload-status"></div>
-            <div th:each="character: ${characterList} "><!--Active characters-->
+            <div id="character-list" th:each="character: ${characterList} "><!--Active characters-->
                 <h4 th:text="${character.name}"></h4>
                 <h6 th:text="${hashUser.get(character)}"></h6>
                 <img th:if="${hashPic.containsKey(character)}" th:src="${hashPic.get(character)}"/>
@@ -93,8 +98,32 @@
         openPicker();
     });
 
+    function joinGame(){
+        $.ajax({
+            type: "POST",
+            url: "/join-game",
+            data: {
+                characterId: /*[[${character.id}]]*/,
+                gameId: /*[[${game.id}]]*/,
+                _csrf: /*[[${_csrf.token}]]*/
+            }
+        }).done(function () {
+            $('#join-game').html('');
+            $('#select-character').html('');
+            $('#character-list').append()
+
+
+        });
+    }
+    document.getElementById("join-game").addEventListener("click", function () {
+        joinGame();
+    });
 
 </script>
 
 </body>
 </html>
+
+<h4 th:text="${character.name}"></h4>
+<h6 th:text="${hashUser.get(character)}"></h6>
+<img th:if="${hashPic.containsKey(character)}" th:src="${hashPic.get(character)}"/>
