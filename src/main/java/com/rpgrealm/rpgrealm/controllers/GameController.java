@@ -86,12 +86,20 @@ public class GameController {
 
   @GetMapping("/edit-game/{id}")
   public String editGame(@PathVariable Long id, Model model) {
-    model.addAttribute("game", gameRep.findOne(id));
+    Game activeGame=gameRep.findOne(id);
+
+    model.addAttribute("game", activeGame);
+    if(activeGame.getBanner()!=null){
+      AppFile banner=activeGame.getBanner();
+      model.addAttribute("banner", banner);
+    }
     return "edit-game";
   }
   @PostMapping("edit-game/{id}")
   public String commitEditGame(@ModelAttribute Game game, RedirectAttributes redirectAttributes){
-
+    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User dbUser=usrRep.findOne(user.getId());
+    game.setGame_master(dbUser);
     gameRep.save(game);
     redirectAttributes.addAttribute("id",game.getId());
     return "redirect:/view-game/{id}";
