@@ -53,25 +53,31 @@ public class GameController {
 
   @GetMapping("/view-game/{id}")
   public String viewGame(@PathVariable Long id, Model model) {
-
+//    Return the active game
     Game activeGame=gameRep.findOne(id);
+//    Get a list of the characters tagged to this game
     List<Character> characterList=activeGame.getCharacters();
+//    Make a hash map of the characters and their owners username
     HashMap<Character, String> gamePair =new HashMap<>();
     for(Character character: characterList){
       gamePair.put(character, character.getUser().getUsername());
     }
+//    make a hash map for the characters and their picture urls
     HashMap<Character, String> gameCharPics=new HashMap<>();
     for(Character character:characterList){
       if(character.getImage()!=null){
         gameCharPics.put(character, character.getImage().getFile_url());
       }
     }
-    System.out.println(gamePair);
+    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User dbUser=usrRep.findOne(user.getId());
 
     model.addAttribute("game",activeGame);
     model.addAttribute("characterList",characterList);
     model.addAttribute("hashUser", gamePair);
     model.addAttribute("hashPic", gameCharPics);
+    model.addAttribute("owner",activeGame.getGame_master());
+    model.addAttribute("user",dbUser);
     return "view-game";
   }
 

@@ -10,13 +10,17 @@
         <div class="title-column-right"><img src="/images/main/small-scroll.jpg"/></div>
     </div>
     <div class="inner-container">
-        <div class="game-container">
 
+        <div class="game-container">
+            <div th:object="${owner}">
+                <h1 th:text="'Owner is '+${owner.username} "></h1>
+            </div>
             <div th:object="${game}">
                 <p th:text="${game.name}"></p>
                 <p th:text="${game.description}"></p>
                 <a th:href="'/edit-game/'+${game.id}">Edit Link</a>
-                <a th:href="'/join-game/'+${game.id}">Join the game!</a>
+                <a th:if="${owner}!=${user}" th:href="'/join-game/'+${game.id}">Join the game!</a>
+
             </div>
             <div>
                 <button type="button" label="Upload a PDF or Image:" class="glow_button" id="upload">Upload
