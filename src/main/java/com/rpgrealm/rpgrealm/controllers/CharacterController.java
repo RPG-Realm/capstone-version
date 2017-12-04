@@ -73,13 +73,18 @@ public class CharacterController {
 
   @GetMapping("/edit-character/{id}")
   public String showEditCharacterForm(Model model, @PathVariable Long id) {
-    model.addAttribute("character", charRep.findOne(id));
+
+        model.addAttribute("character", charRep.findOne(id));
+
     return "edit-character";
   }
 
   @PostMapping("/edit-character/{id}")
   public String editCharacter(@ModelAttribute Character character, RedirectAttributes redirectAttributes) {
-    charRep.save(character);
+      User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      User dbUser=usrRep.findOne(user.getId());
+      character.setUser(dbUser);
+      charRep.save(character);
     redirectAttributes.addAttribute("id",character.getId());
     return "redirect:/view-character/{id}";
   }
