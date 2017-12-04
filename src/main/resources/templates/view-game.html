@@ -10,20 +10,43 @@
         <div class="title-column-right"><img src="/images/main/small-scroll.jpg"/></div>
     </div>
     <div class="inner-container">
-        <div class="game-container">
 
+        <div class="game-container">
+            <div class="banner-photo-container">
+                <img id="banner-photo" class="user-photo" th:if="${bannerPhoto !=null}"
+                     th:object="${bannerPhoto}"
+                     th:src="*{file_url}" th:alt="*{file_name}"/>
+                <img id="banner-photo" class="user-photo" th:if="${bannerPhoto == null}" th:alt="'No Photo'"
+                     src="/images/main/large-shield.jpg"/>
+            </div>
+            <div th:object="${owner}">
+                <h1 th:text="'Owner is '+${owner.username} "></h1>
+            </div>
+            <div th:object="${ownerPic}">
+                <img th:src="${ownerPic.file_url}" th:alt="${ownerPic.file_name}"/>
+            </div>
+            <div th:if="${gameFiles != null}" th:each="file: ${gameFiles}">
+                <a th:href="${file.file_url}" th:text="${file.file_name}"></a>
+            </div>
             <div th:object="${game}">
                 <p th:text="${game.name}"></p>
                 <p th:text="${game.description}"></p>
-                <a th:href="'/edit-game/'+${game.id}">Edit Link</a>
-                <a th:href="'/join-game/'+${game.id}">Join the game!</a>
+                <a th:if="${owner}==${user}" th:href="'/edit-game/'+${game.id}">Edit Link</a>
+                <a th:if="(${owner}!=${user}) and ${myList==null}" th:href="'/join-game/'+${game.id}">Join the game!</a>
+
             </div>
             <div>
-                <button type="button" label="Upload a PDF or Image:" class="glow_button" id="upload">Upload
+                <button th:if="${owner}==${user}" type="button" label="Upload a PDF or Image:" class="glow_button" id="upload">Upload
                     File
                 </button>
             </div>
             <div id="upload-status"></div>
+            <div>
+                <button th:if="${owner}==${user}" type="button" label="Upload a PDF or Image:" class="glow_button" id="banner-select">Upload
+                    Banner
+                </button>
+            </div>
+            <div id="banner-status"></div>
             <div th:each="character: ${characterList} "><!--Active characters-->
                 <h4 th:text="${character.name}"></h4>
                 <h6 th:text="${hashUser.get(character)}"></h6>
@@ -48,7 +71,7 @@
     function openPicker() {
         fsClient.pick({
             fromSources: ["local_file_system", "url", "imagesearch", "googledrive"],
-            accept: ["image/*"],
+            accept: ["image/*",".pdf"],
             transformations: {
                 crop: {
                     force: true,
@@ -77,14 +100,9 @@
                     _csrf: /*[[${_csrf.token}]]*/,
                     mimetype: mimetype,
                     filename: filename
-                },
-
-                success: "File upload completed successfully",
-                dataType: "json"
-
-
+                }
             }).done(function () {
-                request.getElementById("upload-status").innerHTML = "File Uploaded Successfully";
+                document.getElementById("upload-status").innerHTML = "File Uploaded Successfully";
             });
         });
     }
@@ -93,6 +111,51 @@
         openPicker();
     });
 
+
+    function bannerPicker() {
+        fsClient.pick({
+            fromSources: ["local_file_system", "url", "imagesearch", "googledrive"],
+            accept: ["image/*"],
+            transformations: {
+                crop: {
+                    force: true,
+                    aspectRatio: 1
+                }
+            },
+            maxSize: 2000000
+        }).then(function (response) {
+
+// console log the output
+            console.log(response);
+            console.log(response.filesUploaded[0].url);
+            console.log("here is the game ID: " + /*[[${game.id}]]*/);
+            console.log(/*[[${_csrf.token}]]*/);
+            console.log(/*[[${_csrf.parameterName}]]*/);
+            var url = response.filesUploaded[0].url;
+            var mimetype = response.filesUploaded[0].mimetype;
+            var filename = response.filesUploaded[0].filename;
+// Send ajax to file-upload controller
+            $.ajax({
+                type: "POST",
+                url: "/upload-banner",
+                data: {
+                    response: url,
+                    gameId: /*[[${game.id}]]*/,
+                    _csrf: /*[[${_csrf.token}]]*/,
+                    mimetype: mimetype,
+                    filename: filename
+                }
+            }).done(function () {
+                document.getElementById("banner-status").innerHTML = "File Uploaded Successfully";
+                $("#banner-photo").fadeOut(100).delay(400);
+                $("#banner-photo").attr("src", url).delay(400).fadeIn(500);
+            });
+        });
+    }
+
+    document.getElementById("banner-select").addEventListener("click", function () {
+        bannerPicker();
+    });
 
 </script>
 

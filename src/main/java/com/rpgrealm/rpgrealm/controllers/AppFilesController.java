@@ -3,6 +3,7 @@ package com.rpgrealm.rpgrealm.controllers;
 import com.fasterxml.jackson.annotation.JacksonInject;
 import com.rpgrealm.rpgrealm.models.AppFile;
 import com.rpgrealm.rpgrealm.models.Character;
+import com.rpgrealm.rpgrealm.models.Game;
 import com.rpgrealm.rpgrealm.models.User;
 import com.rpgrealm.rpgrealm.repositories.AppFileRepository;
 import com.rpgrealm.rpgrealm.repositories.CharacterRepository;
@@ -37,7 +38,7 @@ public class AppFilesController {
 
   @PostMapping("/upload-file")
   public String createFile(@JacksonInject String response, @JacksonInject Long gameId, @JacksonInject String filename, @JacksonInject String mimetype) {
-
+    User principalUser=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     System.out.println(response);
     System.out.println(gameId);
     System.out.println(filename);
@@ -47,7 +48,29 @@ public class AppFilesController {
     appfile.setFile_url(response);
     appfile.setFile_name(filename);
     appfile.setMime_type(mimetype);
+    appfile.setUser(principalUser);
     fileRep.save(appfile);
+    return "/home";
+  }
+  @PostMapping("/upload-banner")
+  public String uploadBanner(@JacksonInject String response, @JacksonInject Long gameId, @JacksonInject String filename, @JacksonInject String mimetype) {
+    User principalUser=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User dbUser=usrRep.findOne(principalUser.getId());
+    Game activeGame =gameRep.findOne(gameId);
+
+    System.out.println(response);
+    System.out.println(gameId);
+    System.out.println(filename);
+
+    AppFile appFile = new AppFile();
+    appFile.setGame(activeGame);
+    appFile.setFile_url(response);
+    appFile.setFile_name(filename);
+    appFile.setMime_type(mimetype);
+    appFile.setUser(dbUser);
+    activeGame.setBanner(appFile);
+    fileRep.save(appFile);
+    gameRep.save(activeGame);
     return "/home";
   }
 

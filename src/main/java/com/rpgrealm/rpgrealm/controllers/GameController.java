@@ -3,6 +3,7 @@
  */
 package com.rpgrealm.rpgrealm.controllers;
 
+import com.fasterxml.jackson.annotation.JacksonInject;
 import com.rpgrealm.rpgrealm.models.AppFile;
 import com.rpgrealm.rpgrealm.models.Character;
 import com.rpgrealm.rpgrealm.models.Game;
@@ -52,25 +53,57 @@ public class GameController {
 
   @GetMapping("/view-game/{id}")
   public String viewGame(@PathVariable Long id, Model model) {
-
+//    Return the active game
     Game activeGame=gameRep.findOne(id);
+//    Get a list of the characters tagged to this game
     List<Character> characterList=activeGame.getCharacters();
+//    Make a hash map of the characters and their owners username
     HashMap<Character, String> gamePair =new HashMap<>();
     for(Character character: characterList){
       gamePair.put(character, character.getUser().getUsername());
     }
+//    make a hash map for the characters and their picture urls
     HashMap<Character, String> gameCharPics=new HashMap<>();
     for(Character character:characterList){
       if(character.getImage()!=null){
         gameCharPics.put(character, character.getImage().getFile_url());
       }
     }
-    System.out.println(gamePair);
+//    Check who user is to compare versus game owner
+    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User dbUser=usrRep.findOne(user.getId());
+//    Get Owners photo
+    AppFile ownerPhoto=activeGame.getGame_master().getProfile_photo();
+//    Get a character list of the session user in the game
+    List<Character> userList=charRep.findByUserAndGame(dbUser.getId(),activeGame.getId());
+//    Get all the files tied to the game
+    List<AppFile> gameFiles=activeGame.getGame_files();
+    System.out.println(gameFiles.toString());
+
 
     model.addAttribute("game",activeGame);
     model.addAttribute("characterList",characterList);
     model.addAttribute("hashUser", gamePair);
     model.addAttribute("hashPic", gameCharPics);
+//    gets game owner
+    model.addAttribute("owner",activeGame.getGame_master());
+    model.addAttribute("user",dbUser);
+//    Pass in list of a users characters to validate join.
+    if(!userList.isEmpty()){
+      model.addAttribute("myList",userList);
+    }
+//    Pass game filesList
+    if(!gameFiles.isEmpty()){
+      model.addAttribute("gameFiles",gameFiles);
+    }
+//    Passes in game owners photo
+    model.addAttribute("ownerPic", ownerPhoto);
+//    Pass in game banner
+    if(activeGame.getBanner()!=null){
+      //    Get the banner file
+      AppFile bannerPhoto=activeGame.getBanner();
+      model.addAttribute("bannerPhoto",bannerPhoto);
+    }
     return "view-game";
   }
 
@@ -108,7 +141,7 @@ public class GameController {
 //  drop the get request in the url, just use the post from ajax. Use @RequestAttribute to get the names from ajax
   
   @PostMapping("/join-game")
-  public String commitJoinGame(@RequestParam Long gameId, @RequestParam Long characterId, RedirectAttributes redirectAttributes){
+  public String commitJoinGame(@JacksonInject Long gameId, @JacksonInject Long characterId, RedirectAttributes redirectAttributes){
     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Game gameJoined = gameRep.findOne(gameId);
     List<Character> gamesCharacters = gameJoined.getCharacters();

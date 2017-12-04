@@ -25,4 +25,9 @@ public interface CharacterRepository extends CrudRepository<Character, Long> {
 
     // where name =?1 and description = ?2 or typ = ?3
     List<Character> findByNameAndDescriptionOrType(String name, String description, String type);
+    @Query( nativeQuery = true,
+            value=
+                    "SELECT * FROM characters c JOIN characters_in_games cg on cg.character_id = c.id WHERE user_id =?1 AND game_id =?2"
+    )
+    List<Character> findByUserAndGame(Long user_id, Long game_id);
 }

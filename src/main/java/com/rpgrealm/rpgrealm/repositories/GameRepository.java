@@ -16,4 +16,6 @@ public interface GameRepository extends CrudRepository<Game, Long> {
             value=
                     "SELECT * FROM games WHERE owner_id =?1")
     List<Game> findByUserId(Long user_id);
+
+
 }
