@@ -14,11 +14,13 @@
                 <!-- Content of the page -->
                 <div th:object="${user}">
                     <div class="user-photo-container">
-                    <img id="user-photo" class="user-photo" th:if="${profilePhoto !=null}" th:object="${profilePhoto}"
-                         th:src="*{file_url}" th:alt="*{file_name}"/>
-                    <img id="user-photo" class="user-photo" th:if="${profilePhoto == null}" th:alt="'No Photo'"
-                         src="/images/main/large-shield.jpg"/>
-                    </div><br/>
+                        <img id="user-photo" class="user-photo" th:if="${profilePhoto !=null}"
+                             th:object="${profilePhoto}"
+                             th:src="*{file_url}" th:alt="*{file_name}"/>
+                        <img id="user-photo" class="user-photo" th:if="${profilePhoto == null}" th:alt="'No Photo'"
+                             src="/images/main/large-shield.jpg"/>
+                    </div>
+                    <br/>
                     <span id="upload-status"></span>
                     <h3 th:text="'username: '+*{username}"></h3>
                     <h3 th:text="*{first_name}+' '+*{last_name}"></h3>
@@ -26,9 +28,10 @@
                     <h3 th:text="*{city}+', '+*{state}+' '+*{zip_code}"></h3>
                     <h3 th:text="'Phone: '+*{phone}"></h3>
                 </div>
-            </div>
-            <br/>
-            <div class="form_container">
+
+                <div class="formdiv"></div>
+                <div class="formdiv"></div>
+
                 <div class="glow-button">
                     <a th:href="'/user-profile/edit/'+${user.id}">Edit User Profile</a>
                 </div>
@@ -91,7 +94,7 @@
                 $("#upload-status").html("File Uploaded Successfully");
                 console.log("File was uploaded");
                 $("#user-photo").fadeOut(100).delay(400);
-                $("#user-photo").attr("src",url).delay(400).fadeIn(500);
+                $("#user-photo").attr("src", url).delay(400).fadeIn(500);
             });
         });
 
@@ -99,7 +102,7 @@
 
     $("#user-photo").click(openPicker);
 
-    (function() {
+    (function () {
         $("#user-photo").mouseover(function () {
             $("#upload-status").html("&nbsp;&nbsp; Change Profile Image");
         });
