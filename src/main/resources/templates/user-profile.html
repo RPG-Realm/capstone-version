@@ -99,15 +99,15 @@
 
     $("#user-photo").click(openPicker);
 
-
-        $("#user-photo").hover(function () {
-            $(".upload-status").html("Change Your Image");
+    (function() {
+        $("#user-photo").mouseover(function () {
+            $("#upload-status").html("&nbsp;&nbsp; Change Profile Image");
         });
         $("#user-photo").mouseleave(function () {
-            $(".upload-status").html("");
+            $("#upload-status").html("");
 
-    });
-
+        });
+    })();
 </script>
 </body>
 </html>
