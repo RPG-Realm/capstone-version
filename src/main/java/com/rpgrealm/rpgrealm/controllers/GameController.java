@@ -61,7 +61,9 @@ public class GameController {
     }
     HashMap<Character, String> gameCharPics=new HashMap<>();
     for(Character character:characterList){
-      gameCharPics.put(character, character.getImage().getFile_url());
+      if(character.getImage()!=null){
+        gameCharPics.put(character, character.getImage().getFile_url());
+      }
     }
     System.out.println(gamePair);
 

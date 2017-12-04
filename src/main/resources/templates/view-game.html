@@ -27,7 +27,8 @@
             <div th:each="character: ${characterList} "><!--Active characters-->
                 <h4 th:text="${character.name}"></h4>
                 <h6 th:text="${hashUser.get(character)}"></h6>
-                <img th:src="${hashPic.get(character)}"/>
+                <img th:if="${hashPic.containsKey(character)}" th:src="${hashPic.get(character)}"/>
+                <img th:if="${!hashPic.containsKey(character)}" src="/images/main/small-sword.jpg"/>
             </div>
         </div>
     </div>
