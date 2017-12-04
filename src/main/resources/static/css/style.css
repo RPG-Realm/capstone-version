@@ -20,7 +20,7 @@ a:visited {
 a {
     color: white;
     text-decoration: none;
-    transition: all 15.0s ease 0s;
+    transition: all 1.5s ease 0s;
 }
 
 a:hover {
