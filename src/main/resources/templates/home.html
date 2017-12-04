@@ -9,7 +9,7 @@
         <div class="title-column-right"><img src="/images/main/treasure_chest.jpg"/></div>
     </div>
     <div class="inner-container">
-        <div class="home-container">
+        <div class="home-container" th:if="${user==null}">
 
             <div class="glow-button">
                 <a href="/login"><img src="/images/home/login.gif"/></a>
@@ -17,7 +17,16 @@
             <div class="glow-button">
                 <a href="/sign-up"><img src="/images/home/register.gif"/></a>
             </div>
+        </div>
+        <div class="home-container" th:if="${user!=null}">
 
+            <div class="glow-button">
+                <a href="/user-profile"><img src="/images/home/login.gif"/></a> <!-- Needs a Userprofile gif. -->
+            </div>
+            <div class="glow-button">
+                <a href="/search-games"><img src="/images/home/register.gif"/></a> <!-- Needs a games list gif. -->
+            </div>
+            <div>tesst to see if it works</div>
         </div>
     </div>
 </div>
