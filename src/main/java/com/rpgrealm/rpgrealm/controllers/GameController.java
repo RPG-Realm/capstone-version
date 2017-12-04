@@ -53,27 +53,33 @@ public class GameController {
   @GetMapping("/view-game/{id}")
   public String viewGame(@PathVariable Long id, Model model) {
 
-    Game activeGame=gameRep.findOne(id);
-    List<Character> characterList=activeGame.getCharacters();
-    HashMap<Character, String> gamePair =new HashMap<>();
-    for(Character character: characterList){
-      gamePair.put(character, character.getUser().getUsername());
-    }
-    HashMap<Character, String> gameCharPics=new HashMap<>();
-    for(Character character:characterList){
-      if(character.getImage()!=null){
-        gameCharPics.put(character, character.getImage().getFile_url());
-      }
-    }
-    System.out.println(gamePair);
+      User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      User dbUser =usrRep.findOne(user.getId());
 
-    model.addAttribute("game",activeGame);
-    model.addAttribute("characterList",characterList);
+      Game activeGame=gameRep.findOne(id);
+      List<Character> characterList=activeGame.getCharacters();
+      HashMap<Character, String> gamePair =new HashMap<>();
+      for(Character character: characterList){
+        gamePair.put(character, character.getUser().getUsername());
+      }
+      HashMap<Character, String> gameCharPics=new HashMap<>();
+      for(Character character:characterList){
+        if(character.getImage()!=null){
+          gameCharPics.put(character, character.getImage().getFile_url());
+        }
+      }
+      List<Character> userCharacterList=charRep.findByUserId(dbUser.getId());
+
+
+      model.addAttribute("game",activeGame);
+      model.addAttribute("characterList",characterList);
 //    Attaches characters with their owners username
-    model.addAttribute("hashUser", gamePair);
+      model.addAttribute("hashUser", gamePair);
 //    Attaches characters with their images
-    model.addAttribute("hashPic", gameCharPics);
-    return "view-game";
+      model.addAttribute("hashPic", gameCharPics);
+      model.addAttribute("userCharacterList", userCharacterList);
+      model.addAttribute("user", dbUser);
+      return "view-game";
   }
 
   @GetMapping("/view-game/all")
