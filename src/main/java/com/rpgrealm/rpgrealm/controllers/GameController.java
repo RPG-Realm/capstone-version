@@ -3,6 +3,7 @@
  */
 package com.rpgrealm.rpgrealm.controllers;
 
+import com.fasterxml.jackson.annotation.JacksonInject;
 import com.rpgrealm.rpgrealm.models.AppFile;
 import com.rpgrealm.rpgrealm.models.Character;
 import com.rpgrealm.rpgrealm.models.Game;
@@ -108,7 +109,7 @@ public class GameController {
 //  drop the get request in the url, just use the post from ajax. Use @RequestAttribute to get the names from ajax
   
   @PostMapping("/join-game")
-  public String commitJoinGame(@RequestParam Long gameId, @RequestParam Long characterId, RedirectAttributes redirectAttributes){
+  public String commitJoinGame(@JacksonInject Long gameId, @JacksonInject Long characterId, RedirectAttributes redirectAttributes){
     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Game gameJoined = gameRep.findOne(gameId);
     List<Character> gamesCharacters = gameJoined.getCharacters();

@@ -40,18 +40,13 @@
             function joinGame() {
                 $.ajax("/join-game", {
                     type: "POST",
-                    data: jQuery.param({
-//                gameId: ${game.id},
+                    data:{
                         gameId:/*[[${game.id}]]*/,
                         characterId: $('input[type=radio]:checked').val(),
                         _csrf: $("#csrf").val()
-                    })
-                }).done(console.log("AJAX sent succesful"));
-                /*.fail(function (error) {
-                            console.log(error);
-                        })*/
+                    }
+                });
             }
-
             document.getElementById('join-game').addEventListener('click', joinGame);
         </script>
     </div>
