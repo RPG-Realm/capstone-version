@@ -147,6 +147,8 @@
                 }
             }).done(function () {
                 document.getElementById("banner-status").innerHTML = "File Uploaded Successfully";
+                $("#banner-photo").fadeOut(100).delay(400);
+                $("#banner-photo").attr("src", url).delay(400).fadeIn(500);
             });
         });
     }
