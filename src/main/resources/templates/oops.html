@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/head :: main-header('Oops!')"></head>
+<body>
+<nav th:include="fragments/navbar :: mainNavbar"></nav>
+<div class="container-main">
+	<div class="title-container">
+		<div class="title-column-left">You Entered an Entropy Bubble...</div>
+		<div class="title-column-right"><img src="/images/main/treasure_chest.jpg"/></div>
+	</div>
+	<div class="inner-container">
+		<div class="oops-container">
+			<div class="form-container"><h3>You found the dwarves but you shouldn't be here in the tavern. Oops!</h3>
+			</div>
+	</div>
+	</div>
+</div>
+<footer th:include="fragments/footer :: footer"></footer>
+</body>
+</html>

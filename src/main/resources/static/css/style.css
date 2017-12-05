@@ -528,5 +528,18 @@ img {
     box-shadow: 0 0 50px rgba(218,165,32,1);
     border-radius: 15%;
     border: 3px solid black;
+}
 
+.oops-container {
+    align-content: center;
+    width: 100%;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    background-color: #333333;
+    background-image: url("/images/oops/drinking-dwarves.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding: 5%;
+    min-height: 570px;
 }
