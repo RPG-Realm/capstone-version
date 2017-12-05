@@ -15,7 +15,7 @@
 
                     <div class="user-photo-container">
                         <img id="user-photo" class="user-photo" th:if="${portrait !=null}"
-                             th:object="${profilePhoto}"
+                             th:object="${portrait}"
                              th:src="*{file_url}" th:alt="*{file_name}"/>
                         <img id="user-photo" class="user-photo" th:if="${portrait == null}" th:alt="'No Photo'"
                              src="/images/main/large-shield.jpg"/>
@@ -35,7 +35,7 @@
                             Character Sheet</a>
                     </div>
                     <div class="glow-button" th:if="${pdf !=null}">
-                        <a id="character-pdf" href="javascript: showPdf()">View Character Sheet</a>
+                        <a id="character-pdf"  th:object="${pdf}" th:href="*{file_url}">View Character Sheet</a>
                     </div>
                     <br/>
                     <span id="upload-status2">*Character Sheets can only be a .PDF</span>
