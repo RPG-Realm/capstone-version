@@ -525,7 +525,7 @@ img {
 
 .developer-image:hover {
     border-radius: 10%;
-    box-shadow: 0 0 30px rgba(81, 203, 238, 1);
+    box-shadow: 0 0 50px rgba(218,165,32,1);
     border-radius: 15%;
     border: 3px solid black;
 
