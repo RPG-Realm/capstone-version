@@ -39,4 +39,23 @@ public class HomeController {
             return "/about-us";
         }
     }
+
+    @GetMapping("/oops")
+    public String errorHandlerPage(Model model) {
+        if (checked()){
+          User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+          model.addAttribute("user", user);
+          return "/oops";
+        }else{return "/oops";}
+
+    }
+
+    private boolean checked(){
+      try{
+        User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return true;
+      }catch (Exception e){
+        return false;
+      }
+    }
 }
