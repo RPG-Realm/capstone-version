@@ -6,7 +6,7 @@
 <!-- Content of the page -->
 <div class="container-main" sec:authorize="isAuthenticated()">
 	<div class="title-container">
-		<div class="title-column-left" th:text="${user.first_name+'''s User Profile'}"></div>
+		<div class="title-column-left" th:text="${user.username+'''s User Profile'}"></div>
 		<div class="title-column-right"><img src="/images/search/treasure_chest.jpg"/></div>
 	</div>
 	<div class="inner-container">
