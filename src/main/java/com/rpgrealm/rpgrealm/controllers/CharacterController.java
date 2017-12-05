@@ -33,6 +33,8 @@ public class CharacterController {
 
   @GetMapping("/create-character")
   public String showCharacterForm(Model model) {
+      User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      model.addAttribute("user",user);
     model.addAttribute("character", new Character());
     return "create-character";
   }
@@ -64,6 +66,8 @@ public class CharacterController {
       Character character =charRep.findOne(id);
       AppFile pdf=character.getPdf();
       AppFile portrait=character.getImage();
+      User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      model.addAttribute("user",user);
 
       model.addAttribute("character", character);
       model.addAttribute("pdf", pdf);
@@ -74,14 +78,19 @@ public class CharacterController {
   @GetMapping("/edit-character/{id}")
   public String showEditCharacterForm(Model model, @PathVariable Long id) {
     model.addAttribute("character", charRep.findOne(id));
+      User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      model.addAttribute("user",user);
     return "edit-character";
   }
 
   @PostMapping("/edit-character/{id}")
   public String editCharacter(@ModelAttribute Character character, RedirectAttributes redirectAttributes) {
-    charRep.save(character);
-    redirectAttributes.addAttribute("id",character.getId());
-    return "redirect:/view-character/{id}";
+        Character dbCharacter=charRep.findOne(character.getId());
+        User charcterOwner=dbCharacter.getUser();
+        character.setUser(charcterOwner);
+        charRep.save(character);
+        redirectAttributes.addAttribute("id",character.getId());
+        return "redirect:/view-character/{id}";
   }
 
 }

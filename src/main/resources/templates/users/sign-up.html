@@ -10,7 +10,7 @@
 <div class="inner-container">
     <div class="user-container">
         <div class="form_container">
-            <form th:action="@{/sign-up}" method="post" th:object="${user}">
+            <form th:action="@{/sign-up}" method="post" th:object="${newUser}">
                 <div class="row">
                     <div class="column">Username:</div>
                     <div class="column"><input type="text" class="form_fields" th:field="*{username}"/></div>

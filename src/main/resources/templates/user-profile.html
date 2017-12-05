@@ -29,7 +29,7 @@
                     <h3 th:if="*{first_name!=null}" th:text="'Name: '+*{first_name}+' '+*{last_name}"></h3>
 
                     <h3 th:if="*{address_1==null}">Address</h3>
-                    <h3 th:if="*{address_1!=null}" th:text="'Address '+*{address_1}"></h3>
+                    <h3 th:if="*{address_1!=null}" th:text="'Address: '+*{address_1}"></h3>
 
                     <!--If you put in a city, put in state and zipcode-->
                     <h3 th:if="*{city==null}">City, State Zip Code</h3>

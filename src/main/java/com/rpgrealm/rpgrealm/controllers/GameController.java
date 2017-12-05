@@ -38,6 +38,8 @@ public class GameController {
 
   @GetMapping("/create-game")
   public String createGame(Model model) {
+    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    model.addAttribute("user",user);
     model.addAttribute("game", new Game());
     return "create-game";
   }
@@ -69,13 +71,25 @@ public class GameController {
         gameCharPics.put(character, character.getImage().getFile_url());
       }
     }
-//    Check who user is to compare versus game owner
-    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    User dbUser=usrRep.findOne(user.getId());
-//    Get Owners photo
-    AppFile ownerPhoto=activeGame.getGame_master().getProfile_photo();
+
+
+//    Check who user is to compare versus game owner THIS IS BREAKING IT CURRENTLY
+    if(checked()){
+      User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      User dbUser=usrRep.findOne(user.getId());
 //    Get a character list of the session user in the game
-    List<Character> userList=charRep.findByUserAndGame(dbUser.getId(),activeGame.getId());
+      List<Character> userList=charRep.findByUserAndGame(dbUser.getId(),activeGame.getId());
+      model.addAttribute("user",dbUser);
+      //    Pass in list of a users characters to validate join.
+      if(!userList.isEmpty()){
+        model.addAttribute("myList",userList);
+      }
+    }
+
+
+
+    //    Get Owners photo
+    AppFile ownerPhoto=activeGame.getGame_master().getProfile_photo();
 //    Get all the files tied to the game
     List<AppFile> gameFiles=activeGame.getGame_files();
     System.out.println(gameFiles.toString());
@@ -87,11 +101,8 @@ public class GameController {
     model.addAttribute("hashPic", gameCharPics);
 //    gets game owner
     model.addAttribute("owner",activeGame.getGame_master());
-    model.addAttribute("user",dbUser);
-//    Pass in list of a users characters to validate join.
-    if(!userList.isEmpty()){
-      model.addAttribute("myList",userList);
-    }
+
+
 //    Pass game filesList
     if(!gameFiles.isEmpty()){
       model.addAttribute("gameFiles",gameFiles);
@@ -119,12 +130,18 @@ public class GameController {
 
   @GetMapping("/edit-game/{id}")
   public String editGame(@PathVariable Long id, Model model) {
+    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    model.addAttribute("user",user);
     model.addAttribute("game", gameRep.findOne(id));
     return "edit-game";
   }
   @PostMapping("edit-game/{id}")
   public String commitEditGame(@ModelAttribute Game game, RedirectAttributes redirectAttributes){
-
+    Game activeGame=gameRep.findOne(game.getId());
+    AppFile banner=activeGame.getBanner();
+    User owner=activeGame.getGame_master();
+    game.setGame_master(owner);
+    game.setBanner(banner);
     gameRep.save(game);
     redirectAttributes.addAttribute("id",game.getId());
     return "redirect:/view-game/{id}";
@@ -133,8 +150,10 @@ public class GameController {
   @GetMapping("/join-game/{id}")
   public String joinGameForm(@PathVariable Long id, Model model){
     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    model.addAttribute("user",user);
     model.addAttribute("game", gameRep.findOne(id));
     model.addAttribute("characterList", charRep.findByUserId(user.getId()));
+
     return "select-character";
   }
 
@@ -150,6 +169,15 @@ public class GameController {
     gameRep.save(gameJoined);
     redirectAttributes.addAttribute("id",gameId);
     return "redirect:/view-game/{id}";
+  }
+
+  private boolean checked(){
+    try{
+      User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      return true;
+    }catch(Exception e){
+      return false;
+    }
   }
 
 }
