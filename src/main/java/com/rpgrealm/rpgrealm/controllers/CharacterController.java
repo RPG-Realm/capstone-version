@@ -79,9 +79,12 @@ public class CharacterController {
 
   @PostMapping("/edit-character/{id}")
   public String editCharacter(@ModelAttribute Character character, RedirectAttributes redirectAttributes) {
-    charRep.save(character);
-    redirectAttributes.addAttribute("id",character.getId());
-    return "redirect:/view-character/{id}";
+        Character dbCharacter=charRep.findOne(character.getId());
+        User charcterOwner=dbCharacter.getUser();
+        character.setUser(charcterOwner);
+        charRep.save(character);
+        redirectAttributes.addAttribute("id",character.getId());
+        return "redirect:/view-character/{id}";
   }
 
 }
