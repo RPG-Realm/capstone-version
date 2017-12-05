@@ -10,30 +10,38 @@
     </div>
     <div class="inner-container">
         <div class="game-container" sec:authorize="isAuthenticated()">
-        <div th:object="${character}">
-            <h3 th:text="*{name}"></h3>
-            <h4 th:text="*{type}"></h4>
-            <div class="character-photo-container">
-                <img id="character-photo" class="character-photo" th:if="${portrait !=null}" th:object="${portrait}"
-                     th:src="*{file_url}" th:alt="*{file_name}"/>
-                <img id="character-photo" class="character-photo" th:if="${portrait == null}" th:alt="'No Photo'"
-                     src="/images/main/small-shield.jpg"/>
-            </div>
-            <div class="character-pdf-container">
-                <a id="character-pdf" th:if="${pdf !=null}" th:object="${pdf}" th:href="*{file_url}" >Character sheet</a>
-                <a id="character-pdf" th:if="${pdf ==null}"  href="#" >Upload a character sheet to view it</a>
-            </div>
+            <div class="form-container">
+                <div th:object="${character}">
 
-            <p th:text="*{description}"></p>
-            <a th:href="'/edit-character/'+*{id}">Edit Character</a>
+                    <div class="user-photo-container">
+                        <img id="user-photo" class="user-photo" th:if="${portrait !=null}"
+                             th:object="${portrait}"
+                             th:src="*{file_url}" th:alt="*{file_name}"/>
+                        <img id="user-photo" class="user-photo" th:if="${portrait == null}" th:alt="'No Photo'"
+                             src="/images/main/large-shield.jpg"/>
+                    </div>
+                    <br/>
+                    <span id="upload-status"></span>
+                    <h2 th:text="*{name}"></h2>
+                    <h4 th:text="'Type: '+*{type}"></h4>
+                    <p th:text="'Description: '+*{description}"></p>
+
+                    <div class="formdiv"></div>
+                    <div class="glow-button">
+                        <a th:href="'/edit-character/'+*{id}">Edit Character</a>
+                    </div>
+                    <div class="glow-button" th:if="${pdf ==null}">
+                        <a id="character-pdf" href="javascript: openPicker()">Upload a
+                            Character Sheet</a>
+                    </div>
+                    <div class="glow-button" th:if="${pdf !=null}">
+                        <a id="character-pdf"  th:object="${pdf}" th:href="*{file_url}">View Character Sheet</a>
+                    </div>
+                    <br/>
+                    <span id="upload-status2">*Character Sheets can only be a .PDF</span>
+                </div>
+            </div>
         </div>
-    </div>
-        <div>
-            <button type="button" label="Upload a PDF or Image:" class="glow_button" id="upload">Upload
-                File
-            </button>
-        </div>
-        <div id="upload-status"></div>
     </div>
 </div>
 <input
@@ -49,7 +57,7 @@
     function openPicker() {
         fsClient.pick({
             fromSources: ["local_file_system", "url", "imagesearch", "googledrive"],
-            accept: ["image/*",".pdf"],
+            accept: [".pdf"],
             transformations: {
                 crop: {
                     force: true,
@@ -75,17 +83,17 @@
                 data: {
                     response: url,
                     characterId: /*[[${character.id}]]*/,
-                    _csrf  : /*[[${_csrf.token}]]*/,
-                    mimetype : mimetype,
+                    _csrf: /*[[${_csrf.token}]]*/,
+                    mimetype: mimetype,
                     filename: filename
                 }
             }).done(function () {
-                $("#upload-status").html("File Uploaded Successfully");
+                $("#upload-status2").html("File Uploaded Successfully");
                 console.log("File was uploaded");
-                if(mimetype=="image/jpeg") {
+                if (mimetype == "image/jpeg") {
                     $("#character-photo").fadeOut(400);
                     $("#character-photo").attr("src", url).delay(3000).fadeIn(3000);
-                }else if(mimetype=="application/pdf") {
+                } else if (mimetype == "application/pdf") {
                     $("#character-pdf").attr("href", url).html("Character Sheet");
 
                 }
@@ -94,7 +102,69 @@
 
     }
 
-    $("#upload").click(openPicker);
+
+    function openPicker2() {
+        fsClient.pick({
+            fromSources: ["local_file_system", "url", "imagesearch", "googledrive"],
+            accept: ["image/*"],
+            transformations: {
+                crop: {
+                    force: true,
+                    aspectRatio: 1
+                }
+            },
+            maxSize: 2000000
+        }).then(function (response) {
+
+// console log the output
+            console.log(response);
+            console.log(response.filesUploaded[0].url);
+
+            console.log(/*[[${_csrf.token}]]*/);
+            console.log(/*[[${_csrf.parameterName}]]*/);
+            console.log(/*[[${character.id}]]*/);
+            var url = response.filesUploaded[0].url;
+            var mimetype = response.filesUploaded[0].mimetype;
+            var filename = response.filesUploaded[0].filename;
+// Send ajax to file-upload controller
+            $.ajax({
+                type: "POST",
+                url: "/upload-file/character-files",
+                data: {
+                    response: url,
+                    characterId: /*[[${character.id}]]*/,
+                    _csrf: /*[[${_csrf.token}]]*/,
+                    mimetype: mimetype,
+                    filename: filename
+                }
+            }).done(function () {
+                $("#upload-status").html("File Uploaded Successfully");
+                console.log("File was uploaded");
+                if (mimetype == "image/jpeg") {
+                    $("#user-photo").fadeOut(400);
+                    $("#user-photo").attr("src", url).delay(3000).fadeIn(3000);
+                } else if (mimetype == "application/pdf") {
+                    $("#character-pdf").attr("href", url).html("Character Sheet");
+
+                }
+            });
+        });
+
+    }
+
+
+    $("#user-photo").click(openPicker2);
+
+    (function () {
+        $("#user-photo").mouseover(function () {
+            $("#upload-status").html("&nbsp;&nbsp; Change Profile Image");
+        });
+        $("#user-photo").mouseleave(function () {
+            $("#upload-status").html("");
+
+        });
+    })();
+
 
 </script>
 </body>
