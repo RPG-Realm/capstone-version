@@ -71,13 +71,25 @@ public class GameController {
         gameCharPics.put(character, character.getImage().getFile_url());
       }
     }
-//    Check who user is to compare versus game owner
-    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    User dbUser=usrRep.findOne(user.getId());
-//    Get Owners photo
-    AppFile ownerPhoto=activeGame.getGame_master().getProfile_photo();
+
+
+//    Check who user is to compare versus game owner THIS IS BREAKING IT CURRENTLY
+    if((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()!=null){
+      User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      User dbUser=usrRep.findOne(user.getId());
 //    Get a character list of the session user in the game
-    List<Character> userList=charRep.findByUserAndGame(dbUser.getId(),activeGame.getId());
+      List<Character> userList=charRep.findByUserAndGame(dbUser.getId(),activeGame.getId());
+      model.addAttribute("user",dbUser);
+      //    Pass in list of a users characters to validate join.
+      if(!userList.isEmpty()){
+        model.addAttribute("myList",userList);
+      }
+    }
+
+
+
+    //    Get Owners photo
+    AppFile ownerPhoto=activeGame.getGame_master().getProfile_photo();
 //    Get all the files tied to the game
     List<AppFile> gameFiles=activeGame.getGame_files();
     System.out.println(gameFiles.toString());
@@ -89,11 +101,8 @@ public class GameController {
     model.addAttribute("hashPic", gameCharPics);
 //    gets game owner
     model.addAttribute("owner",activeGame.getGame_master());
-    model.addAttribute("user",dbUser);
-//    Pass in list of a users characters to validate join.
-    if(!userList.isEmpty()){
-      model.addAttribute("myList",userList);
-    }
+
+
 //    Pass game filesList
     if(!gameFiles.isEmpty()){
       model.addAttribute("gameFiles",gameFiles);
