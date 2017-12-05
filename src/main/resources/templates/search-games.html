@@ -11,6 +11,7 @@
     <div class="inner-container">
         <div class="game-container">
             <!-- Content of the page -->
+
                 <div class="search-list-container" th:each="game : ${gameList}">
                     <div class="column-left"><a th:href="'/view-game/'+${game.id}" th:text="${game.name}"></a></div>
                     <div class="column-middle"><a th:href="'/view-game/'+${game.id}" th:text="${game.description}"></a></div>
