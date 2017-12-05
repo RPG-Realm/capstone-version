@@ -121,6 +121,8 @@ public class GameController {
 
   @GetMapping("/edit-game/{id}")
   public String editGame(@PathVariable Long id, Model model) {
+    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    model.addAttribute("user",user);
     model.addAttribute("game", gameRep.findOne(id));
     return "edit-game";
   }
@@ -139,8 +141,10 @@ public class GameController {
   @GetMapping("/join-game/{id}")
   public String joinGameForm(@PathVariable Long id, Model model){
     User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    model.addAttribute("user",user);
     model.addAttribute("game", gameRep.findOne(id));
     model.addAttribute("characterList", charRep.findByUserId(user.getId()));
+
     return "select-character";
   }
 

@@ -66,6 +66,8 @@ public class CharacterController {
       Character character =charRep.findOne(id);
       AppFile pdf=character.getPdf();
       AppFile portrait=character.getImage();
+      User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      model.addAttribute("user",user);
 
       model.addAttribute("character", character);
       model.addAttribute("pdf", pdf);
@@ -76,6 +78,8 @@ public class CharacterController {
   @GetMapping("/edit-character/{id}")
   public String showEditCharacterForm(Model model, @PathVariable Long id) {
     model.addAttribute("character", charRep.findOne(id));
+      User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      model.addAttribute("user",user);
     return "edit-character";
   }
 
