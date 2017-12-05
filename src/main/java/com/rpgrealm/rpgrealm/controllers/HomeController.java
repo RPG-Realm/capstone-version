@@ -27,8 +27,16 @@ public class HomeController {
         }catch (Exception e){
             return "home";
         }
-
-
-
+    }
+    @GetMapping("/about-us")
+    public String aboutUs(Model model) {
+        try{
+            User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User dbUser=usrRep.findOne(user.getId());
+            model.addAttribute("user",dbUser);
+            return "/about-us";
+        }catch (Exception e){
+            return "/about-us";
+        }
     }
 }

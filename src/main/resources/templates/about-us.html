@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/head :: main-header('All posts')"></head>
+<body>
+<nav th:include="fragments/navbar :: mainNavbar"></nav>
+<div class="container-main">
+    <div class="title-container">
+        <div class="title-column-left">You Found the Treasure: Two Developers! You Win!</div>
+        <div class="title-column-right"><img src="/images/main/treasure_chest.jpg"/></div>
+    </div>
+    <div class="inner-container">
+        <div class="about-us-container">
+            <div class="about-us-two-column">
+                <div class="about-us-column-left">
+                    <div class="developer-container">
+                        <img class="developer-image" src="/images/about-us/chase.jpg"/>
+                        <div class="formdiv"></div>
+                        <h2>Chase Hammock</h2>
+                        <h3>Java Full Stack Developer</h3>
+                        <h3>(And 12th level Wizard)</h3>
+                        <h3><a href="https://www.linkedin.com/in/chasehammock/" target="_blank">Find me @ LinkedIn</a></h3>
+
+                    </div>
+                </div>
+                <div class="about-us-column-right">
+                    <div class="developer-container">
+                        <img class="developer-image" src="/images/about-us/chase.jpg"/>
+                        <h2>Erik Hansen</h2>
+                        <h3>Java Full Stack Developer</h3>
+                        <h3><a href="https://www.linkedin.com/in/chasehammock/" target="_blank">Find me @ LinkedIn</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:include="fragments/footer :: footer"></footer>
+</body>
+</html>
