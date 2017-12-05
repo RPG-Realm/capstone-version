@@ -452,17 +452,20 @@ img {
 
 .game-column-left {
     float: left;
-    width: 10%;
+    width: 20%;
+	  padding: 5px;
 }
 
 .game-column-middle {
     display: inline-block;
-    width: 80%;
+    width: 60%;
+	padding: 5px;
 }
 
 .game-column-right {
     float: right;
-    width: 10%;
+    width: 20%;
+	padding: 5px;
 }
 
 .game-dungeon-map img{
