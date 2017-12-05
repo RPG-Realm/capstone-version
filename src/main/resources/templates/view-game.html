@@ -39,9 +39,10 @@
                     <div th:object="${ownerPic}">
                         <img th:src="${ownerPic.file_url}" th:alt="${ownerPic.file_name}"/>
                     </div>
-                    <div th:if="${gameFiles != null}" th:each="file: ${gameFiles}">
+                    <div id="file-list" th:if="${gameFiles != null}" th:each="file: ${gameFiles}">
                         <a th:href="${file.file_url}" th:text="${file.file_name}"></a>
                     </div>
+                    <div id="file-list" th:if="${gameFiles==null}"></div>
                     <div th:object="${game}">
                         <p th:text="${game.name}"></p>
                         <p th:text="${game.description}"></p>
@@ -117,6 +118,7 @@
                 }
             }).done(function () {
                 document.getElementById("upload-status").innerHTML = "File Uploaded Successfully";
+                $('#file-list').append("<a href=" + url + ">" + filename + "</a>");
             });
         });
     }
@@ -163,6 +165,7 @@
                 document.getElementById("banner-status").innerHTML = "File Uploaded Successfully";
                 $("#banner-photo").fadeOut(100).delay(400);
                 $("#banner-photo").attr("src", url).delay(400).fadeIn(500);
+                $('#file-list').append("<a href=" + url + ">" + filename + "</a>");
             });
         });
     }
