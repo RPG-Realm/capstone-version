@@ -14,10 +14,6 @@
 			<div class="form_container">
 				<form th:action="@{'/user-profile/edit/'+${user.id}}" method="post" th:object="${user}">
 					<div class="row">
-						<div class="column">Username:</div>
-						<div class="column"><input type="text" th:field="*{username}" class="form_fields" /></div>
-					</div>
-					<div class="row">
 						<div class="column">Email:</div>
 						<div class="column"><input th:type="email" th:field="*{email}" class="form_fields"/></div>
 					</div>
@@ -209,6 +205,7 @@
 					</div>
 					<div class="column"><input type="hidden" th:field="*{profile_photo}" class="form_fields"/></div>
 					<div class="column"><input type="hidden" th:field="*{user_created_time}" class="form_fields" /></div>
+					<div class="column"><input type="hidden" th:field="*{username}" class="form_fields" /></div>
 				</form>
 			</div>
 		</div>
