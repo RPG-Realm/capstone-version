@@ -35,7 +35,7 @@
                             Character Sheet</a>
                     </div>
                     <div class="glow-button" th:if="${pdf !=null}">
-                        <a id="character-pdf"  th:object="${pdf}" th:href="*{file_url}">View Character Sheet</a>
+                        <a id="character-pdf"  th:object="${pdf}" th:href="*{file_url}" target="_blank">View Character Sheet</a>
                     </div>
                     <br/>
                     <span id="upload-status2">*Character Sheets can only be a .PDF</span>

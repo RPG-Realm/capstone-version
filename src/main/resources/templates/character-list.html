@@ -4,7 +4,7 @@
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
 <div class="title-container">
-    <div class="title-column-left" th:text="${user.username+'''s Available Characters:'}"></div>
+    <div class="title-column-left" th:text="${user.username}+'\'s Available Characters:'"></div>
     <div class="title-column-right"><img src="/images/main/small-sword.jpg"/></div>
 </div>
 <div class="inner-container">
