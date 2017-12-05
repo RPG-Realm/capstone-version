@@ -124,7 +124,11 @@ public class GameController {
   }
   @PostMapping("edit-game/{id}")
   public String commitEditGame(@ModelAttribute Game game, RedirectAttributes redirectAttributes){
-
+    Game activeGame=gameRep.findOne(game.getId());
+    AppFile banner=activeGame.getBanner();
+    User owner=activeGame.getGame_master();
+    game.setGame_master(owner);
+    game.setBanner(banner);
     gameRep.save(game);
     redirectAttributes.addAttribute("id",game.getId());
     return "redirect:/view-game/{id}";
