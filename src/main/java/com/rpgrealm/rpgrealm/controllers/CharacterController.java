@@ -33,6 +33,8 @@ public class CharacterController {
 
   @GetMapping("/create-character")
   public String showCharacterForm(Model model) {
+      User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      model.addAttribute("user",user);
     model.addAttribute("character", new Character());
     return "create-character";
   }

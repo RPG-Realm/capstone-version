@@ -38,6 +38,8 @@ public class GameController {
 
   @GetMapping("/create-game")
   public String createGame(Model model) {
+    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    model.addAttribute("user",user);
     model.addAttribute("game", new Game());
     return "create-game";
   }
