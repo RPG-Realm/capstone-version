@@ -74,7 +74,7 @@ public class GameController {
 
 
 //    Check who user is to compare versus game owner THIS IS BREAKING IT CURRENTLY
-    if((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()!=null){
+    if(checked()){
       User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
       User dbUser=usrRep.findOne(user.getId());
 //    Get a character list of the session user in the game
@@ -169,6 +169,15 @@ public class GameController {
     gameRep.save(gameJoined);
     redirectAttributes.addAttribute("id",gameId);
     return "redirect:/view-game/{id}";
+  }
+
+  private boolean checked(){
+    try{
+      User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      return true;
+    }catch(Exception e){
+      return false;
+    }
   }
 
 }
