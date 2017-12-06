@@ -52,9 +52,7 @@
                         _csrf: $("#csrf").val()
                     }
                 }).done(function () {
-
                     window.location.replace("https://rpg-realm.org/view-game/" + id);
-                    console.log(window.location)
                 });
             }
             document.getElementById('join-game').addEventListener('click', joinGame);
