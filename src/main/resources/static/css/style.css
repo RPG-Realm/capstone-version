@@ -586,3 +586,9 @@ img {
     width: 100%;
 
 }
+
+.logged-in{
+    margin-bottom: 5px;
+    color: gray;
+    font-size: 12px;
+}

@@ -4,18 +4,19 @@
 </head>
 <body>
 <nav id="my-nav" class="navbar navbar-default" th:fragment="mainNavbar">
-    <div class="container-top"><img src="/images/main/logo.jpg"/></div>
+    <div class="container-top"><img src="/images/main/logo.jpg"/>
+    </div>
     <div class="topnav">
         <a href="/home">Home</a>
-        <a th:if="${user!=null}" href="/user-profile">Your Profile</a>
+        <a th:if="${user!=null}" href="/user-profile" th:text="${user.first_name}+'\'s Profile'"></a>
         <a th:if="${user!=null}" href="/create-character">Create Character</a>
         <a th:if="${user!=null}" href="/create-game">Create Game</a>
         <a href="/search-games">View Games</a>
         <a th:if="${user!=null}" href="javascript: document.myform.submit()">Logout</a>
         <a th:if="${user==null}" href="/login">Login</a>
         <a th:if="${user==null}" href="/sign-up">Register</a>
-
     </div>
+
 </nav>
 </body>
 </html>
