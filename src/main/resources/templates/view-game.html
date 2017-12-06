@@ -17,8 +17,10 @@
                     <h3>Game Players:</h3>
                     <div class="game-back" th:each="character: ${characterList} "><!--Active characters-->
 
-                        <img class="user-photo" th:if="${hashPic.containsKey(character)}" th:src="${hashPic.get(character)}"/>
-                        <img class="user-photo" th:if="${!hashPic.containsKey(character)}" src="/images/main/small-sword.jpg"/>
+                        <img class="user-photo" th:if="${hashPic.containsKey(character)}"
+                             th:src="${hashPic.get(character)}"/>
+                        <img class="user-photo" th:if="${!hashPic.containsKey(character)}"
+                             src="/images/main/large-shield.jpg"/>
                         <h4 th:text="'['+${character.name}+']'"></h4>
                         <h4 th:text="'user: '+${hashUser.get(character)}"></h4>
                     </div>
@@ -33,8 +35,8 @@
                         <img id="banner-photo" class="user-photo" th:if="${bannerPhoto == null}" th:alt="'No Photo'"
                              src="/images/main/large-shield.jpg"/>
                     </div>
-                <div class="formdiv"></div>
-                    <div class="game-back">
+                    <div class="formdiv"></div>
+                    <div class="game-back-description">
                         <p th:text="'Game Description: '+${game.description}"></p>
                     </div>
                     <div class="formdiv"></div>
@@ -43,53 +45,53 @@
                     <div class="search-list-container" th:if="${gameFiles != null}" th:each="file: ${gameFiles}">
                         <a th:href="${file.file_url}" th:text="${file.file_name}"></a>
                     </div>
-                    <div class="search-list-container" th:if="${gameFiles==null}"></div>
+                    <div class="search-list-container" th:if="${gameFiles==null}">There are currently no files present
+                        in this game...
+                    </div>
                 </div>
 
                 <div class="game-column-right">
                     <div class="game-back">
-                    <div class="red-text" th:object="${owner}">
-                    </div>
-                    <div th:if="${ownerPic!=null}" th:object="${ownerPic}">
-                        <img class="user-photo" th:src="${ownerPic.file_url}"/>
-                    </div>
-                    <div th:if="${ownerPic==null}">
-                        <img class="user-photo" alt="No Photo" src="/images/main/large-shield.jpg"/>
-                    </div>
-                    <div class="formdiv"></div>
+                        <div class="red-text" th:object="${owner}">
+                        </div>
+                        <div th:if="${ownerPic!=null}" th:object="${ownerPic}">
+                            <img class="user-photo" th:src="${ownerPic.file_url}"/>
+                        </div>
+                        <div th:if="${ownerPic==null}">
+                            <img class="user-photo" alt="No Photo" src="/images/main/large-shield.jpg"/>
+                        </div>
+                        <div class="formdiv"></div>
 
 
                         <h3 th:text="'Game Master:'"></h3>
                         <h4 th:text="'['+${owner.username}+']' "></h4>
                     </div>
                     <div class="formdiv"></div>
-                    <div class="game-back">
+                    <div class="game-back" th:if="${owner}==${user} and ${user!=null}">
 
 
-                        <div th:if="${user!=null}">
-                            <div class="glow-button-game"><a th:if="${owner}==${user}" th:href="'/edit-game/'+${game.id}">
-                                Edit This Game</a>
-                            </div>
-
-                        </div>
-
-                        <div class="glow-button-game" th:if="(${owner}!=${user}) and ${myList==null}">
-                             <a th:href="'/join-game/'+${game.id}">Join the
-                                 game!</a>
+                        <div class="glow-button-game" th:if="${owner}==${user}"><a th:href="'/edit-game/'+${game.id}">
+                            Edit This Game</a>
                         </div>
 
 
-                    <div th:if="${user!=null}">
                         <div class="glow-button-game" th:if="${owner}==${user}" id="upload">
                             <a href="javascript: openPicker()">Upload Game File</a>
                         </div>
-                    </div>
-                    <div th:if="${user!=null}">
+
+
                         <div class="glow-button-game" th:if="${owner}==${user}">
-                             <a href="javascript: bannerPicker()">Upload Dungeon Map</a>
+                            <a href="javascript: bannerPicker()">Upload Dungeon Map</a>
                         </div>
                     </div>
+                    <div class="game-back" th:if="(${owner}!=${user}) and ${myList==null} and ${user!=null}">
+                        <div class="glow-button-game" th:if="(${owner}!=${user}) and ${myList==null}">
+                            <a th:href="'/join-game/'+${game.id}">Join the
+                                Game!</a>
+                        </div>
+
                     </div>
+                    <div class="formdiv"></div>
                     <div id="banner-status"></div>
                 </div>
             </div>

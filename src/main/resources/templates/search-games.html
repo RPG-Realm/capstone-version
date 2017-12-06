@@ -16,8 +16,8 @@
                     <div class="column-left"><a th:href="'/view-game/'+${game.id}" th:text="${game.name}"></a></div>
                     <div class="column-middle"><a th:href="'/view-game/'+${game.id}" th:text="${game.description}"></a></div>
                     <div class="column-right"><a th:href="'/view-game/'+${game.id}" th:text="${game.type}"></a></div>
-                    <div class="column-rating" th:if="${game.rating} == 0" th:text="'Rated R'"></div>
-                    <div class="column-rating" th:if="${game.rating} == 1" th:text="'Rated PG'"></div>
+                    <div class="column-rating" th:if="${game.rating} == 1" th:text="'Rated R'"></div>
+                    <div class="column-rating" th:if="${game.rating} == 0" th:text="'Rated PG'"></div>
                 </div>
         </div>
     </div>
