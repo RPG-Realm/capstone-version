@@ -20,7 +20,7 @@
                         <img class="user-photo" th:if="${hashPic.containsKey(character)}" th:src="${hashPic.get(character)}"/>
                         <img class="user-photo" th:if="${!hashPic.containsKey(character)}" src="/images/main/small-sword.jpg"/>
                         <h4 th:text="'['+${character.name}+']'"></h4>
-                        <h3 th:text="'user: '+${hashUser.get(character)}"></h3>
+                        <h4 th:text="'user: '+${hashUser.get(character)}"></h4>
                     </div>
                 </div>
 
