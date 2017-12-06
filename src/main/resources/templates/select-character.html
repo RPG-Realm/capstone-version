@@ -53,7 +53,8 @@
                     }
                 }).done(function () {
 
-                    window.location="/view-game/"+id;
+                    window.location.href="https://" + location.hostname + "/view-game/" + id;
+                    console.log(window.location)
                 });
             }
             document.getElementById('join-game').addEventListener('click', joinGame);
