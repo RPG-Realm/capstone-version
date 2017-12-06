@@ -53,7 +53,7 @@
                     }
                 }).done(function () {
 
-                    window.location.href="https://" + location.hostname + "/view-game/" + id;
+                    window.location.replace("/view-game/" + id);
                     console.log(window.location)
                 });
             }
