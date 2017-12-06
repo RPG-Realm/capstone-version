@@ -474,7 +474,7 @@ img {
 
 .game-column-left {
     float: left;
-    width: 25%;
+    width: 22%;
 	  padding: 5px;
     border: 0px solid green;
     text-align:center;
@@ -482,7 +482,7 @@ img {
 }
 
 .game-column-middle {
-    width: 50%;
+    width: 56%;
 	padding: 5px;
     border: 0px solid pink;
     text-align:center;
@@ -491,7 +491,7 @@ img {
 
 .game-column-right {
     float: right;
-    width: 25%;
+    width: 22%;
 	padding: 5px;
     border: 0px solid purple;
     text-align:center;
