@@ -160,8 +160,7 @@ public class GameController {
 //  drop the get request in the url, just use the post from ajax. Use @RequestAttribute to get the names from ajax
 //  There was a debug here
   @PostMapping("/join-game")
-  public String commitJoinGame(@JacksonInject Long gameId, @JacksonInject Long characterId, RedirectAttributes redirectAttributes){
-    User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+  public String commitJoinGame(@RequestParam Long gameId, @RequestParam Long characterId,  RedirectAttributes redirectAttributes){
     Game gameJoined = gameRep.findOne(gameId);
     List<Character> gamesCharacters = gameJoined.getCharacters();
     gamesCharacters.add(charRep.findOne(characterId));
