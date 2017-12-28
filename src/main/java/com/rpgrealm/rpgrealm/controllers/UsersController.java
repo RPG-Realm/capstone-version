@@ -62,8 +62,13 @@ public class UsersController {
 
   @PostMapping("/user-profile/edit/{id}")
   public String commitEditUser(@ModelAttribute User user){
-    String hash = passwordEncoder.encode(user.getPassword());
-    user.setPassword(hash);
+    User currentData=usrRep.findOne(user.getId());
+    if(!user.getPassword().equalsIgnoreCase("")){
+      String hash = passwordEncoder.encode(user.getPassword());
+      user.setPassword(hash);
+    }else{
+      user.setPassword(currentData.getPassword());
+    }
     usrRep.save(user);
     return "redirect:/user-profile";
   }
